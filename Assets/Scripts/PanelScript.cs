@@ -9,7 +9,8 @@ public class PanelScript : MonoBehaviour
     private bool panelIsShowing = true;
     private float scrollVal = 0.33f;
 
-    
+    private static int pageNumber = 1;
+
     public void TogglePanel(GameObject panel)
     {
         StartCoroutine(MovePanel(panel));
@@ -17,15 +18,55 @@ public class PanelScript : MonoBehaviour
 
     public void scrollPanelRight()
     {
-        StartCoroutine(scrollRight(scrollbar));
-        GetComponent<Button>().interactable = scrollbar.value != 0.99f;
-        otherNavButton.interactable = true;
+        if (pageNumber != 5)
+        {
+            pageNumber++;
+        }
+        
+        Debug.Log(pageNumber);      
+
+        if (pageNumber < 5)
+        {
+            StartCoroutine(scrollRight(scrollbar));
+            GetComponent<Button>().interactable = scrollbar.value != 0.99f;
+            otherNavButton.interactable = true;
+        }
+        
+        if (pageNumber >= 4)
+        {
+            GetComponent<Button>().interactable = false;
+            pageNumber = 4;
+        }
+        else if (GetComponent<Button>().interactable == false)
+        {
+            GetComponent<Button>().interactable = true;
+        }        
     }
     public void scrollPanelLeft()
     {
-        StartCoroutine(scrollLeft(scrollbar));
-        GetComponent<Button>().interactable = scrollbar.value != 0;
-        otherNavButton.interactable = true;
+        if (pageNumber != 0)
+        {
+            pageNumber--;
+        }
+
+        Debug.Log(pageNumber);        
+
+        if (pageNumber > 0)
+        {
+            StartCoroutine(scrollLeft(scrollbar));
+            GetComponent<Button>().interactable = scrollbar.value != 0;
+            otherNavButton.interactable = true;
+        }     
+        
+        if (pageNumber <= 1)
+        {
+            GetComponent<Button>().interactable = false;
+            pageNumber = 1;
+        }
+        else if (GetComponent<Button>().interactable == false)
+        {
+            GetComponent<Button>().interactable = true;
+        }  
     }
 
     private IEnumerator scrollLeft(Scrollbar scrollbar)
