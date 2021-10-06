@@ -182,18 +182,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Password Strength
+  m_Text: "     Password Strength\n\nPasswords should fulfill the following criteria
+    to be secure:\n\u2022 Alphanumeric with symbols\n\u2022 16 characters or more\n\u2022
+    No personal information\n\u2022 "
 --- !u!222 &49026549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -537,7 +539,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &152184613
@@ -4623,7 +4625,6 @@ GameObject:
   - component: {fileID: 1059618115}
   - component: {fileID: 1059618114}
   - component: {fileID: 1059618117}
-  - component: {fileID: 1059618113}
   m_Layer: 5
   m_Name: ContentPanel
   m_TagString: Untagged
@@ -4652,19 +4653,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 9.540009}
   m_SizeDelta: {x: 340, y: 304.08}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1059618113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059618111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
 --- !u!114 &1059618114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6455,7 +6443,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1469415714
@@ -7251,18 +7239,22 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PRIVACY SETTINGS
+  m_Text: '        Privacy Settings
+
+
+    Privacy settings should be set to friends-only
+    to regulate what information can be seen in public.'
 --- !u!222 &1598705221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7451,20 +7443,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sensitive Information
-
-'
+  m_Text: "   Sensitive Information\n\nAvoid posting:\n\u2022 Travel Plans\n\u2022
+    Personal Information\n\u2022 Personal Complaints\n\u2022 Private Information\n\u2022
+    Location Data\n\u2022 Explicit Content\n"
 --- !u!222 &1638439621
 CanvasRenderer:
   m_ObjectHideFlags: 0
