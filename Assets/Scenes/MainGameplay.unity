@@ -182,18 +182,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Password Strength
+  m_Text: "     Password Strength\n\nPasswords should be:\n\n\u2022 16 characters
+    or more\n\u2022 Alphanumeric\n\u2022 No personal information"
 --- !u!222 &49026549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -658,7 +659,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &152184613
@@ -8578,18 +8579,22 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PRIVACY SETTINGS
+  m_Text: '       Privacy Settings
+
+
+    Privacy Settings should be set to friends-only
+    to ensure that no compromising information can be seen on public'
 --- !u!222 &1598705221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8778,20 +8783,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sensitive Information
-
-'
+  m_Text: "    Sensitive Information\n\nSensitive Information can be any of the following:\n\n\u2022
+    Personal Information\n\u2022 Location Data\n\u2022 Greivances or Rants\n\u2022
+    Explicit Content\n"
 --- !u!222 &1638439621
 CanvasRenderer:
   m_ObjectHideFlags: 0
