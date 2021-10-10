@@ -30,7 +30,7 @@ public static class StaticFunction
         " ",
         "Buy 1 take 1 promo on some Maccas!!! Get them while they’re hot!",
         "Craving for some egg tarts! #bestsnackever",
-        "School life is hardddddddd :(((( Wish I could fast forward to summer"
+        " "
     };
 
     private static string[] badAddress = new string[]
@@ -70,7 +70,6 @@ public static class StaticFunction
     };
 
     private static int errorNum = 1;
-    private static int post1Index;
 
     public static string[] getBadCaptions()
     {
@@ -115,15 +114,5 @@ public static class StaticFunction
     public static void setErrorNum(int i)
     {
         errorNum = i;
-    }
-
-    public static int getPost1Index()
-    {
-        return post1Index;
-    }
-
-    public static void setPost1Index(int i)
-    {
-        post1Index = i;
     }
 }
