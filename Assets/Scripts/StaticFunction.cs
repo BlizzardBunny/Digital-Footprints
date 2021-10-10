@@ -36,15 +36,37 @@ public static class StaticFunction
     private static string[] badAddress = new string[]
     {
         "236 Osler St Toronto, Canada",
-        "59 Lbiam St Enugu, Nigeria",
-        "7989 Walnut St Cedar Falls, Iowa"
+        "73 Lebanon St. Ibadan, Nigeria",
+        "38 Riverlawn Drive, Cedar Falls, Iowa",
+        "3967 Main Street, Redwood, Washington",
+        "2A Snake Road, Los Angeles, California"
     };
 
     private static string[] goodAddress = new string[]
     {
         "Toronto, Canada",
-        "The Internets",
-        "Cedar Falls, Iowa"
+        "Ibadan, Nigeria",
+        "Cedar Falls, Iowa",
+        "Redwood, Washington",
+        "Los Angeles, California"
+    };
+
+    private static string[] names = new string[]
+    {
+        "Bruno Bourdeaux",
+        "Ekene Cuevas",
+        "Destiny Stuart",
+        "Karen Thompson",
+        "Norma Lecter"
+    };
+
+    private static string[] bios = new string[]
+    {
+        "Living that sweet life #YouOnlyLiveOnce #LiveLaughLove",
+        "Have virus problem? Try my applet here www.LegitVirusRemover.com",
+        "Walk as if you are kissing the Earth with your feet #MantraOfTheDay #SpirituallyPure",
+        "46 Years young and single mom of 3. Always get what I want. #Feisty #IfYouCantHandleMeAtMyWorst",
+        "Lover of all things snake/serpent related! Pls DM me if you have anything related to the best danger noodle<3 #NaginiDidNothingWrong"
     };
 
     private static int errorNum = 1;
@@ -73,6 +95,16 @@ public static class StaticFunction
     public static string[] getGoodAddress()
     {
         return goodAddress;
+    }
+
+    public static string[] getNames()
+    {
+        return names;
+    }
+
+    public static string[] getBios()
+    {
+        return bios;
     }
 
     public static int getErrorNum()
