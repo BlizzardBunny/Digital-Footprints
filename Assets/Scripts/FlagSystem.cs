@@ -15,7 +15,8 @@ public class FlagSystem : MonoBehaviour
     private bool isFlag;
     private int flagIndex;
     private static int rndNum = -1;
-    private static int post1Index = -1;
+    private static int otherPostIndex = -1;
+    private static int instanceCounter = 0; //counts how many instances have run this script
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,14 @@ public class FlagSystem : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            StaticFunction.setErrorNum(1);
+            if (instanceCounter <= 0)
+            {
+                isFlag = false;
+                flagIndex = -1;
+                otherPostIndex = -1;
+                StaticFunction.setErrorNum(1);
+                rndNum = -1;
+            }
             Setup();
             CheckSetup();
         }
@@ -39,7 +47,8 @@ public class FlagSystem : MonoBehaviour
 
     private void Setup()
     {
-        if (rndNum <= -1)
+        Debug.Log(parentName + " ErrorNum A: " + StaticFunction.getErrorNum());
+        if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
         }
@@ -52,55 +61,67 @@ public class FlagSystem : MonoBehaviour
         profile.GetComponent<Image>().sprite = profilePics[rndNum];
         bio.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBios()[rndNum];
 
-        if (parentName == "Location")
-        {            
-            int rnd = UnityEngine.Random.Range(1, 5);      
-            if ((rnd == 1) && (StaticFunction.getErrorNum() > 0))
+        int rnd = UnityEngine.Random.Range(1, 4); //determine if this instance is a flag [random]
+        Debug.Log(parentName + ", rnd: " + rnd);
+
+        if ((rnd == 1) && (StaticFunction.getErrorNum() > 0)) //this instance is a flag
+        {
+            StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
+
+            if (parentName == "Location") //not a post prefab
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-                StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
                 isFlag = true;
+                Debug.Log("Bad " + rnd + ": " + transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text);
             }
-            else
+            else //is a post prefab
             {
-                transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodAddress()[rndNum];
-            }
-        }
-        else
-        {
-            Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
-            Transform postName = transform.parent.transform.Find("Name");
-            postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
-            postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
+                //make deets of post match deets of profile
+                Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
+                Transform postName = transform.parent.transform.Find("Name");
+                postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
+                postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
 
-            Transform caption = transform.parent.transform.Find("Caption");
-            Transform photo = transform.parent.transform.Find("Photo");
+                //randomize post content
+                Transform caption = transform.parent.transform.Find("Caption");
+                Transform photo = transform.parent.transform.Find("Photo");
 
-            int rnd = UnityEngine.Random.Range(1, 5);
-            if ((rnd == 1) && (StaticFunction.getErrorNum() > 0))
-            {
                 int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
                 photo.GetComponent<Image>().sprite = badPosts[rnd2];
-                StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
                 flagIndex = rnd2;
                 isFlag = true;
             }
-            else
+        }
+        else //not a flag
+        {
+            if (parentName == "Location") //not a post prefab
             {
-                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodCaptions().Length); ;
-                if (parentName == "Post1")
+                transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodAddress()[rndNum];
+                Debug.Log("Good " + rnd + ": " + transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text);
+            }
+            else //is a post prefab
+            {
+                //make deets of post match deets of profile
+                Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
+                Transform postName = transform.parent.transform.Find("Name");
+                postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
+                postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
+
+                //randomize post content
+                Transform caption = transform.parent.transform.Find("Caption");
+                Transform photo = transform.parent.transform.Find("Photo");
+
+                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodCaptions().Length);
+                if (otherPostIndex <= -1)
                 {
-                    post1Index = rnd2;
+                    otherPostIndex = rnd2;
                 }
                 else
                 {
-                    if (post1Index > -1)
+                    if (rnd2 == otherPostIndex)
                     {
-                        while (rnd2 == post1Index)
-                        {
-                            rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodCaptions().Length);
-                        }
+                        rnd2++;
                     }
                 }
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodCaptions()[rnd2];
@@ -108,17 +129,46 @@ public class FlagSystem : MonoBehaviour
             }
         }
 
-        Debug.Log(parentName + ": Setup done");
+        Debug.Log(parentName + " ErrorNum B: " + StaticFunction.getErrorNum());
     }
 
     //for case where no flags were made
     private void CheckSetup()
     {        
-        if ((StaticFunction.getErrorNum() > 0) && (parentName == "Location"))
+        instanceCounter++;
+
+        if (instanceCounter == 3)
         {
-            transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-            StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
-            isFlag = true;
+            if ((StaticFunction.getErrorNum() > 0))
+            {
+                StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
+
+                if (parentName == "Location") //not a post prefab
+                {
+                    transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
+                    isFlag = true;
+                }
+                else //is a post prefab
+                {
+                    //make deets of post match deets of profile
+                    Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
+                    Transform postName = transform.parent.transform.Find("Name");
+                    postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
+                    postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
+
+                    //randomize post content
+                    Transform caption = transform.parent.transform.Find("Caption");
+                    Transform photo = transform.parent.transform.Find("Photo");
+
+                    int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
+                    caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
+                    photo.GetComponent<Image>().sprite = badPosts[rnd2];
+                    flagIndex = rnd2;
+                    isFlag = true;
+                }
+            }
+
+            instanceCounter = 0;
         }
     }
     public void Proc()
