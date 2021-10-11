@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class FlagSystem : MonoBehaviour
 {
-    public GameObject editableMAPrefab;
+    [SerializeField] GameObject editableMAPrefab;
     public Sprite[] badPosts = new Sprite[StaticFunction.getBadCaptions().Length];
     public Sprite[] goodPosts = new Sprite[StaticFunction.getGoodCaptions().Length];
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
@@ -172,7 +172,7 @@ public class FlagSystem : MonoBehaviour
             instanceCounter = 0;
         }
     }
-    public void Proc()
+    public void Proc(Button clicked)
     {
         Debug.Log(editableIsDrawn);
         if (editableIsDrawn)
@@ -182,7 +182,7 @@ public class FlagSystem : MonoBehaviour
         }
         else
         {
-            editableMA = Instantiate(editableMAPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            editableMA = Instantiate(editableMAPrefab, clicked.transform.position, clicked.transform.rotation, clicked.transform.parent);
             editableIsDrawn = true;
         }
     }

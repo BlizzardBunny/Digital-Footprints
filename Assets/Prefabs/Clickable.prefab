@@ -204,10 +204,10 @@ MonoBehaviour:
       - m_Target: {fileID: -230640972414948255}
         m_TargetAssemblyTypeName: FlagSystem, Assembly-CSharp
         m_MethodName: Proc
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1228960436042544535}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69bc59770b5fd94b893ecbae60add88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editableMA: {fileID: 1265099658620451867, guid: 6f2c568ac4503b34789c4b6d327b948f, type: 3}
+  editableMAPrefab: {fileID: 1265099658620451867, guid: 6f2c568ac4503b34789c4b6d327b948f, type: 3}
   badPosts:
   - {fileID: 21300000, guid: b52d17e37bc070d42b6620303a6ee829, type: 3}
   - {fileID: 21300000, guid: c2d2a418365007b40a6439f240ed5872, type: 3}
