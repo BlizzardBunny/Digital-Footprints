@@ -172,18 +172,29 @@ public class FlagSystem : MonoBehaviour
             instanceCounter = 0;
         }
     }
+
     public void Proc(Button clicked)
     {
-        Debug.Log(editableIsDrawn);
-        if (editableIsDrawn)
+        if (!editableIsDrawn)
         {
-            Destroy(editableMA);
-            editableIsDrawn = false;
+            editableMA = Instantiate(
+                editableMAPrefab, 
+                new Vector3(1725.1201171875f, 666.411865234375f, 0.0f), 
+                clicked.transform.rotation, 
+                clicked.transform.parent.transform.parent.transform.parent.transform.parent); //can't use a tag here because it's the specific SNS parent
+
+            Transform messageField = editableMA.transform.Find("MessageField");
+
+            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = clicked.transform.parent.name;
+            editableIsDrawn = true;
         }
         else
         {
-            editableMA = Instantiate(editableMAPrefab, clicked.transform.position, clicked.transform.rotation, clicked.transform.parent);
-            editableIsDrawn = true;
+            foreach(GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+            {
+                Destroy(x);
+            }
+            editableIsDrawn = false;
         }
     }
 
