@@ -7,9 +7,13 @@ using UnityEngine.UI;
 
 public class FlagSystem : MonoBehaviour
 {
+    public GameObject editableMAPrefab;
     public Sprite[] badPosts = new Sprite[StaticFunction.getBadCaptions().Length];
     public Sprite[] goodPosts = new Sprite[StaticFunction.getGoodCaptions().Length];
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
+
+    private GameObject editableMA;
+    private bool editableIsDrawn = false;
 
     private string parentName;
     private bool isFlag;
@@ -47,7 +51,6 @@ public class FlagSystem : MonoBehaviour
 
     private void Setup()
     {
-        Debug.Log(parentName + " ErrorNum A: " + StaticFunction.getErrorNum());
         if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
@@ -62,17 +65,15 @@ public class FlagSystem : MonoBehaviour
         bio.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBios()[rndNum];
 
         int rnd = UnityEngine.Random.Range(1, 4); //determine if this instance is a flag [random]
-        Debug.Log(parentName + ", rnd: " + rnd);
 
         if ((rnd == 1) && (StaticFunction.getErrorNum() > 0)) //this instance is a flag
         {
             StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
+            isFlag = true;
 
             if (parentName == "Location") //not a post prefab
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-                isFlag = true;
-                Debug.Log("Bad " + rnd + ": " + transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text);
             }
             else //is a post prefab
             {
@@ -90,7 +91,6 @@ public class FlagSystem : MonoBehaviour
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
                 photo.GetComponent<Image>().sprite = badPosts[rnd2];
                 flagIndex = rnd2;
-                isFlag = true;
             }
         }
         else //not a flag
@@ -98,7 +98,6 @@ public class FlagSystem : MonoBehaviour
             if (parentName == "Location") //not a post prefab
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodAddress()[rndNum];
-                Debug.Log("Good " + rnd + ": " + transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text);
             }
             else //is a post prefab
             {
@@ -123,13 +122,16 @@ public class FlagSystem : MonoBehaviour
                     {
                         rnd2++;
                     }
+
+                    if (rnd2 == StaticFunction.getGoodCaptions().Length)
+                    {
+                        rnd2 -= 2;
+                    }
                 }
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodCaptions()[rnd2];
                 photo.GetComponent<Image>().sprite = goodPosts[rnd2];
             }
         }
-
-        Debug.Log(parentName + " ErrorNum B: " + StaticFunction.getErrorNum());
     }
 
     //for case where no flags were made
@@ -137,16 +139,16 @@ public class FlagSystem : MonoBehaviour
     {        
         instanceCounter++;
 
-        if (instanceCounter == 3)
+        if (instanceCounter == GameObject.FindGameObjectsWithTag("Clickable").Length)
         {
             if ((StaticFunction.getErrorNum() > 0))
             {
                 StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
+                isFlag = true;
 
                 if (parentName == "Location") //not a post prefab
                 {
                     transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-                    isFlag = true;
                 }
                 else //is a post prefab
                 {
@@ -164,7 +166,6 @@ public class FlagSystem : MonoBehaviour
                     caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
                     photo.GetComponent<Image>().sprite = badPosts[rnd2];
                     flagIndex = rnd2;
-                    isFlag = true;
                 }
             }
 
@@ -173,16 +174,16 @@ public class FlagSystem : MonoBehaviour
     }
     public void Proc()
     {
-        if (isFlag)
+        Debug.Log(editableIsDrawn);
+        if (editableIsDrawn)
         {
-            if (parentName == "Location")
-            {
-
-            }
+            Destroy(editableMA);
+            editableIsDrawn = false;
         }
         else
         {
-
+            editableMA = Instantiate(editableMAPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            editableIsDrawn = true;
         }
     }
 
