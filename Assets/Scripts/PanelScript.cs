@@ -3,13 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PanelScript : MonoBehaviour
-{    
+{
+    [SerializeField] GameObject categoryPanelPrefab;
     public Scrollbar scrollbar;
     public Button otherNavButton;
     private bool panelIsShowing = true;
-    private float scrollVal = 0.33f;
+    private float scrollVal = 0.34f;
 
     private static int pageNumber = 1;
+
+    private GameObject categoryPanel;
 
     public void TogglePanel(GameObject panel)
     {
@@ -27,7 +30,9 @@ public class PanelScript : MonoBehaviour
 
         if (pageNumber < 5)
         {
+            GetComponent<Button>().interactable = false;
             StartCoroutine(scrollRight(scrollbar));
+            GetComponent<Button>().interactable = true;
             GetComponent<Button>().interactable = scrollbar.value != 0.99f;
             otherNavButton.interactable = true;
         }
@@ -53,7 +58,9 @@ public class PanelScript : MonoBehaviour
 
         if (pageNumber > 0)
         {
+            GetComponent<Button>().interactable = false;
             StartCoroutine(scrollLeft(scrollbar));
+            GetComponent<Button>().interactable = true;
             GetComponent<Button>().interactable = scrollbar.value != 0;
             otherNavButton.interactable = true;
         }     
@@ -67,6 +74,62 @@ public class PanelScript : MonoBehaviour
         {
             GetComponent<Button>().interactable = true;
         }  
+    }
+
+    public void JumpPage(int pageNum)
+    {
+        pageNumber = pageNum;
+        float targetPosition = 0;
+        switch (pageNum - 1)
+        {
+            case 1:
+                targetPosition += scrollVal - 0.005f;
+                break;
+            case 2:
+                targetPosition += (scrollVal * 2) - 0.012f;
+                break;
+            case 3:
+                targetPosition += (scrollVal * 3) - 0.02f;
+                break;
+        }
+        scrollbar.value = targetPosition;
+
+        GameObject leftArrow = GameObject.FindGameObjectWithTag("LeftArrow");
+        GameObject rightArrow = GameObject.FindGameObjectWithTag("RightArrow");
+        leftArrow.GetComponent<Button>().interactable = true;
+        if (pageNum >= 4)
+        {
+            rightArrow.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void Categorize(Button clicked)
+    {
+        categoryPanel = Instantiate(
+                categoryPanelPrefab,
+                new Vector3(1749.999755859375f, 287.0400085449219f, 0.0f),
+                clicked.transform.rotation,
+                clicked.transform.parent.transform.parent.transform.parent.transform.parent);
+    }
+
+    public void CancelCategorize()
+    {
+       foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+       {
+            Destroy(x);
+       }
+    }
+
+    public void ToggleFunction(int pageNum)
+    {
+        if (StaticFunction.getIsChecking())
+        {
+            Categorize(GetComponent<Button>());
+        }
+        else
+        {
+            JumpPage(pageNum);
+        }
     }
 
     private IEnumerator scrollLeft(Scrollbar scrollbar)

@@ -36,13 +36,24 @@ public class FlagSystem : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            isFlag = false;
+            flagIndex = -1;
             if (instanceCounter <= 0)
             {
-                isFlag = false;
-                flagIndex = -1;
+                StaticFunction.setCurrFlag(-1);
                 otherPostIndex = -1;
                 StaticFunction.setErrorNum(1);
                 rndNum = -1;
+
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+                {
+                    Destroy(x);
+                }
+
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+                {
+                    Destroy(x);
+                }
             }
             Setup();
             CheckSetup();
@@ -70,8 +81,9 @@ public class FlagSystem : MonoBehaviour
         {
             StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
             isFlag = true;
+            Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
 
-            if (parentName == "Location") //not a post prefab
+            if (parentName == "Address") //not a post prefab
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
             }
@@ -95,7 +107,7 @@ public class FlagSystem : MonoBehaviour
         }
         else //not a flag
         {
-            if (parentName == "Location") //not a post prefab
+            if (parentName == "Address") //not a post prefab
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodAddress()[rndNum];
             }
@@ -145,8 +157,9 @@ public class FlagSystem : MonoBehaviour
             {
                 StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
                 isFlag = true;
+                Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
 
-                if (parentName == "Location") //not a post prefab
+                if (parentName == "Address") //not a post prefab
                 {
                     transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
                 }
@@ -173,20 +186,37 @@ public class FlagSystem : MonoBehaviour
         }
     }
 
-    public void Proc(Button clicked)
+    public void Flag(Button clicked)
     {
+        Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
         if (!editableIsDrawn)
         {
-            editableMA = Instantiate(
-                editableMAPrefab, 
-                new Vector3(1725.1201171875f, 666.411865234375f, 0.0f), 
-                clicked.transform.rotation, 
+            try
+            {
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+                {
+                    Destroy(x);
+                }
+            }
+            catch
+            {
+            }
+            
+            if (isFlag)
+            {
+                editableMA = Instantiate(
+                editableMAPrefab,
+                new Vector3(1725.1201171875f, 666.411865234375f, 0.0f),
+                clicked.transform.rotation,
                 clicked.transform.parent.transform.parent.transform.parent.transform.parent); //can't use a tag here because it's the specific SNS parent
 
-            Transform messageField = editableMA.transform.Find("MessageField");
+                Transform messageField = editableMA.transform.Find("MessageField");
 
-            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = clicked.transform.parent.name;
-            editableIsDrawn = true;
+                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = clicked.transform.parent.name;
+                editableIsDrawn = true;
+                StaticFunction.setIsChecking(true);
+                StaticFunction.setCurrFlag(flagIndex);
+            }
         }
         else
         {
@@ -195,6 +225,8 @@ public class FlagSystem : MonoBehaviour
                 Destroy(x);
             }
             editableIsDrawn = false;
+            StaticFunction.setIsChecking(false);
+            StaticFunction.setCurrFlag(-1);
         }
     }
 

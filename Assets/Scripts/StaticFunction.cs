@@ -70,6 +70,8 @@ public static class StaticFunction
     };
 
     private static int errorNum = 1;
+    private static bool isChecking = false;
+    private static int currFlag = -1;
 
     public static string[] getBadCaptions()
     {
@@ -114,5 +116,25 @@ public static class StaticFunction
     public static void setErrorNum(int i)
     {
         errorNum = i;
+    }
+
+    public static bool getIsChecking()
+    {
+        return isChecking;
+    }
+
+    public static void setIsChecking(bool b)
+    {
+        isChecking = b;
+    }
+
+    public static int getCurrFlag()
+    {
+        return currFlag;
+    }
+
+    public static void setCurrFlag(int i)
+    {
+        currFlag = i;
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Clickable
   - EditableMA
   - MessageField
+  - Categories
+  - LeftArrow
+  - RightArrow
   layers:
   - Default
   - TransparentFX
