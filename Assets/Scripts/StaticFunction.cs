@@ -72,6 +72,8 @@ public static class StaticFunction
     private static int errorNum = 1;
     private static bool isChecking = false;
     private static int currFlag = -1;
+    private static int profileNum = 0;
+    private static int totalProfiles = 3;
 
     public static string[] getBadCaptions()
     {
@@ -136,5 +138,25 @@ public static class StaticFunction
     public static void setCurrFlag(int i)
     {
         currFlag = i;
+    }
+
+    public static int getProfileNum()
+    {
+        return profileNum;
+    }
+
+    public static void setProfileNum(int i)
+    {
+        profileNum = i;
+    }
+
+    public static int getTotalProfiles()
+    {
+        return totalProfiles;
+    }
+
+    public static void setTotalProfiles(int i)
+    {
+        totalProfiles = i;
     }
 }

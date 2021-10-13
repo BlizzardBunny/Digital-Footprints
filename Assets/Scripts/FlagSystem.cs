@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class FlagSystem : MonoBehaviour
@@ -34,30 +35,7 @@ public class FlagSystem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isFlag = false;
-            flagIndex = -1;
-            if (instanceCounter <= 0)
-            {
-                StaticFunction.setCurrFlag(-1);
-                otherPostIndex = -1;
-                StaticFunction.setErrorNum(1);
-                rndNum = -1;
-
-                foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
-                {
-                    Destroy(x);
-                }
-
-                foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
-                {
-                    Destroy(x);
-                }
-            }
-            Setup();
-            CheckSetup();
-        }
+        
     }
 
     private void Setup()
@@ -208,7 +186,7 @@ public class FlagSystem : MonoBehaviour
                 editableMAPrefab,
                 new Vector3(1725.1201171875f, 666.411865234375f, 0.0f),
                 clicked.transform.rotation,
-                clicked.transform.parent.transform.parent.transform.parent.transform.parent); //can't use a tag here because it's the specific SNS parent
+                GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 
                 Transform messageField = editableMA.transform.Find("MessageField");
 
@@ -224,10 +202,49 @@ public class FlagSystem : MonoBehaviour
             {
                 Destroy(x);
             }
+
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+            {
+                Destroy(x);
+            }
+
             editableIsDrawn = false;
             StaticFunction.setIsChecking(false);
             StaticFunction.setCurrFlag(-1);
         }
+    }
+
+    public void Reset()
+    {
+        isFlag = false;
+        flagIndex = -1;
+        if (instanceCounter <= 0)
+        {
+            StaticFunction.setCurrFlag(-1);
+            otherPostIndex = -1;
+            StaticFunction.setErrorNum(1);
+            rndNum = -1;
+
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+            {
+                Destroy(x);
+            }
+
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+            {
+                Destroy(x);
+            }
+
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("ReportEntry"))
+            {
+                Destroy(x);
+            }
+        }
+        
+        Setup();
+        CheckSetup();
+
+        Debug.Log(parentName + " reset");
     }
 
     public void Exit()

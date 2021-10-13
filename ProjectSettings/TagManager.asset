@@ -10,6 +10,9 @@ TagManager:
   - Categories
   - LeftArrow
   - RightArrow
+  - MessagesBG
+  - MessagesCanvas
+  - ReportEntry
   layers:
   - Default
   - TransparentFX
