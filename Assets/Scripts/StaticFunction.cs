@@ -69,6 +69,25 @@ public static class StaticFunction
         "Lover of all things snake/serpent related! Pls DM me if you have anything related to the best danger noodle<3 #NaginiDidNothingWrong"
     };
 
+    private static string[] tutorialDialogue = new string[]
+    {
+        "Greetings, and welcome to Digital Footprints, where your privacy is our priority.",
+        "For your first day, we would be providing you with some dummy accounts to work on. Use this time to familiarize yourself with the company’s software and workflow.",
+        "You will be looking for privacy issues. What privacy issues are is covered by our Company Standards widget on the right.",
+        "If you see anything that looks like a privacy issue, click on it and our system would flag it as such.",
+        "This would then be reflected in the client’s report where you can double check what you have flagged. Make sure to click send to confirm your flag.",
+        "If you are satisfied with your work, click SUBMIT and the client would be notified of your recommendations.",
+        "Do be warned that while you are free to make mistakes on the dummy account, doing so with a real customer’s account would warrant a penalty.",
+        "We hope that your time with us will be informative and fulfilling, good luck!"
+    };
+
+    private static string[] roundMessages = new string[]
+    {
+        "Excellent, it seems that you fully grasp how our system works here at Digital Footprints.\nDo be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized.",
+        "While you did make some mistakes here and there, I hope that this did help you understand how our system works. \nDo be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized.",
+        "I strongly recommend reviewing today’s work to understand what went wrong. \nDo remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
+    };
+
     private static int errorNum = 1;
     private static bool isChecking = false;
     private static int currFlag = -1;

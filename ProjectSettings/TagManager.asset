@@ -13,6 +13,9 @@ TagManager:
   - MessagesBG
   - MessagesCanvas
   - ReportEntry
+  - World
+  - Submit
+  - Confirmation
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class FlagSystem : MonoBehaviour
 {
-    [SerializeField] GameObject editableMAPrefab;
+    public GameObject editableMAPrefab;
     public Sprite[] badPosts = new Sprite[StaticFunction.getBadCaptions().Length];
     public Sprite[] goodPosts = new Sprite[StaticFunction.getGoodCaptions().Length];
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
