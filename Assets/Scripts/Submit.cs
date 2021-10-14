@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class Submit : MonoBehaviour
 {
-    public Transform profileNum;
-    public Transform totalProfiles;
+    
     public GameObject confirmationPrefab;
-    public GameObject confirmation;
+
+    private GameObject confirmation;
+    private Transform profileNum;
+    private Transform totalProfiles;
 
     // Start is called before the first frame update
     void Start()
     {
+        profileNum = GameObject.FindGameObjectWithTag("Count").transform;
+        totalProfiles = GameObject.FindGameObjectWithTag("Total").transform;
         totalProfiles.GetComponent<TMPro.TextMeshProUGUI>().text = "/" + StaticFunction.getTotalProfiles().ToString();
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
     }
@@ -47,6 +51,11 @@ public class Submit : MonoBehaviour
             {
                 FlagSystem script = (FlagSystem) x.GetComponent(typeof(FlagSystem));
                 script.Reset();
+            }
+
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Confirmation"))
+            {
+                Destroy(x);
             }
         }
 

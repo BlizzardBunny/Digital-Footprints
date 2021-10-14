@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69bc59770b5fd94b893ecbae60add88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editableMAPrefab: {fileID: 1265099658620451867, guid: 6f2c568ac4503b34789c4b6d327b948f, type: 3}
+  editableMAPrefab: {fileID: 4787043458398286025, guid: 8dcbd3ead089a714b87db0fce0fd736a, type: 3}
   badPosts:
   - {fileID: 21300000, guid: b52d17e37bc070d42b6620303a6ee829, type: 3}
   - {fileID: 21300000, guid: c2d2a418365007b40a6439f240ed5872, type: 3}

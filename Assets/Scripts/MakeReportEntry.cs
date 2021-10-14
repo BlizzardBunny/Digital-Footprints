@@ -16,6 +16,7 @@ public class MakeReportEntry : MonoBehaviour
 
     public void MakeReport()
     {
+        Debug.Log("Send was pressed");
         messageField = GameObject.FindGameObjectWithTag("MessageField");
 
         string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
@@ -24,7 +25,7 @@ public class MakeReportEntry : MonoBehaviour
         {
             reportEntry = Instantiate(
                 reportEntryPrefab,
-                new Vector3(1725.1199951171875f, 951.2784423828125f, 0.0f), //need to automotate y value at some point for more than one error
+                new Vector3(1752.53125f, 979.4930419921875f, 0.0f), //need to automotate y value at some point for more than one error                            
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 
