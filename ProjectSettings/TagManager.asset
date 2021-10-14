@@ -16,6 +16,8 @@ TagManager:
   - World
   - Submit
   - Confirmation
+  - Count
+  - Total
   layers:
   - Default
   - TransparentFX
