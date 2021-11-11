@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Clickable
+  - EditableMA
+  - MessageField
+  - Categories
+  - LeftArrow
+  - RightArrow
+  - MessagesBG
+  - MessagesCanvas
+  - ReportEntry
+  - World
+  - Submit
+  - Confirmation
+  - Count
+  - Total
+  - ErrorTag
   layers:
   - Default
   - TransparentFX
