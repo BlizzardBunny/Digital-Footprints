@@ -8,7 +8,6 @@ public class PanelScript : MonoBehaviour
     public Scrollbar scrollbar;
     public Button otherNavButton;
     private bool panelIsShowing = true;
-    private bool digibookIsMinimized = false;
     private float scrollVal = 0.33f;
 
     private static int pageNumber = 1;
@@ -20,13 +19,14 @@ public class PanelScript : MonoBehaviour
         StartCoroutine(MovePanel(panel));
 
     }
+
     public void minimizePanel(GameObject panel)
     {
         Animator animator = panel.GetComponent<Animator>();
         if (animator != null)
         {
-            digibookIsMinimized = animator.GetBool("isMinimized");
-            animator.SetBool("isMinimized",!digibookIsMinimized);
+            bool panelIsMinimized = animator.GetBool("isMinimized");
+            animator.SetBool("isMinimized",!panelIsMinimized);
         }
     }
 

@@ -19,24 +19,15 @@ public class Category : MonoBehaviour
             Transform messageField = GameObject.FindGameObjectWithTag("MessageField").transform;
             string text = messageField.GetComponent<TMPro.TextMeshProUGUI>().text;
 
-            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - " + buttonText;
-
-            //if (text == "Address")
-            //{
-            //    messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - Location Data";
-            //    if (buttonText == "Location Data")
-            //    {
-                    
-            //    }
-            //}
-            //else
-            //{
-            //    messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - " + StaticFunction.getCaptionFlags()[StaticFunction.getCurrFlag()];
-            //    if (buttonText == StaticFunction.getCaptionFlags()[StaticFunction.getCurrFlag()])
-            //    {
-                    
-            //    }
-            //}
+            if (text.Contains("-"))
+            {
+                string[] reportDetails = text.Split(new string[] { " - " }, System.StringSplitOptions.None);
+                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
+            }
+            else
+            {
+                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - " + buttonText;
+            }
         }
         catch
         {

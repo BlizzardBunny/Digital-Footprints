@@ -69,6 +69,26 @@ public static class StaticFunction
         "Lover of all things snake/serpent related! Pls DM me if you have anything related to the best danger noodle<3 #NaginiDidNothingWrong"
     };
 
+    private static string[] privacySettingsFlags = new string[]
+    {
+        "Messages",
+        "Add as Friend",
+        "View Posts",
+        "View Email",
+        "View Phone Number",
+        "Searchable Online"
+    };
+
+    private static string[] privacySettingsChoices = new string[]
+    {
+        "Message Me",
+        "Add As Friend",
+        "View Posts",
+        "View Email",
+        "View Phone Number",
+        "Search me Online"
+    };
+
     private static string[] tutorialDialogue = new string[]
     {
         "Greetings, and welcome to Digital Footprints, where your privacy is our priority.",
@@ -139,6 +159,16 @@ public static class StaticFunction
     public static string[] getBios()
     {
         return bios;
+    }
+
+    public static string[] getPrivacySettingFlags()
+    {
+        return privacySettingsFlags;
+    }
+
+    public static string[] getPrivacySettingChoices()
+    {
+        return privacySettingsChoices;
     }
 
     public static string[] getTutorial()

@@ -61,33 +61,55 @@ public class Submit : MonoBehaviour
 
 					if (clickable.transform.parent.name == itemName)
 					{
-						Debug.Log(itemName + " isFlag: " + script.getIsFlag());
 						if (!script.getIsFlag())
 						{
 							StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
 							break;
 						}
-						Debug.Log(itemName + " ." + flagName + ".");
-						if ((itemName == "Address") && (flagName != "Personal Information"))
-						{
-							Debug.Log((itemName == "Address"));
-							Debug.Log((flagName != "Location Data"));
-							StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
-						}
-						else if (itemName != "Address")
-						{                    
-							int flagIndex = script.getFlagIndex();
-						
-							if (flagIndex <= -1)
-							{
-								StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
-							}
-							else if (flagName != StaticFunction.getCaptionFlags()[flagIndex])
-							{
-								StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
-							}
-						}
-						break;
+
+                        if ((itemName == "Address") && (flagName != "Personal Information"))
+                        {
+                            StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                        }
+                        else if (itemName.StartsWith("Post"))
+                        {
+                            int flagIndex = script.getFlagIndex();
+
+                            if (flagIndex <= -1)
+                            {
+                                StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                            }
+                            else if (flagName != StaticFunction.getCaptionFlags()[flagIndex])
+                            {
+                                StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                            }
+                        }
+                        else if (transform.parent.parent.name == "PrivacyWindow") //~~~~FIX THIS~~~~~
+                        {
+                            Toggle everyoneToggle = transform.parent.Find("Everyone").GetComponent<Toggle>();
+                            Toggle friendsToggle = transform.parent.Find("Friends").GetComponent<Toggle>();
+
+                            if ((!everyoneToggle.isOn) && (friendsToggle.isOn))
+                            {
+                                StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                            }
+
+                            for (int i = 0; i < StaticFunction.getPrivacySettingChoices().Length; i++)
+                            {
+                                Debug.Log(itemName + "  " + flagName);
+                                if (StaticFunction.getPrivacySettingChoices()[i].Equals(itemName))
+                                {
+                                    Debug.Log(itemName + " : " + flagName);
+                                    Debug.Log(StaticFunction.getPrivacySettingChoices()[i] + " : " + StaticFunction.getPrivacySettingFlags()[i]);
+                                    if (!StaticFunction.getPrivacySettingFlags()[i].Equals(flagName))
+                                    {
+                                        StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
 					}                
 				}
 			}

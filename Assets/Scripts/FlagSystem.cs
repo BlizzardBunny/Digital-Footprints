@@ -33,11 +33,6 @@ public class FlagSystem : MonoBehaviour
         CheckSetup();
     }
 
-    private void Update()
-    {
-        
-    }
-
     public int getFlagIndex()
     {
         return flagIndex;
@@ -53,17 +48,17 @@ public class FlagSystem : MonoBehaviour
         if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
+
+            Transform name = transform.parent.parent.transform.Find("Name");
+            Transform profile = transform.parent.parent.transform.Find("ProfilePic");
+            Transform bio = transform.parent.parent.transform.Find("Bio");
+
+            name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
+            profile.GetComponent<Image>().sprite = profilePics[rndNum];
+            bio.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBios()[rndNum];
         }
 
-        Transform name = transform.parent.parent.transform.Find("Name");
-        Transform profile = transform.parent.parent.transform.Find("ProfilePic");
-        Transform bio = transform.parent.parent.transform.Find("Bio");
-
-        name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
-        profile.GetComponent<Image>().sprite = profilePics[rndNum];
-        bio.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBios()[rndNum];
-
-        int rnd = UnityEngine.Random.Range(1, 4); //determine if this instance is a flag [random]
+        int rnd = UnityEngine.Random.Range(1, GameObject.FindGameObjectsWithTag("Clickable").Length); //determine if this instance is a flag [random]
 
         if ((rnd == 1) && (StaticFunction.getErrorNum() > 0)) //this instance is a flag
         {
@@ -71,11 +66,11 @@ public class FlagSystem : MonoBehaviour
             isFlag = true;
             Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
 
-            if (parentName == "Address") //not a post prefab
+            if (parentName == "Address")
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
             }
-            else //is a post prefab
+            else if (parentName.StartsWith("Post"))
             {
                 //make deets of post match deets of profile
                 Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
@@ -92,14 +87,25 @@ public class FlagSystem : MonoBehaviour
                 photo.GetComponent<Image>().sprite = badPosts[rnd2];
                 flagIndex = rnd2;
             }
+            else if (transform.parent.parent.name == "PrivacyWindow")
+            {
+                Transform everyone = transform.parent.Find("Everyone");
+                Transform friends = transform.parent.Find("Friends");
+
+                Toggle everyoneToggle = everyone.GetComponent<Toggle>();
+                Toggle friendsToggle = friends.GetComponent<Toggle>();
+
+                everyoneToggle.isOn = true;
+                friendsToggle.isOn = false;
+            }
         }
         else //not a flag
         {
-            if (parentName == "Address") //not a post prefab
+            if (parentName == "Address")
             {
                 transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodAddress()[rndNum];
             }
-            else //is a post prefab
+            else if (parentName.StartsWith("Post"))
             {
                 //make deets of post match deets of profile
                 Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
@@ -131,6 +137,17 @@ public class FlagSystem : MonoBehaviour
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodCaptions()[rnd2];
                 photo.GetComponent<Image>().sprite = goodPosts[rnd2];
             }
+            else if (transform.parent.parent.name == "PrivacyWindow")
+            {
+                Transform everyone = transform.parent.Find("Everyone");
+                Transform friends = transform.parent.Find("Friends");
+
+                Toggle everyoneToggle = everyone.GetComponent<Toggle>();
+                Toggle friendsToggle = friends.GetComponent<Toggle>();
+
+                everyoneToggle.isOn = false;
+                friendsToggle.isOn = true;
+            }
         }
     }
 
@@ -147,11 +164,11 @@ public class FlagSystem : MonoBehaviour
                 isFlag = true;
                 Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
 
-                if (parentName == "Address") //not a post prefab
+                if (parentName == "Address")
                 {
                     transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
                 }
-                else //is a post prefab
+                else if (parentName.StartsWith("Post"))
                 {
                     //make deets of post match deets of profile
                     Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
@@ -167,6 +184,17 @@ public class FlagSystem : MonoBehaviour
                     caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
                     photo.GetComponent<Image>().sprite = badPosts[rnd2];
                     flagIndex = rnd2;
+                }
+                else if (transform.parent.parent.name == "PrivacyWindow")
+                {
+                    Transform everyone = transform.parent.Find("Everyone");
+                    Transform friends = transform.parent.Find("Friends");
+
+                    Toggle everyoneToggle = everyone.GetComponent<Toggle>();
+                    Toggle friendsToggle = friends.GetComponent<Toggle>();
+
+                    everyoneToggle.isOn = true;
+                    friendsToggle.isOn = false;
                 }
             }
 
@@ -202,11 +230,6 @@ public class FlagSystem : MonoBehaviour
             editableIsDrawn = true;
             StaticFunction.setIsChecking(true);
             StaticFunction.setCurrFlag(flagIndex);
-
-            if (isFlag)
-            {
-                
-            }
         }
         else
         {
