@@ -11,13 +11,17 @@ public class PanelScript : MonoBehaviour
     private float scrollVal = 0.33f;
 
     private static int pageNumber = 1;
+    private static string currSocialMedia;
+    private static GameObject[] socialMediaPages;
 
-    private GameObject categoryPanel;
+    public void Start()
+    {
+        socialMediaPages = GameObject.FindGameObjectsWithTag("SocialMediaPage");
+    }
 
     public void TogglePanel(GameObject panel)
     {
         StartCoroutine(MovePanel(panel));
-
     }
 
     public void minimizePanel(GameObject panel)
@@ -25,8 +29,35 @@ public class PanelScript : MonoBehaviour
         Animator animator = panel.GetComponent<Animator>();
         if (animator != null)
         {
-            bool panelIsMinimized = animator.GetBool("isMinimized");
-            animator.SetBool("isMinimized",!panelIsMinimized);
+            if ((currSocialMedia != transform.name) && (transform.name != "Mail") && (transform.name != "Privacy"))
+            {
+                currSocialMedia = transform.name;
+                
+                string panelName = transform.name + " (Panel)";
+                foreach (GameObject socialMediaPage in socialMediaPages)
+                {                
+                    if (socialMediaPage.transform.name == panelName)
+                    {
+                        socialMediaPage.transform.parent.Find("Title").Find("Title TMP").GetComponent<TMPro.TextMeshProUGUI>().text = transform.name;
+                        socialMediaPage.SetActive(true);
+                    }
+                    else
+                    {
+                        socialMediaPage.SetActive(false);
+                    }
+                }
+
+                bool panelIsMinimized = animator.GetBool("isMinimized");
+                if (panelIsMinimized)
+                {
+                    animator.SetBool("isMinimized", !panelIsMinimized);
+                }
+            }
+            else
+            {
+                bool panelIsMinimized = animator.GetBool("isMinimized");
+                animator.SetBool("isMinimized", !panelIsMinimized);
+            }
         }
     }
 
@@ -114,11 +145,12 @@ public class PanelScript : MonoBehaviour
 
     public void Categorize(Button clicked)
     {
-        categoryPanel = Instantiate(
-                categoryPanelPrefab,
-                new Vector3(1749.999755859375f, 287.0400085449219f, 0.0f),
-                clicked.transform.rotation,
-                clicked.transform.parent.transform.parent.transform.parent.transform.parent);
+        Instantiate(
+            categoryPanelPrefab,
+            new Vector3(1749.999755859375f, 287.0400085449219f, 0.0f),
+            clicked.transform.rotation,
+            clicked.transform.parent.transform.parent.transform.parent.transform.parent
+            );
     }
 
     public void CancelCategorize()

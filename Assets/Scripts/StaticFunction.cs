@@ -72,10 +72,10 @@ public static class StaticFunction
     private static string[] privacySettingsFlags = new string[]
     {
         "Messages",
-        "Add as Friend",
-        "View Posts",
-        "View Email",
-        "View Phone Number",
+        "Friend Requests",
+        "Content Visibility",
+        "Contact Details",
+        "Contact Details",
         "Searchable Online"
     };
 

@@ -17,6 +17,7 @@ public class FlagSystem : MonoBehaviour
     private GameObject editableMA;
     private bool editableIsDrawn = false;
 
+    private string snsName = "0";
     private string parentName;
     private bool isFlag;
     private int flagIndex;
@@ -31,17 +32,43 @@ public class FlagSystem : MonoBehaviour
         isFlag = false;
         flagIndex = -1;
 
+        Transform t = transform.parent;
+        while (snsName.Equals("0"))
+        {
+            if (t.tag == "SocialMediaPage")
+            {
+                snsName = t.name;
+            }
+            else
+            {
+                t = t.parent;
+            }
+        }
+
         if (instanceCounter <= 0)
         {
             if (SceneManager.GetActiveScene().name == "Stage 1")
             {
                 StaticFunction.setErrorNum(1);
                 StaticFunction.setTotalProfiles(3);
+                
+                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
+                {
+                    socialMediaPage.SetActive(false);
+                }
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
                 StaticFunction.setErrorNum(3);
                 StaticFunction.setTotalProfiles(4);
+                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
+                {
+                    if (socialMediaPage.transform.name == "Photogram (Panel)")
+                    {
+                        socialMediaPage.SetActive(false);
+                        break;
+                    }
+                }
             }
             else if (SceneManager.GetActiveScene().name == "Stage 3")
             {
@@ -79,7 +106,10 @@ public class FlagSystem : MonoBehaviour
         if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
+        }
 
+        try
+        {
             Transform name = transform.parent.parent.transform.Find("Name");
             Transform profile = transform.parent.parent.transform.Find("ProfilePic");
             Transform bio = transform.parent.parent.transform.Find("Bio");
@@ -88,6 +118,10 @@ public class FlagSystem : MonoBehaviour
             profile.GetComponent<Image>().sprite = profilePics[rndNum];
             bio.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBios()[rndNum];
         }
+        catch (Exception)
+        {
+
+        }
 
         int rnd = UnityEngine.Random.Range(1, GameObject.FindGameObjectsWithTag("Clickable").Length); //determine if this instance is a flag [random]
 
@@ -95,7 +129,7 @@ public class FlagSystem : MonoBehaviour
         {
             StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
             isFlag = true;
-            Debug.Log(parentName + " " + isFlag);
+            Debug.Log("Setup(): " + snsName + " " + parentName);
 
             if (parentName == "Address")
             {
@@ -200,7 +234,7 @@ public class FlagSystem : MonoBehaviour
                         StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
                         script.setIsFlag(true);
                         String parentName = clickable.transform.parent.name;
-                        Debug.Log(parentName + " " + script.getIsFlag()) ;
+                        Debug.Log("CheckSetup() " + snsName + " " + parentName) ;
 
                         if (parentName == "Address")
                         {
