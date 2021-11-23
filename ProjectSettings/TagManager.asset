@@ -19,6 +19,7 @@ TagManager:
   - Count
   - Total
   - ErrorTag
+  - PrivacyWindow
   layers:
   - Default
   - TransparentFX

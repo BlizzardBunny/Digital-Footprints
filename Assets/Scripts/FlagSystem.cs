@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FlagSystem : MonoBehaviour
 {
@@ -29,6 +30,26 @@ public class FlagSystem : MonoBehaviour
         parentName = transform.parent.name;
         isFlag = false;
         flagIndex = -1;
+
+        if (instanceCounter <= 0)
+        {
+            if (SceneManager.GetActiveScene().name == "Stage 1")
+            {
+                StaticFunction.setErrorNum(1);
+                StaticFunction.setTotalProfiles(3);
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 2")
+            {
+                StaticFunction.setErrorNum(3);
+                StaticFunction.setTotalProfiles(4);
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 3")
+            {
+                StaticFunction.setErrorNum(5);
+                StaticFunction.setTotalProfiles(5);
+            }
+        }          
+        
         Setup();
         CheckSetup();
     }
@@ -38,13 +59,23 @@ public class FlagSystem : MonoBehaviour
         return flagIndex;
     }
 
+    public void setFlagIndex(int i)
+    {
+        flagIndex = i;
+    }
+
     public bool getIsFlag()
     {
         return isFlag;
     }
 
-    private void Setup()
+    public void setIsFlag(bool b)
     {
+        isFlag = b;
+    }
+
+    private void Setup()
+    {        
         if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
@@ -64,7 +95,7 @@ public class FlagSystem : MonoBehaviour
         {
             StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
             isFlag = true;
-            Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
+            Debug.Log(parentName + " " + isFlag);
 
             if (parentName == "Address")
             {
@@ -151,7 +182,7 @@ public class FlagSystem : MonoBehaviour
         }
     }
 
-    //for case where no flags were made
+    //for case where not enough flags were made
     private void CheckSetup()
     {        
         instanceCounter++;
@@ -160,42 +191,56 @@ public class FlagSystem : MonoBehaviour
         {
             if ((StaticFunction.getErrorNum() > 0))
             {
-                StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
-                isFlag = true;
-                Debug.Log(parentName + " " + isFlag + " " + editableIsDrawn);
-
-                if (parentName == "Address")
+                foreach (GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
                 {
-                    transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-                }
-                else if (parentName.StartsWith("Post"))
-                {
-                    //make deets of post match deets of profile
-                    Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
-                    Transform postName = transform.parent.transform.Find("Name");
-                    postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
-                    postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
+                    FlagSystem script = (FlagSystem)clickable.GetComponent(typeof(FlagSystem));
 
-                    //randomize post content
-                    Transform caption = transform.parent.transform.Find("Caption");
-                    Transform photo = transform.parent.transform.Find("Photo");
+                    if (!script.getIsFlag())
+                    {
+                        StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
+                        script.setIsFlag(true);
+                        String parentName = clickable.transform.parent.name;
+                        Debug.Log(parentName + " " + script.getIsFlag()) ;
 
-                    int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
-                    caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
-                    photo.GetComponent<Image>().sprite = badPosts[rnd2];
-                    flagIndex = rnd2;
-                }
-                else if (transform.parent.parent.name == "PrivacyWindow")
-                {
-                    Transform everyone = transform.parent.Find("Everyone");
-                    Transform friends = transform.parent.Find("Friends");
+                        if (parentName == "Address")
+                        {
+                            clickable.transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
+                        }
+                        else if (parentName.StartsWith("Post"))
+                        {
+                            //make deets of post match deets of profile
+                            Transform postProfilePic = clickable.transform.parent.transform.Find("ProfilePic");
+                            Transform postName = clickable.transform.parent.transform.Find("Name");
+                            postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
+                            postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
 
-                    Toggle everyoneToggle = everyone.GetComponent<Toggle>();
-                    Toggle friendsToggle = friends.GetComponent<Toggle>();
+                            //randomize post content
+                            Transform caption = clickable.transform.parent.transform.Find("Caption");
+                            Transform photo = clickable.transform.parent.transform.Find("Photo");
 
-                    everyoneToggle.isOn = true;
-                    friendsToggle.isOn = false;
-                }
+                            int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
+                            caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
+                            photo.GetComponent<Image>().sprite = badPosts[rnd2];
+                            script.setFlagIndex(rnd2);
+                        }
+                        else if (transform.parent.parent.name == "PrivacyWindow")
+                        {
+                            Transform everyone = clickable.transform.parent.Find("Everyone");
+                            Transform friends = clickable.transform.parent.Find("Friends");
+
+                            Toggle everyoneToggle = everyone.GetComponent<Toggle>();
+                            Toggle friendsToggle = friends.GetComponent<Toggle>();
+
+                            everyoneToggle.isOn = true;
+                            friendsToggle.isOn = false;
+                        }
+                    }
+
+                    if (StaticFunction.getErrorNum() == 0)
+                    {
+                        break;
+                    }
+                }                
             }
 
             instanceCounter = 0;
@@ -251,6 +296,7 @@ public class FlagSystem : MonoBehaviour
 
     public void Reset()
     {
+        GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", false);
         isFlag = false;
         flagIndex = -1;
         if (instanceCounter <= 0)

@@ -8,6 +8,8 @@ public class MakeReportEntry : MonoBehaviour
     private GameObject messageField;
     private GameObject reportEntry;
 
+    private static int numOfReports = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +17,17 @@ public class MakeReportEntry : MonoBehaviour
     }
 
     public void MakeReport()
-    {
+    {        
         Debug.Log("Send was pressed");
         messageField = GameObject.FindGameObjectWithTag("MessageField");
 
         string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
 
         if (reportDetails[1] != "")
-        {
+        {            
             reportEntry = Instantiate(
                 reportEntryPrefab,
-                new Vector3(1752.53125f, 979.4930419921875f, 0.0f), //need to automotate y value at some point for more than one error                            
+                new Vector3(1752.53125f, 979.4930419921875f - (79f * (float) numOfReports), 0.0f), //need to automotate y value at some point for more than one error                            
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 
@@ -42,6 +44,8 @@ public class MakeReportEntry : MonoBehaviour
                 Destroy(x);
             }
         }
+        
+        numOfReports++;
     }
 
     

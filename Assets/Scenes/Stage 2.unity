@@ -8314,7 +8314,7 @@ GameObject:
   - component: {fileID: 1329488645}
   m_Layer: 5
   m_Name: PrivacyWindow
-  m_TagString: Untagged
+  m_TagString: PrivacyWindow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

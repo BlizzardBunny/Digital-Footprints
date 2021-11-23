@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Submit : MonoBehaviour
 {    
@@ -84,10 +85,10 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                             }
                         }
-                        else if (transform.parent.parent.name == "PrivacyWindow") //~~~~FIX THIS~~~~~
+                        else if (clickable.transform.parent.parent.name == "PrivacyWindow")
                         {
-                            Toggle everyoneToggle = transform.parent.Find("Everyone").GetComponent<Toggle>();
-                            Toggle friendsToggle = transform.parent.Find("Friends").GetComponent<Toggle>();
+                            Toggle everyoneToggle = clickable.transform.parent.Find("Everyone").GetComponent<Toggle>();
+                            Toggle friendsToggle = clickable.transform.parent.Find("Friends").GetComponent<Toggle>();
 
                             if ((!everyoneToggle.isOn) && (friendsToggle.isOn))
                             {
