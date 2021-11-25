@@ -47,30 +47,26 @@ public class Submit : MonoBehaviour
 		
 		if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
 		{
-			StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+			StaticFunction.setMistakes(StaticFunction.getMistakes() + StaticFunction.getTotalErrors());
 		}
 		else
 		{
-			foreach(GameObject reportEntry in GameObject.FindGameObjectsWithTag("ReportEntry"))
+            foreach(GameObject reportEntry in GameObject.FindGameObjectsWithTag("ReportEntry"))
 			{
 				string itemName = reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text;
 				string flagName = reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text;
+                string snsName = reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text;
 
-				foreach(GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
+                foreach (GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
 				{
 					FlagSystem script = (FlagSystem) clickable.GetComponent(typeof(FlagSystem));
 
-					if (clickable.transform.parent.name == itemName)
+					if ((clickable.transform.parent.name == itemName) && (script.getSNSName() == snsName))
 					{
-						if (!script.getIsFlag())
-						{
-							StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
-							break;
-						}
-
                         if ((itemName == "Address") && (flagName != "Personal Information"))
                         {
                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                            Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": address is not flagged as personal info");
                         }
                         else if (itemName.StartsWith("Post"))
                         {
@@ -79,10 +75,12 @@ public class Submit : MonoBehaviour
                             if (flagIndex <= -1)
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": flagindex error");
                             }
                             else if (flagName != StaticFunction.getCaptionFlags()[flagIndex])
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": wrong post flag");
                             }
                         }
                         else if (clickable.transform.parent.parent.name == "PrivacyWindow")
@@ -93,27 +91,27 @@ public class Submit : MonoBehaviour
                             if ((!everyoneToggle.isOn) && (friendsToggle.isOn))
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": setting is not set to everyone");
                             }
 
                             for (int i = 0; i < StaticFunction.getPrivacySettingChoices().Length; i++)
                             {
-                                Debug.Log(itemName + "  " + flagName);
                                 if (StaticFunction.getPrivacySettingChoices()[i].Equals(itemName))
                                 {
-                                    Debug.Log(itemName + " : " + flagName);
-                                    Debug.Log(StaticFunction.getPrivacySettingChoices()[i] + " : " + StaticFunction.getPrivacySettingFlags()[i]);
                                     if (!StaticFunction.getPrivacySettingFlags()[i].Equals(flagName))
                                     {
                                         StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                        Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": wrong privacy setting category");
                                     }
                                     break;
                                 }
                             }
                         }
+
                         break;
 					}                
 				}
-			}
+			}	
 		}
 		
         
@@ -123,13 +121,33 @@ public class Submit : MonoBehaviour
         StaticFunction.setProfileNum(StaticFunction.getProfileNum() + 1);
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
 
+        //setInstanceCounter
+        GameObject temp = GameObject.FindGameObjectWithTag("Clickable");
+        FlagSystem tempScript = (FlagSystem) temp.GetComponent(typeof(FlagSystem));
+        tempScript.setInstanceCounter(0);
+
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Clickable"))
         {
             FlagSystem script = (FlagSystem) x.GetComponent(typeof(FlagSystem));
-            script.Reset();
+            script.ResetStage();
         }
 
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Confirmation"))
+        {
+            Destroy(x);
+        }
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+        {
+            Destroy(x);
+        }
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+        {
+            Destroy(x);
+        }
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("ReportEntry"))
         {
             Destroy(x);
         }

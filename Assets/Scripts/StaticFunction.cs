@@ -120,6 +120,7 @@ public static class StaticFunction
     };
 
     private static int errorNum = 1;
+    private static int totalErrors = 1; //errors to be found for this stage
     private static bool isChecking = false;
     private static int currFlag = -1;
     private static int profileNum = 0; //profiles completed
@@ -199,6 +200,16 @@ public static class StaticFunction
     public static void setErrorNum(int i)
     {
         errorNum = i;
+    }
+
+    public static int getTotalErrors()
+    {
+        return totalErrors;
+    }
+
+    public static void setTotalErrors(int i)
+    {
+        totalErrors = i;
     }
 
     public static bool getIsChecking()

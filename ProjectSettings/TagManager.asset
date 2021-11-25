@@ -21,6 +21,8 @@ TagManager:
   - ErrorTag
   - PrivacyWindow
   - SocialMediaPage
+  - SNSField
+  - MainWindow
   layers:
   - Default
   - TransparentFX

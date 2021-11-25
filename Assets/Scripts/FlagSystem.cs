@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class FlagSystem : MonoBehaviour
 {
@@ -19,8 +20,9 @@ public class FlagSystem : MonoBehaviour
 
     private string snsName = "0";
     private string parentName;
-    private bool isFlag;
     private int flagIndex;
+    private int id;
+    private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
     private static int otherPostIndex = -1;
     private static int instanceCounter = 0; //counts how many instances have run this script
@@ -29,8 +31,8 @@ public class FlagSystem : MonoBehaviour
     void Start()
     {
         parentName = transform.parent.name;
-        isFlag = false;
         flagIndex = -1;
+        id = instanceCounter;
 
         Transform t = transform.parent;
         while (snsName.Equals("0"))
@@ -45,40 +47,7 @@ public class FlagSystem : MonoBehaviour
             }
         }
 
-        if (instanceCounter <= 0)
-        {
-            if (SceneManager.GetActiveScene().name == "Stage 1")
-            {
-                StaticFunction.setErrorNum(1);
-                StaticFunction.setTotalProfiles(3);
-                
-                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
-                {
-                    socialMediaPage.SetActive(false);
-                }
-            }
-            else if (SceneManager.GetActiveScene().name == "Stage 2")
-            {
-                StaticFunction.setErrorNum(3);
-                StaticFunction.setTotalProfiles(4);
-                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
-                {
-                    if (socialMediaPage.transform.name == "Photogram (Panel)")
-                    {
-                        socialMediaPage.SetActive(false);
-                        break;
-                    }
-                }
-            }
-            else if (SceneManager.GetActiveScene().name == "Stage 3")
-            {
-                StaticFunction.setErrorNum(5);
-                StaticFunction.setTotalProfiles(5);
-            }
-        }          
-        
-        Setup();
-        CheckSetup();
+        ResetStage();  
     }
 
     public int getFlagIndex()
@@ -86,23 +55,18 @@ public class FlagSystem : MonoBehaviour
         return flagIndex;
     }
 
-    public void setFlagIndex(int i)
+    public void setInstanceCounter(int i)
     {
-        flagIndex = i;
+        instanceCounter = i;
     }
 
-    public bool getIsFlag()
+    public string getSNSName()
     {
-        return isFlag;
-    }
-
-    public void setIsFlag(bool b)
-    {
-        isFlag = b;
+        return snsName;
     }
 
     private void Setup()
-    {        
+    {
         if ((rndNum <= -1) && (instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
@@ -123,13 +87,20 @@ public class FlagSystem : MonoBehaviour
 
         }
 
-        int rnd = UnityEngine.Random.Range(1, GameObject.FindGameObjectsWithTag("Clickable").Length); //determine if this instance is a flag [random]
+        bool flaggedItem = false;
 
-        if ((rnd == 1) && (StaticFunction.getErrorNum() > 0)) //this instance is a flag
+        foreach (int j in flagIds)
+        {
+            if (id == j)
+            {
+                flaggedItem = true;
+            }
+        }
+
+        if (flaggedItem) //this instance is a flag
         {
             StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
-            isFlag = true;
-            Debug.Log("Setup(): " + snsName + " " + parentName);
+            Debug.Log("Setup(): " + snsName + " " + parentName + " id: " + id);
 
             if (parentName == "Address")
             {
@@ -216,74 +187,8 @@ public class FlagSystem : MonoBehaviour
         }
     }
 
-    //for case where not enough flags were made
-    private void CheckSetup()
-    {        
-        instanceCounter++;
-
-        if (instanceCounter == GameObject.FindGameObjectsWithTag("Clickable").Length)
-        {
-            if ((StaticFunction.getErrorNum() > 0))
-            {
-                foreach (GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
-                {
-                    FlagSystem script = (FlagSystem)clickable.GetComponent(typeof(FlagSystem));
-
-                    if (!script.getIsFlag())
-                    {
-                        StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
-                        script.setIsFlag(true);
-                        String parentName = clickable.transform.parent.name;
-                        Debug.Log("CheckSetup() " + snsName + " " + parentName) ;
-
-                        if (parentName == "Address")
-                        {
-                            clickable.transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[rndNum];
-                        }
-                        else if (parentName.StartsWith("Post"))
-                        {
-                            //make deets of post match deets of profile
-                            Transform postProfilePic = clickable.transform.parent.transform.Find("ProfilePic");
-                            Transform postName = clickable.transform.parent.transform.Find("Name");
-                            postProfilePic.GetComponent<Image>().sprite = profilePics[rndNum];
-                            postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[rndNum];
-
-                            //randomize post content
-                            Transform caption = clickable.transform.parent.transform.Find("Caption");
-                            Transform photo = clickable.transform.parent.transform.Find("Photo");
-
-                            int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
-                            caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
-                            photo.GetComponent<Image>().sprite = badPosts[rnd2];
-                            script.setFlagIndex(rnd2);
-                        }
-                        else if (transform.parent.parent.name == "PrivacyWindow")
-                        {
-                            Transform everyone = clickable.transform.parent.Find("Everyone");
-                            Transform friends = clickable.transform.parent.Find("Friends");
-
-                            Toggle everyoneToggle = everyone.GetComponent<Toggle>();
-                            Toggle friendsToggle = friends.GetComponent<Toggle>();
-
-                            everyoneToggle.isOn = true;
-                            friendsToggle.isOn = false;
-                        }
-                    }
-
-                    if (StaticFunction.getErrorNum() == 0)
-                    {
-                        break;
-                    }
-                }                
-            }
-
-            instanceCounter = 0;
-        }
-    }
-
     public void Flag(Button clicked)
     {
-        Debug.Log(parentName + " isFlag:" + isFlag + " editableIsDrawn:" + editableIsDrawn);
         if (!editableIsDrawn)
         {
             try
@@ -304,8 +209,10 @@ public class FlagSystem : MonoBehaviour
                 GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 
             Transform messageField = editableMA.transform.Find("MessageField");
+            Transform snsField = editableMA.transform.Find("SNSField");
 
             messageField.GetComponent<TMPro.TextMeshProUGUI>().text = clicked.transform.parent.name;
+            snsField.GetComponent<TMPro.TextMeshProUGUI>().text = snsName;
             editableIsDrawn = true;
             StaticFunction.setIsChecking(true);
             StaticFunction.setCurrFlag(flagIndex);
@@ -328,38 +235,77 @@ public class FlagSystem : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetStage()
     {
+        GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
         GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", false);
-        isFlag = false;
-        flagIndex = -1;
+
         if (instanceCounter <= 0)
         {
+            Debug.Log("===ROUND " + (StaticFunction.getProfileNum() + 1) + "===");
+
+            flagIds.Clear();
+            flagIds.TrimExcess();
+
+            //setup stage reqs
+            if (SceneManager.GetActiveScene().name == "Stage 1")
+            {
+                StaticFunction.setErrorNum(1);
+                StaticFunction.setTotalProfiles(3);
+                StaticFunction.setTotalErrors(1);
+
+                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
+                {
+                    socialMediaPage.SetActive(false);
+                }
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 2")
+            {
+                StaticFunction.setErrorNum(3);
+                StaticFunction.setTotalProfiles(4);
+                StaticFunction.setTotalErrors(3);
+
+                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
+                {
+                    if (socialMediaPage.transform.name == "Photogram (Panel)")
+                    {
+                        socialMediaPage.SetActive(false);
+                        break;
+                    }
+                }
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 3")
+            {
+                StaticFunction.setErrorNum(5);
+                StaticFunction.setTotalProfiles(5);
+                StaticFunction.setTotalErrors(5);
+            }
+
+            //randomize flags
+            //setup list
+            List<int> clickableIDs = new List<int>();
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Clickable").Length; i++)
+            {
+                clickableIDs.Add(i);
+            }
+
+            //randomize list
+            clickableIDs = clickableIDs.OrderBy(tvz => System.Guid.NewGuid()).ToList();
+
+            //select x IDs to be flags (depends on stage)
+            for (int i = 0; i < StaticFunction.getErrorNum(); i++)
+            {
+                flagIds.Add(clickableIDs[i]);
+            }
+
             StaticFunction.setCurrFlag(-1);
             otherPostIndex = -1;
             StaticFunction.setErrorNum(1);
-            rndNum = -1;
-
-            foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
-            {
-                Destroy(x);
-            }
-
-            foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
-            {
-                Destroy(x);
-            }
-
-            foreach (GameObject x in GameObject.FindGameObjectsWithTag("ReportEntry"))
-            {
-                Destroy(x);
-            }
+            rndNum = -1;            
         }
         
         Setup();
-        CheckSetup();
-
-        Debug.Log(parentName + " reset");
+        instanceCounter++;
     }
 
     public void Exit()

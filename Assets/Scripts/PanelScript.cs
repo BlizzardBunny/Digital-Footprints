@@ -39,11 +39,8 @@ public class PanelScript : MonoBehaviour
                     if (socialMediaPage.transform.name == panelName)
                     {
                         socialMediaPage.transform.parent.Find("Title").Find("Title TMP").GetComponent<TMPro.TextMeshProUGUI>().text = transform.name;
-                        socialMediaPage.SetActive(true);
-                    }
-                    else
-                    {
-                        socialMediaPage.SetActive(false);
+                        socialMediaPage.GetComponent<RectTransform>().SetAsLastSibling();
+                        break;
                     }
                 }
 

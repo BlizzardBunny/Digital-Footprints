@@ -6,6 +6,7 @@ public class MakeReportEntry : MonoBehaviour
 {
     public GameObject reportEntryPrefab;
     private GameObject messageField;
+    private GameObject snsField;
     private GameObject reportEntry;
 
     private static int numOfReports = 0;
@@ -17,9 +18,9 @@ public class MakeReportEntry : MonoBehaviour
     }
 
     public void MakeReport()
-    {        
-        Debug.Log("Send was pressed");
+    {
         messageField = GameObject.FindGameObjectWithTag("MessageField");
+        snsField = GameObject.FindGameObjectWithTag("SNSField");
 
         string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
 
@@ -33,6 +34,7 @@ public class MakeReportEntry : MonoBehaviour
 
             reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
             reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[1];
+            reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text = snsField.GetComponent<TMPro.TextMeshProUGUI>().text;
 
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
             {
@@ -46,7 +48,5 @@ public class MakeReportEntry : MonoBehaviour
         }
         
         numOfReports++;
-    }
-
-    
+    }    
 }
