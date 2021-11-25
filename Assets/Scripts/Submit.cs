@@ -107,6 +107,21 @@ public class Submit : MonoBehaviour
                                 }
                             }
                         }
+                        else if (itemName == "Password")
+                        {
+                            int flagIndex = script.getFlagIndex();
+
+                            if (flagIndex <= -1)
+                            {
+                                StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": flagindex error");
+                            }
+                            else if (flagName != StaticFunction.getPasswordFlags()[flagIndex])
+                            {
+                                StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
+                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": wrong post flag");
+                            }
+                        }
 
                         break;
 					}                

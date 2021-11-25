@@ -89,6 +89,36 @@ public static class StaticFunction
         "Search me Online"
     };
 
+    private static string[] badPasswords = new string[]
+    {
+        "PasswordPassword",
+        "[PROFILENAME]_2021",
+        "[ADDRESS]420!",
+        "Im-Gr8t",
+        "aA~",
+        "IDONTWANTNEWPASSWORD"
+    };
+
+    private static string[] passwordFlags = new string[]
+    {
+        "Complexity",
+        "Personal Information",
+        "Personal Information",
+        "Password Length",
+        "Password Length",
+        "Complexity"
+    };
+
+    private static string[] goodPasswords = new string[]
+    {
+        "P9Y#Pp6v!c2Zh!-6",
+        "FR@2mr*pNjR-r37s",
+        "&6Js$8cRuTK+@ExC",
+        "nR#8j2_c6afWvb6d",
+        "SEnW$Ky8sK7WjTyT",
+        "kJekcFFZF&7mP@HS"
+    };
+
     private static string[] tutorialDialogue = new string[]
     {
         "Greetings, and welcome to Digital Footprints, where your privacy is our priority.",
@@ -140,6 +170,21 @@ public static class StaticFunction
     public static string[] getGoodCaptions()
     {
         return goodCaptions;
+    }
+
+    public static string[] getBadPasswords()
+    {
+        return badPasswords;
+    }
+
+    public static string[] getPasswordFlags()
+    {
+        return passwordFlags;
+    }
+
+    public static string[] getGoodPasswords()
+    {
+        return goodPasswords;
     }
 
     public static string[] getBadAddress()

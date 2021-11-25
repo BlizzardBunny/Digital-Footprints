@@ -17,6 +17,7 @@ public class PanelScript : MonoBehaviour
     public void Start()
     {
         socialMediaPages = GameObject.FindGameObjectsWithTag("SocialMediaPage");
+        currSocialMedia = "*";
     }
 
     public void TogglePanel(GameObject panel)
@@ -29,7 +30,7 @@ public class PanelScript : MonoBehaviour
         Animator animator = panel.GetComponent<Animator>();
         if (animator != null)
         {
-            if ((currSocialMedia != transform.name) && (transform.name != "Mail") && (transform.name != "Privacy"))
+            if ((currSocialMedia != transform.name) && ((transform.name == "Digibook") || (transform.name == "Photogram") || (transform.name == "Chirper") || (transform.name == "*")))
             {
                 currSocialMedia = transform.name;
                 

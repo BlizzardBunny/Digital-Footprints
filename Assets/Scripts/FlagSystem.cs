@@ -134,6 +134,50 @@ public class FlagSystem : MonoBehaviour
                 everyoneToggle.isOn = true;
                 friendsToggle.isOn = false;
             }
+            else if (parentName == "Password")
+            {
+                Transform passwordField = transform.parent.Find("PasswordField");
+
+                //randomize password
+                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadPasswords().Length);
+
+                string temp = "";
+                if (StaticFunction.getBadPasswords()[rnd2].Contains("["))
+                {
+                    bool isInsideBrackets = false;
+                    foreach (char x in StaticFunction.getBadPasswords()[rnd2])
+                    {
+                        if (x.Equals('['))
+                        {
+                            isInsideBrackets = true;
+                        }
+                        else if (x.Equals(']'))
+                        {
+                            isInsideBrackets = false;
+                        }
+                        else if (isInsideBrackets)
+                        {
+                            temp += x;
+                        }
+                    }
+
+                    if (temp.Equals("PROFILENAME"))
+                    {
+                        temp = temp.Replace("[PROFILENAME]", StaticFunction.getNames()[rndNum]);
+                    }
+                    else if (temp.Equals("ADDRESS"))
+                    {
+                        temp = temp.Replace("[PROFILENAME]", StaticFunction.getGoodAddress()[rndNum]);
+                    }
+                    else
+                    {
+                        throw new Exception("Invalid temp: " + temp);
+                    }
+                }
+
+                passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadPasswords()[rnd2];
+                flagIndex = rnd2;
+            }
         }
         else //not a flag
         {
@@ -183,6 +227,15 @@ public class FlagSystem : MonoBehaviour
 
                 everyoneToggle.isOn = false;
                 friendsToggle.isOn = true;
+            }
+            else if (parentName == "Password")
+            {
+                Transform passwordField = transform.parent.Find("PasswordField");
+
+                //randomize password
+                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodPasswords().Length);
+                passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodPasswords()[rnd2];
+                flagIndex = rnd2;
             }
         }
     }
@@ -238,7 +291,7 @@ public class FlagSystem : MonoBehaviour
     public void ResetStage()
     {
         GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
-        GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", false);
+        GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", true);
 
         if (instanceCounter <= 0)
         {
