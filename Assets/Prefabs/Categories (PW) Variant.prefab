@@ -7,6 +7,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1917318734330558723}
     m_Modifications:
+    - target: {fileID: -8395839728588906520, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: categoryDetails
+      value: "Mixing and combining the use of numbers, special characters, and letter
+        cases (both upper AND lower case) increases your password\u2019s complexity,
+        making it harder to crack."
+      objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005328, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Name
       value: ComStaButton (1)
@@ -278,6 +284,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1917318734330558723}
     m_Modifications:
+    - target: {fileID: -8395839728588906520, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: categoryDetails
+      value: Your personal information should not be within your password because
+        it can make your password easily guessable, especially since entities can
+        gather information about you online.
+      objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005328, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Name
       value: ComStaButton (2)
@@ -372,6 +384,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+--- !u!1001 &3821844784064269188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1917318734330558723}
+    m_Modifications:
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -106.1149
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -54.811
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -286.94263
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076682, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362136927314076683, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
+      propertyPath: m_Name
+      value: CategoryDetailsPanel
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0da45ffb0200b674d8fa31d9e119f3f8, type: 3}
 --- !u!1001 &6846292890053956875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -379,6 +488,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1917318734330558723}
     m_Modifications:
+    - target: {fileID: -8395839728588906520, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: categoryDetails
+      value: The longer the password, the stronger it is. 10 characters or more is
+        required to have a strong password.
+      objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005328, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Name
       value: ComStaButton

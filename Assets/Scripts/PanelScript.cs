@@ -16,6 +16,8 @@ public class PanelScript : MonoBehaviour
 
     public void Start()
     {
+        GameObject content = GameObject.FindGameObjectWithTag("CompanyStandardsContent");
+        content.transform.position = new Vector3(1580.0f, 322.0400085449219f, 0.0f);
         socialMediaPages = GameObject.FindGameObjectsWithTag("SocialMediaPage");
         currSocialMedia = "*";
     }
@@ -147,7 +149,7 @@ public class PanelScript : MonoBehaviour
             categoryPanelPrefab,
             new Vector3(1749.999755859375f, 287.0400085449219f, 0.0f),
             clicked.transform.rotation,
-            clicked.transform.parent.transform.parent.transform.parent.transform.parent
+            GameObject.FindGameObjectWithTag("CompanyStandards").transform
             );
     }
 

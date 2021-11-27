@@ -23,6 +23,8 @@ TagManager:
   - SocialMediaPage
   - SNSField
   - MainWindow
+  - CompanyStandards
+  - CompanyStandardsContent
   layers:
   - Default
   - TransparentFX
