@@ -28,7 +28,7 @@ public class FlagSystem : MonoBehaviour
     private static int instanceCounter = 0; //counts how many instances have run this script
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         parentName = transform.parent.name;
         flagIndex = -1;
@@ -142,7 +142,7 @@ public class FlagSystem : MonoBehaviour
                 int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadPasswords().Length);
 
                 string temp = "";
-                if (StaticFunction.getBadPasswords()[rnd2].Contains("["))
+                if (StaticFunction.getBadPasswords()[rnd2].Contains('['))
                 {
                     bool isInsideBrackets = false;
                     foreach (char x in StaticFunction.getBadPasswords()[rnd2])
@@ -159,23 +159,28 @@ public class FlagSystem : MonoBehaviour
                         {
                             temp += x;
                         }
-                    }
-
-                    if (temp.Equals("PROFILENAME"))
-                    {
-                        temp = temp.Replace("[PROFILENAME]", StaticFunction.getNames()[rndNum]);
-                    }
-                    else if (temp.Equals("ADDRESS"))
-                    {
-                        temp = temp.Replace("[PROFILENAME]", StaticFunction.getGoodAddress()[rndNum]);
-                    }
-                    else
-                    {
-                        throw new Exception("Invalid temp: " + temp);
-                    }
+                    }             
                 }
 
-                passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadPasswords()[rnd2];
+                if (temp.Equals("PROFILENAME"))
+                {
+                    temp = StaticFunction.getBadPasswords()[rnd2];
+                    temp = temp.Replace("[PROFILENAME]", StaticFunction.getNames()[rndNum]);
+                    temp = temp.Replace(' ', '_');
+                }
+                else if (temp.Equals("ADDRESS"))
+                {
+                    temp = StaticFunction.getBadPasswords()[rnd2];
+                    temp = temp.Replace("[ADDRESS]", StaticFunction.getGoodAddress()[rndNum]);
+                    temp = temp.Replace(", ", "_");
+                    temp = temp.Replace(' ', '_');
+                }
+                else if (temp.Equals(""))
+                {
+                    temp = StaticFunction.getBadPasswords()[rnd2];
+                }
+
+                passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = temp;
                 flagIndex = rnd2;
             }
         }

@@ -93,7 +93,7 @@ public static class StaticFunction
     {
         "PasswordPassword",
         "[PROFILENAME]_2021",
-        "[ADDRESS]420!",
+        "[ADDRESS]21!",
         "Im-Gr8t",
         "aA~",
         "IDONTWANTNEWPASSWORD"

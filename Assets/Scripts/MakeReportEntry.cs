@@ -9,6 +9,7 @@ public class MakeReportEntry : MonoBehaviour
     private GameObject snsField;
     private GameObject reportEntry;
 
+    private static GameObject prevReportEntry;
     private static int numOfReports = 0;
 
     // Start is called before the first frame update
@@ -25,16 +26,26 @@ public class MakeReportEntry : MonoBehaviour
         string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
 
         if (reportDetails[1] != "")
-        {            
+        {
             reportEntry = Instantiate(
                 reportEntryPrefab,
-                new Vector3(1752.53125f, 979.4930419921875f - (79f * (float) numOfReports), 0.0f), //need to automotate y value at some point for more than one error                            
+                new Vector3(1752.53125f, 979.4930419921875f, 0.0f),                             
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 
             reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
             reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[1];
             reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text = snsField.GetComponent<TMPro.TextMeshProUGUI>().text;
+
+            if (numOfReports == 0)
+            {
+                prevReportEntry = reportEntry;
+            }
+            else
+            {
+                reportEntry.transform.position = new Vector3(prevReportEntry.transform.position.x, prevReportEntry.transform.position.y - 79f, prevReportEntry.transform.position.z);
+                prevReportEntry = reportEntry;
+            }
 
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
             {
