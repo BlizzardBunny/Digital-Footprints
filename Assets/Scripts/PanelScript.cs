@@ -8,7 +8,7 @@ public class PanelScript : MonoBehaviour
     public Scrollbar scrollbar;
     public Button otherNavButton;
     private bool panelIsShowing = true;
-    private float scrollVal = 1 / 3f;
+    private float scrollVal = 0.25f;
 
     private static int pageNumber = 1;
     private static string currSocialMedia;
@@ -152,6 +152,7 @@ public class PanelScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        scrollbar.value = targetPosition;
         if (pageNumber != 1)
         {
             GetComponent<Button>().interactable = true;
@@ -171,6 +172,7 @@ public class PanelScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        scrollbar.value = targetPosition;
         if (pageNumber != 4)
         {
             GetComponent<Button>().interactable = true;            
