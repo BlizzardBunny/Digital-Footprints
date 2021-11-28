@@ -24,7 +24,18 @@ public class DialogueControls : MonoBehaviour
         if (dialogueIndex >= dialogue.Length)
         {
             dialogueIndex = 0;
-			Application.Quit();
+            if (SceneManager.GetActiveScene().name == "Stage 1")
+            {
+                SceneManager.LoadScene("Stage 2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 2")
+            {
+                SceneManager.LoadScene("Stage 3");
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 3")
+            {
+                Application.Quit();
+            }
         }
         else
         {

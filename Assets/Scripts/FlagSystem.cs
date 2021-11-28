@@ -296,7 +296,14 @@ public class FlagSystem : MonoBehaviour
     public void ResetStage()
     {
         GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
-        GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", true);
+        try
+        {
+            GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", true);
+        }
+        catch (Exception)
+        {
+
+        }
 
         if (instanceCounter <= 0)
         {
@@ -311,11 +318,6 @@ public class FlagSystem : MonoBehaviour
                 StaticFunction.setErrorNum(1);
                 StaticFunction.setTotalProfiles(3);
                 StaticFunction.setTotalErrors(1);
-
-                foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
-                {
-                    socialMediaPage.SetActive(false);
-                }
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
