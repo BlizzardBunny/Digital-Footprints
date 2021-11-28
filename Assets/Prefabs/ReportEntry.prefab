@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95.433, y: -20.322}
+  m_AnchoredPosition: {x: 239.51, y: -20.327}
   m_SizeDelta: {x: 144.08, y: 40.644}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &857905199255958207
@@ -991,6 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reportEntryPrefab: {fileID: 0}
+  snsLogos: []
 --- !u!1 &7054699285578589817
 GameObject:
   m_ObjectHideFlags: 0

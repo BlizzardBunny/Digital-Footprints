@@ -282,6 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmationPrefab: {fileID: 3850745046234004881}
   dialoguePrefab: {fileID: 0}
+  mistakeMessagePrefab: {fileID: 0}
 --- !u!1 &3850745045713630069
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmationPrefab: {fileID: 3850745046234004881}
   dialoguePrefab: {fileID: 1163755748046703942, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
+  mistakeMessagePrefab: {fileID: 7356037365626714882, guid: 52acf0b0823a0e74fbb67343885ae4fe, type: 3}
 --- !u!1 &3850745046575462841
 GameObject:
   m_ObjectHideFlags: 0

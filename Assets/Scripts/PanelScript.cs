@@ -7,6 +7,7 @@ public class PanelScript : MonoBehaviour
     [SerializeField] GameObject categoryPanelPrefab;
     public Scrollbar scrollbar;
     public Button otherNavButton;
+
     private bool panelIsShowing = true;
     private float scrollVal = 0.25f;
 

@@ -7,6 +7,7 @@ public class MakeReportEntry : MonoBehaviour
 {
     public GameObject reportEntryPrefab;
     public Sprite[] snsLogos;
+
     private GameObject messageField;
     private GameObject snsField;
     private GameObject reportEntry;

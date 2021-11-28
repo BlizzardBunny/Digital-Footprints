@@ -8,10 +8,20 @@ public class DialogueControls : MonoBehaviour
     private Transform dialogueBox;
     private int dialogueIndex = 1;
     private string[] dialogue;
+    private Coroutine showMsg;
 
     private void Start()
     {
-        dialogueBox = transform.parent.transform.Find("Dialogue");    
+        try
+        {
+            dialogueBox = transform.parent.transform.Find("Dialogue");  
+        }
+        catch (System.Exception) {}       
+        
+        if (transform.name == "Close")
+        {
+            FadeOutTimer();
+        }
     }
 
     public void setDialogue(string[] d)
@@ -47,5 +57,36 @@ public class DialogueControls : MonoBehaviour
             dialogueBox.GetComponent<TMPro.TextMeshProUGUI>().text = dialogue[dialogueIndex];
             dialogueIndex++;
         }
+    }
+
+    public void DestroyParent()
+    {
+        Debug.Log(transform.parent.Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text);
+        StopCoroutine(showMsg);
+
+        //update list
+        int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
+        StaticFunction.mistakeMessages.RemoveAt(id);
+        for (int i = id; i < StaticFunction.mistakeMessages.Count; i++)
+        {
+            StaticFunction.mistakeMessages[i].transform.Translate(new Vector3(0f, 114.8024f, 0f));
+            StaticFunction.mistakeMessages[i].transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = i.ToString();
+        }
+
+        Destroy(transform.parent.gameObject);
+    }
+
+    public void FadeOutTimer()
+    {
+        Animator anim = transform.parent.GetComponent<Animator>();
+        showMsg = StartCoroutine(ShowMessage(anim));
+    }
+
+    IEnumerator ShowMessage(Animator anim)
+    {
+        yield return new WaitForSeconds(5f);
+        anim.SetBool("isFadingOut", true);
+        yield return new WaitForSeconds(1f);        
+        DestroyParent();
     }
 }

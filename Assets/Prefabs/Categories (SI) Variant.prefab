@@ -115,7 +115,8 @@ PrefabInstance:
     - target: {fileID: -8395839728588906520, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: categoryDetails
       value: Any sort of information that could be used to identify you. This is
-        sensitive information as it can be used for phishing or identity theft.
+        sensitive information as it can be used for phishing or identity theft. This
+        includes addresses, emails, phone numbers, and the like.
       objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005328, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Name

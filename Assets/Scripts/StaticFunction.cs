@@ -159,6 +159,7 @@ public static class StaticFunction
 
     public static int instanceCounter = 0; //number of times FlagSystem is run
     public static List<GameObject> reportEntries = new List<GameObject>();
+    public static List<GameObject> mistakeMessages = new List<GameObject>();
 
     public static void resetVals(int numOfProfiles,int numOfErrors)
     {

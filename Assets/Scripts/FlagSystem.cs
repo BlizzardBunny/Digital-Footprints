@@ -22,6 +22,7 @@ public class FlagSystem : MonoBehaviour
     private string parentName;
     private int flagIndex;
     private int id;
+    private bool flaggedItem;
     private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
     private static int otherPostIndex = -1;
@@ -59,6 +60,11 @@ public class FlagSystem : MonoBehaviour
         return snsName;
     }
 
+    public bool isFlag()
+    {
+        return flaggedItem;
+    }
+
     private void Setup()
     {
         if ((rndNum <= -1) && (StaticFunction.instanceCounter <= 0))
@@ -80,8 +86,6 @@ public class FlagSystem : MonoBehaviour
         {
 
         }
-
-        bool flaggedItem = false;
 
         foreach (int j in flagIds)
         {
