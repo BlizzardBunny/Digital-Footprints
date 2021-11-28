@@ -23,13 +23,16 @@ public class DialogueControls : MonoBehaviour
     {
         if (dialogueIndex >= dialogue.Length)
         {
-            dialogueIndex = 0;
+            dialogueIndex = 0;                
+
             if (SceneManager.GetActiveScene().name == "Stage 1")
-            {
+            {            
+                StaticFunction.resetVals(4,3);
                 SceneManager.LoadScene("Stage 2");
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
+                StaticFunction.resetVals(5, 5);
                 SceneManager.LoadScene("Stage 3");
             }
             else if (SceneManager.GetActiveScene().name == "Stage 3")

@@ -157,6 +157,17 @@ public static class StaticFunction
     private static int totalProfiles = 3;
     private static int mistakes = 0;
 
+    public static void resetVals(int numOfProfiles,int numOfErrors)
+    {
+        errorNum = numOfErrors;
+        totalErrors = numOfErrors;
+        isChecking = false;
+        currFlag = -1;
+        profileNum = 0;
+        totalProfiles = numOfProfiles;
+        mistakes = 0;
+
+    }
     public static string[] getBadCaptions()
     {
         return badCaptions;

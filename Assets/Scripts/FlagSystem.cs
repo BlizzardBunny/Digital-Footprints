@@ -321,9 +321,6 @@ public class FlagSystem : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
-                StaticFunction.setErrorNum(3);
-                StaticFunction.setTotalProfiles(4);
-                StaticFunction.setTotalErrors(3);
 
                 foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
                 {
@@ -334,12 +331,7 @@ public class FlagSystem : MonoBehaviour
                     }
                 }
             }
-            else if (SceneManager.GetActiveScene().name == "Stage 3")
-            {
-                StaticFunction.setErrorNum(5);
-                StaticFunction.setTotalProfiles(5);
-                StaticFunction.setTotalErrors(5);
-            }
+
 
             //randomize flags
             //setup list
