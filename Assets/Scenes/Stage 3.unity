@@ -2048,8 +2048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!1 &112499043
 GameObject:
@@ -2764,8 +2764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &187792250
 MonoBehaviour:
@@ -3007,8 +3007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!1 &196698720
 GameObject:
@@ -5560,8 +5560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &369495589
 MonoBehaviour:
@@ -8091,8 +8091,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &563123040
 MonoBehaviour:
@@ -8404,8 +8404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &578387780
 MonoBehaviour:
@@ -10698,8 +10698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &780419568
 MonoBehaviour:
@@ -15367,7 +15367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
   scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 1411770947}
 --- !u!1001 &1087246244
@@ -17073,8 +17073,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!1 &1235859758
 GameObject:
@@ -18927,8 +18927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &1388006159
 MonoBehaviour:
@@ -19446,7 +19446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
   scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 1082150890}
 --- !u!1 &1415079014
@@ -21710,8 +21710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!1 &1537813451
 GameObject:
@@ -22014,8 +22014,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!1 &1553165291
 GameObject:
@@ -22681,7 +22681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   confirmationPrefab: {fileID: 3850745046234004881, guid: 9b3454f7ed139974f8c37a52a7f4a89f, type: 3}
-  dialoguePrefab: {fileID: 0}
+  dialoguePrefab: {fileID: 1163755748046703942, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
 --- !u!1 &1600938185
 GameObject:
   m_ObjectHideFlags: 0
@@ -27023,8 +27023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b0de8dbad319304696bc150fcbe4ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  categoryPanelPrefab: {fileID: 0}
-  scrollbar: {fileID: 0}
+  categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  scrollbar: {fileID: 1261342439}
   otherNavButton: {fileID: 0}
 --- !u!114 &1870853571
 MonoBehaviour:

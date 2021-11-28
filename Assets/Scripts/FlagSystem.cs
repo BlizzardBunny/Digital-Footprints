@@ -25,14 +25,13 @@ public class FlagSystem : MonoBehaviour
     private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
     private static int otherPostIndex = -1;
-    private static int instanceCounter = 0; //counts how many instances have run this script
 
     // Start is called before the first frame update
     private void Start()
     {
         parentName = transform.parent.name;
         flagIndex = -1;
-        id = instanceCounter;
+        id = StaticFunction.instanceCounter;
 
         Transform t = transform.parent;
         while (snsName.Equals("0"))
@@ -55,11 +54,6 @@ public class FlagSystem : MonoBehaviour
         return flagIndex;
     }
 
-    public void setInstanceCounter(int i)
-    {
-        instanceCounter = i;
-    }
-
     public string getSNSName()
     {
         return snsName;
@@ -67,7 +61,7 @@ public class FlagSystem : MonoBehaviour
 
     private void Setup()
     {
-        if ((rndNum <= -1) && (instanceCounter <= 0))
+        if ((rndNum <= -1) && (StaticFunction.instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
         }
@@ -296,16 +290,8 @@ public class FlagSystem : MonoBehaviour
     public void ResetStage()
     {
         GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
-        try
-        {
-            GameObject.FindGameObjectWithTag("PrivacyWindow").GetComponent<Animator>().SetBool("isMinimized", true);
-        }
-        catch (Exception)
-        {
 
-        }
-
-        if (instanceCounter <= 0)
+        if (StaticFunction.instanceCounter <= 0)
         {
             Debug.Log("===ROUND " + (StaticFunction.getProfileNum() + 1) + "===");
 
@@ -321,7 +307,10 @@ public class FlagSystem : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
-
+                StaticFunction.setErrorNum(3);
+                StaticFunction.setTotalErrors(3);
+                StaticFunction.setTotalProfiles(4);
+                
                 foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
                 {
                     if (socialMediaPage.transform.name == "Photogram (Panel)")
@@ -330,15 +319,43 @@ public class FlagSystem : MonoBehaviour
                         break;
                     }
                 }
-            }
 
+                foreach (GameObject privacyWindow in GameObject.FindGameObjectsWithTag("PrivacyWindow"))
+                {
+                    privacyWindow.GetComponent<Animator>().SetBool("isMinimized", true);
+                }
+
+                foreach (GameObject password in GameObject.FindGameObjectsWithTag("PasswordWindow"))
+                {
+                    password.SetActive(false);
+                }
+            }
+            else if (SceneManager.GetActiveScene().name == "Stage 3")
+            {
+                StaticFunction.setErrorNum(5);
+                StaticFunction.setTotalErrors(5);
+                StaticFunction.setTotalProfiles(5);
+
+                foreach (GameObject privacyWindow in GameObject.FindGameObjectsWithTag("PrivacyWindow"))
+                {
+                    privacyWindow.GetComponent<Animator>().SetBool("isMinimized", true);
+                }
+
+                foreach (GameObject password in GameObject.FindGameObjectsWithTag("PasswordWindow"))
+                {
+                    password.GetComponent<Animator>().SetBool("isMinimized", true);
+                }
+            }
 
             //randomize flags
             //setup list
             List<int> clickableIDs = new List<int>();
             for (int i = 0; i < GameObject.FindGameObjectsWithTag("Clickable").Length; i++)
             {
-                clickableIDs.Add(i);
+                if (GameObject.FindGameObjectsWithTag("Clickable")[i].activeInHierarchy)
+                {
+                    clickableIDs.Add(i);
+                }
             }
 
             //randomize list
@@ -357,7 +374,7 @@ public class FlagSystem : MonoBehaviour
         }
         
         Setup();
-        instanceCounter++;
+        StaticFunction.instanceCounter++;
     }
 
     public void Exit()

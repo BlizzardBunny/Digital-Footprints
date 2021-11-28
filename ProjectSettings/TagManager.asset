@@ -25,6 +25,7 @@ TagManager:
   - MainWindow
   - CompanyStandards
   - CompanyStandardsContent
+  - PasswordWindow
   layers:
   - Default
   - TransparentFX

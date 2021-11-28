@@ -137,9 +137,7 @@ public class Submit : MonoBehaviour
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
 
         //setInstanceCounter
-        GameObject temp = GameObject.FindGameObjectWithTag("Clickable");
-        FlagSystem tempScript = (FlagSystem) temp.GetComponent(typeof(FlagSystem));
-        tempScript.setInstanceCounter(0);
+        StaticFunction.instanceCounter = 0;
 
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Clickable"))
         {
