@@ -61,7 +61,6 @@ public class DialogueControls : MonoBehaviour
 
     public void DestroyParent()
     {
-        Debug.Log(transform.parent.Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text);
         StopCoroutine(showMsg);
 
         //update list

@@ -23,6 +23,7 @@ public class FlagSystem : MonoBehaviour
     private int flagIndex;
     private int id;
     private bool flaggedItem;
+
     private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
     private static int otherPostIndex = -1;
@@ -293,6 +294,7 @@ public class FlagSystem : MonoBehaviour
 
     public void ResetStage()
     {
+        flaggedItem = false;
         GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
 
         if (StaticFunction.instanceCounter <= 0)
@@ -327,11 +329,6 @@ public class FlagSystem : MonoBehaviour
                 foreach (GameObject privacyWindow in GameObject.FindGameObjectsWithTag("PrivacyWindow"))
                 {
                     privacyWindow.GetComponent<Animator>().SetBool("isMinimized", true);
-                }
-
-                foreach (GameObject password in GameObject.FindGameObjectsWithTag("PasswordWindow"))
-                {
-                    password.SetActive(false);
                 }
             }
             else if (SceneManager.GetActiveScene().name == "Stage 3")
@@ -371,6 +368,7 @@ public class FlagSystem : MonoBehaviour
                 flagIds.Add(clickableIDs[i]);
             }
 
+            Debug.Log("~~~~" + flagIds.Count + "~~~~");
             StaticFunction.setCurrFlag(-1);
             otherPostIndex = -1;
             StaticFunction.setErrorNum(1);

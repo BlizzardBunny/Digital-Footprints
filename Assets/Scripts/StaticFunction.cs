@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +9,15 @@ public static class StaticFunction
         "My new home! #Goals #HomeOwner",
         "Off to watch a movie at 8 PM! Gonna be a relaxing afternoon! #SelfCare #MovieNight",
         "Heading to Tokyo for a 2 week vacation! #SushiTime #R&R",
-        "Finally got my Driver�s License! #LifeIsAHighway #BeepBeep",
+        "Finally got my Driver’s License! #LifeIsAHighway #BeepBeep",
         "Check out Globalquiz.org for free and fun quizzes! Just need email and phone number!",
-        "Just got my new credit card!!! #GOALS"
+        "Just got my new credit card!!! #GOALS",
+        "I love my car!!!",
+        "New phone plannnnn!!! Hmu at 209-470-0522",
+        "Doing some window shopping! Won’t be home until 5 :3",
+        "Off on a business trip! Gonna miss 3686 Chandler Drive for the first time!",
+        "My son’s finally enrolled! Enjoy school!!!",
+        "Thanks @Ray for taking care of my home while I’m out!"
     };
 
     private static string[] captionFlags = new string[]
@@ -21,25 +27,47 @@ public static class StaticFunction
         "Location Data",
         "Personal Information",
         "Personal Information",
-        "Personal Information"
+        "Personal Information",
+        "Personal Information",
+        "Personal Information",
+        "Location Data",
+        "Location Data",
+        "Personal Information",
+        "Location Data"
     };
 
     private static string[] goodCaptions = new string[]
     {
-        "Memories of #Moby2019! Take me back to the pre-pandemic days�.",
+        "Memories of #Moby2019! Take me back to the pre-pandemic days….",
         " ",
-        "Buy 1 take 1 promo on some Maccas!!! Get them while they�re hot!",
+        "Buy 1 take 1 promo on some Maccas!!! Get them while they’re hot!",
         "Craving for some egg tarts! #bestsnackever",
-        " "
+        " ",
+        "Listening to Pink Floyd",
+        "Amazing how far video games have gone!",
+        " ",
+        "Tsuki ga kireidesu ne",
+        "Do you come from a land down under",
+        "I <3 Pizza :>",
+        "Just like the simulations"
     };
 
     private static string[] badAddress = new string[]
     {
-        "236 Osler St Toronto, Canada",
-        "73 Lebanon St. Ibadan, Nigeria",
+        "236 Osler St, Toronto, Canada",
+        "73 Lebanon St, Ibadan, Nigeria",
         "38 Riverlawn Drive, Cedar Falls, Iowa",
         "3967 Main Street, Redwood, Washington",
-        "2A Snake Road, Los Angeles, California"
+        "2A Snake Road, Los Angeles, California",
+        "295 Karen Lane, Portland, Oregon",
+        "273 Blind Bay Road, Revelstoke, Canada",
+        "104 Bouverie Road, Westnewton, UK",
+        "137 Front St, Hengoed, United Kingdom",
+        "129 Settlement Road, Victoria, Australia",
+        "95 Walder Crescent, Queensland, Australia",
+        "111 Caxton Place, Byley, United Kingdom",
+        "2235 Diamond St, Isabela, Puerto Rico",
+        "4696 rue Saint-Antoine, Quebec, Canada"
     };
 
     private static string[] goodAddress = new string[]
@@ -48,7 +76,16 @@ public static class StaticFunction
         "Ibadan, Nigeria",
         "Cedar Falls, Iowa",
         "Redwood, Washington",
-        "Los Angeles, California"
+        "Los Angeles, California",
+        "Portland, Oregon",
+        "Revelstoke, Canada",
+        "Westnewton, UK",
+        "Hengoed, United Kingdom",
+        "Victoria, Australia",
+        "Queensland, Australia",
+        "Byley, United Kingdom",
+        "Isabela, Puerto Rico",
+        "Quebec, Canada"
     };
 
     private static string[] names = new string[]
@@ -57,7 +94,16 @@ public static class StaticFunction
         "Ekene Cuevas",
         "Destiny Stuart",
         "Karen Thompson",
-        "Norma Lecter"
+        "Norma Lecter",
+        "Anne Warren",
+        "Cassie Klein",
+        "Emma Larsen",
+        "Fergus Bishop",
+        "Isla McCall",
+        "Leonie Sampson",
+        "Lia Riggs",
+        "Philip Ruiz",
+        "Tommy English"
     };
 
     private static string[] bios = new string[]
@@ -66,7 +112,16 @@ public static class StaticFunction
         "Have virus problem? Try my applet here www.LegitVirusRemover.com",
         "Walk as if you are kissing the Earth with your feet #MantraOfTheDay #SpirituallyPure",
         "46 Years young and single mom of 3. Always get what I want. #Feisty #IfYouCantHandleMeAtMyWorst",
-        "Lover of all things snake/serpent related! Pls DM me if you have anything related to the best danger noodle<3 #NaginiDidNothingWrong"
+        "Lover of all things snake/serpent related! Pls DM me if you have anything related to the best danger noodle<3 #NaginiDidNothingWrong",
+        "Hot and dangerous.",
+        "Namast’ay in bed.",
+        "Making history.",
+        "Life is what happens to you while you scroll through Photogram.",
+        "Born to express, not impress.",
+        "VVV Check out my life VVV",
+        "I don’t look like this in real life.",
+        "L<3VE is in the air.",
+        "Spreading smiles."
     };
 
     private static string[] privacySettingsFlags = new string[]
@@ -95,8 +150,10 @@ public static class StaticFunction
         "[PROFILENAME]_2021",
         "[ADDRESS]21!",
         "Im-Gr8t",
-        "aA~",
-        "IDONTWANTNEWPASSWORD"
+        "IDONTWANTNEWPASSWORD",
+        "FleaM@rketAddict%%",
+        "DnKw$1",
+        "@msDh@&3"
     };
 
     private static string[] passwordFlags = new string[]
@@ -105,29 +162,33 @@ public static class StaticFunction
         "Personal Information",
         "Personal Information",
         "Password Length",
+        "Complexity",
+        "Complexity",
         "Password Length",
-        "Complexity"
+        "Password Length"
     };
 
     private static string[] goodPasswords = new string[]
     {
-        "P9Y#Pp6v!c2Zh!-6",
-        "FR@2mr*pNjR-r37s",
-        "&6Js$8cRuTK+@ExC",
-        "nR#8j2_c6afWvb6d",
-        "SEnW$Ky8sK7WjTyT",
-        "kJekcFFZF&7mP@HS"
+        "There’sNo1InTe@m",
+        "OffOne’sBase#5561",
+        "G00dyTwoShoe$$Lad",
+        "aSTEMGuineaP111g",
+        "KnockingYourSocksOff@996",
+        "tfGp7i@m@cttpgMda1c",
+        "55osF@t!acag@p",
+        "afs00th0mOTds@$",
     };
 
     private static string[] tutorialDialogue = new string[]
     {
         "Greetings, and welcome to Digital Footprints, where your privacy is our priority.",
-        "For your first day, we would be providing you with some dummy accounts to work on. Use this time to familiarize yourself with the company�s software and workflow.",
+        "For your first day, we would be providing you with some dummy accounts to work on. Use this time to familiarize yourself with the company’s software and workflow.",
         "You will be looking for privacy issues. What privacy issues are is covered by our Company Standards widget on the right.",
         "If you see anything that looks like a privacy issue, click on it and our system would flag it as such.",
-        "This would then be reflected in the client�s report where you can double check what you have flagged. Make sure to click send to confirm your flag.",
+        "This would then be reflected in the client’s report where you can double check what you have flagged. Make sure to click send to confirm your flag.",
         "If you are satisfied with your work, click SUBMIT and the client would be notified of your recommendations.",
-        "Do be warned that while you are free to make mistakes on the dummy account, doing so with a real customer�s account would warrant a penalty.",
+        "Do be warned that while you are free to make mistakes on the dummy account, doing so with a real customer’s account would warrant a penalty.",
         "We hope that your time with us will be informative and fulfilling, good luck!"
     };
 
@@ -145,7 +206,7 @@ public static class StaticFunction
 
     private static string[] roundMessagesBad = new string[]
     {
-        "I strongly recommend reviewing today�s work to understand what went wrong.",
+        "I strongly recommend reviewing today’s work to understand what went wrong.",
 		"Do remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
     };
 
