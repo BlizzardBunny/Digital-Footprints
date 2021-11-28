@@ -8,7 +8,7 @@ public class PanelScript : MonoBehaviour
     public Scrollbar scrollbar;
     public Button otherNavButton;
     private bool panelIsShowing = true;
-    private float scrollVal = 0.33f;
+    private float scrollVal = 1 / 3f;
 
     private static int pageNumber = 1;
     private static string currSocialMedia;
@@ -63,57 +63,22 @@ public class PanelScript : MonoBehaviour
 
     public void scrollPanelRight()
     {
-        if (pageNumber != 5)
-        {
-            pageNumber++;
-        }
-        
-        Debug.Log(pageNumber);      
-
-        if (pageNumber < 5)
+        if (pageNumber < 4)
         {
             StartCoroutine(scrollRight(scrollbar));
-            GetComponent<Button>().interactable = scrollbar.value != 0.99f;
             otherNavButton.interactable = true;
-        }
-        
-        if (pageNumber >= 4)
-        {
-            GetComponent<Button>().interactable = false;
-            pageNumber = 4;
-        }
-        else if (GetComponent<Button>().interactable == false)
-        {
-            GetComponent<Button>().interactable = true;
-        }        
+            pageNumber++;
+        }    
+        Debug.Log(pageNumber);      
     }
     public void scrollPanelLeft()
     {
-        if (pageNumber != 0)
+        if (pageNumber > 1)
         {
+            StartCoroutine(scrollLeft(scrollbar));
+            otherNavButton.interactable = true;
             pageNumber--;
         }
-
-        Debug.Log(pageNumber);        
-
-        if (pageNumber > 0)
-        {
-            GetComponent<Button>().interactable = false;
-            StartCoroutine(scrollLeft(scrollbar));
-            GetComponent<Button>().interactable = true;
-            GetComponent<Button>().interactable = scrollbar.value != 0;
-            otherNavButton.interactable = true;
-        }     
-        
-        if (pageNumber <= 1)
-        {
-            GetComponent<Button>().interactable = false;
-            pageNumber = 1;
-        }
-        else if (GetComponent<Button>().interactable == false)
-        {
-            GetComponent<Button>().interactable = true;
-        }  
     }
 
     public void JumpPage(int pageNum)
@@ -123,13 +88,13 @@ public class PanelScript : MonoBehaviour
         switch (pageNum - 1)
         {
             case 1:
-                targetPosition += scrollVal - 0.005f;
+                targetPosition += scrollVal;
                 break;
             case 2:
-                targetPosition += (scrollVal * 2) - 0.012f;
+                targetPosition += (scrollVal * 2);
                 break;
             case 3:
-                targetPosition += (scrollVal * 3) - 0.02f;
+                targetPosition += (scrollVal * 3);
                 break;
         }
         scrollbar.value = targetPosition;
@@ -175,6 +140,7 @@ public class PanelScript : MonoBehaviour
 
     private IEnumerator scrollLeft(Scrollbar scrollbar)
     {
+        GetComponent<Button>().interactable = false;
         float elapsedTime = 0;
         float timeToMove = 0.66f;
         float originalPosition = scrollbar.value;
@@ -185,6 +151,10 @@ public class PanelScript : MonoBehaviour
             scrollbar.value = Mathf.Lerp(originalPosition, targetPosition, (elapsedTime / timeToMove));
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
+        if (pageNumber != 1)
+        {
+            GetComponent<Button>().interactable = true;
         }
     }
     private IEnumerator scrollRight(Scrollbar scrollbar)
@@ -201,7 +171,10 @@ public class PanelScript : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        GetComponent<Button>().interactable = true;
+        if (pageNumber != 4)
+        {
+            GetComponent<Button>().interactable = true;            
+        }
     }
 
     private IEnumerator MovePanel(GameObject panel)
