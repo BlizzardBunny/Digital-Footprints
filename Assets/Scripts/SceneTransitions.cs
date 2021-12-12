@@ -6,10 +6,30 @@ using UnityEngine.SceneManagement;
 //this script handles transitions between the different scenes
 public class SceneTransitions : MonoBehaviour
 {
+    private Coroutine fadeOut;
+
     //Loads Stage 1 when you click Start Game on the Main Menu
     public void StartGame()
     {
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("ToFadeOnTitle"))
+        {
+            Animator anim = g.GetComponent<Animator>();
+            anim.SetBool("isFading", true);
+        }
+
+        Animator bgAnim = GameObject.FindGameObjectWithTag("TitleBG").GetComponent<Animator>();
+        fadeOut = StartCoroutine(WaitandLoad(bgAnim));
+    }
+
+    IEnumerator WaitandLoad(Animator anim)
+    {
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isZooming", true);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isFading", true);
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Stage 1");
+        StopCoroutine(fadeOut);
     }
     //Returns to the Main Menu
     public void returnToMainMenu()

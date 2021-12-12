@@ -27,6 +27,8 @@ TagManager:
   - CompanyStandardsContent
   - PasswordWindow
   - MistakeNotif
+  - ToFadeOnTitle
+  - TitleBG
   layers:
   - Default
   - TransparentFX
