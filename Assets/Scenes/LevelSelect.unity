@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50382764626806f489e244f23c9294d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextLevelButton: {fileID: 1206917960}
 --- !u!1 &638138606
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50382764626806f489e244f23c9294d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextLevelButton: {fileID: 1206917960}
 --- !u!114 &865648862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,7 +1066,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1145,6 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50382764626806f489e244f23c9294d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextLevelButton: {fileID: 1206917960}
 --- !u!1 &1538446867
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,12 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //this script handles transitions between the different scenes
 public class SceneTransitions : MonoBehaviour
 {
     private Coroutine fadeOut;
+    public Button NextLevelButton;
 
+    public void Awake()
+    {
+        if (StaticFunction.getCurrentLevel() == "Stage 3")
+        {
+            NextLevelButton.enabled = false;
+            NextLevelButton.GetComponentInChildren<Text>().text = "";
+            NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0);
+        }
+        else
+        {
+            NextLevelButton.enabled = true;
+            NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
+        }
+    }
     //Loads Stage 1 when you click Start Game on the Main Menu
     public void StartGame()
     {
