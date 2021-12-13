@@ -28,6 +28,8 @@ public class SceneTransitions : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isFading", true);
         yield return new WaitForSeconds(0.5f);
+        StaticFunction.resetVals(3, 1);
+        StaticFunction.instanceCounter = 0;
         SceneManager.LoadScene("Stage 1");
         StopCoroutine(fadeOut);
     }
