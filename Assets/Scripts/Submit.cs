@@ -71,7 +71,15 @@ public class Submit : MonoBehaviour
 		if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
 		{
 			StaticFunction.setMistakes(StaticFunction.getMistakes() + StaticFunction.getTotalErrors());
-            MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalties.");
+            if (StaticFunction.getTotalErrors() == 1)
+            {
+                MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalty.");
+            }
+            else
+            {
+                MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalties.");
+            }
+
 		}
 		else
 		{
