@@ -12,9 +12,6 @@ public class MakeReportEntry : MonoBehaviour
     private GameObject snsField;
     private GameObject reportEntry;
 
-    private static int numOfReports = 0;
-    private static int currProfile = 0;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +20,10 @@ public class MakeReportEntry : MonoBehaviour
 
     public void MakeReport()
     {
-        if (currProfile != StaticFunction.getProfileNum())
+        if (StaticFunction.getCurrentProfile() != StaticFunction.getProfileNum())
         {
-            numOfReports = 0;
-            currProfile = StaticFunction.getProfileNum();
+            StaticFunction.setNumOfReports(0);
+            StaticFunction.setCurrentProfile(StaticFunction.getProfileNum());
         }
 
         messageField = GameObject.FindGameObjectWithTag("MessageField");
@@ -50,7 +47,7 @@ public class MakeReportEntry : MonoBehaviour
             reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
             reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[1];
             reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text = sns;
-            reportEntry.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = numOfReports.ToString();
+            reportEntry.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNumOfReports().ToString();
             
             if (sns.Contains("Chirper"))
             {
@@ -65,7 +62,7 @@ public class MakeReportEntry : MonoBehaviour
                 reportEntry.transform.Find("SNSLogo").GetComponent<Image>().sprite = snsLogos[2];
             }
 
-            if (numOfReports == 0)
+            if (StaticFunction.getNumOfReports() == 0)
             {                
                 StaticFunction.reportEntries.Add(reportEntry);
             }
@@ -79,7 +76,7 @@ public class MakeReportEntry : MonoBehaviour
                 StaticFunction.reportEntries.Add(reportEntry);
             }
 
-            numOfReports++;
+            StaticFunction.setNumOfReports(StaticFunction.getNumOfReports() + 1);
 
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
             {
@@ -98,7 +95,7 @@ public class MakeReportEntry : MonoBehaviour
         int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
 
         StaticFunction.reportEntries.RemoveAt(id);
-        numOfReports--;
+        StaticFunction.setNumOfReports(StaticFunction.getNumOfReports() - 1);
 
         for (int i = id; i < StaticFunction.reportEntries.Count; i++)
         {

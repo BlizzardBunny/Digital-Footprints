@@ -217,7 +217,11 @@ public static class StaticFunction
     private static int profileNum = 0; //profiles completed
     private static int totalProfiles = 3;
     private static int mistakes = 0;
+    private static int currentProfile = 0;
+    private static int numOfReports = 0;
     private static string currentLevel = "Stage 1";
+
+
 
     public static int instanceCounter = 0; //number of times FlagSystem is run
     public static List<GameObject> reportEntries = new List<GameObject>();
@@ -390,5 +394,21 @@ public static class StaticFunction
     public static void setCurrentLevel(string level)
     {
         currentLevel = level;
+    }
+    public static int getCurrentProfile()
+    {
+        return currentProfile;
+    }
+    public static void setCurrentProfile(int profile)
+    {
+        currentProfile = profile;
+    }
+    public static int getNumOfReports()
+    {
+        return numOfReports;
+    }
+    public static void setNumOfReports(int reports)
+    {
+        numOfReports = reports;
     }
 }

@@ -78,6 +78,8 @@ public class SceneTransitions : MonoBehaviour
         {
             StaticFunction.resetVals(5, 5);
         }
+        StaticFunction.setNumOfReports(0);
+        StaticFunction.setCurrentProfile(0);
         SceneManager.LoadScene(currLevel);
     }
     //Exits the game
