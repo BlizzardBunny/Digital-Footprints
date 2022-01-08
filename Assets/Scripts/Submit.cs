@@ -15,7 +15,6 @@ public class Submit : MonoBehaviour
     private GameObject mistakeMessage;
     private Transform profileNum;
     private Transform totalProfiles;
-    private int numOfMsgs;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +24,6 @@ public class Submit : MonoBehaviour
         totalProfiles.GetComponent<TMPro.TextMeshProUGUI>().text = "/" + StaticFunction.getTotalProfiles().ToString();
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
-        numOfMsgs = 0;
     }
 
     public void Confirm()
@@ -56,8 +54,7 @@ public class Submit : MonoBehaviour
         );
 
         mistakeMessage.transform.Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = message;
-        mistakeMessage.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = numOfMsgs.ToString();
-        numOfMsgs++;
+        mistakeMessage.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.mistakeMessages.Count.ToString();
         Animator anim = mistakeMessage.GetComponent<Animator>();
         anim.SetBool("isFadingOut", false);
 
@@ -66,9 +63,10 @@ public class Submit : MonoBehaviour
 
     public void SubmitReport()
     {
+        StaticFunction.mistakeMessages.Clear();
         //check correctness
-		
-		if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
+
+        if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
 		{
 			StaticFunction.setMistakes(StaticFunction.getMistakes() + StaticFunction.getTotalErrors());
             if (StaticFunction.getTotalErrors() == 1)
