@@ -295,7 +295,6 @@ public class FlagSystem : MonoBehaviour
     public void ResetStage()
     {
         flaggedItem = false;
-        GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>().SetBool("isMinimized", true);
 
         if (StaticFunction.instanceCounter <= 0)
         {
@@ -383,4 +382,6 @@ public class FlagSystem : MonoBehaviour
     {
         Application.Quit();
     }
+
+    
 }

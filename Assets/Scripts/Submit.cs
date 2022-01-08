@@ -63,7 +63,10 @@ public class Submit : MonoBehaviour
 
     public void SubmitReport()
     {
-        StaticFunction.mistakeMessages.Clear();
+        if (GameObject.FindGameObjectsWithTag("MistakeNotif").Length == 0)
+        {
+            StaticFunction.mistakeMessages.Clear();
+        }
         //check correctness
 
         if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
