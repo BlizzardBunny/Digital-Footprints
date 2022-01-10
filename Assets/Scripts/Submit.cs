@@ -15,17 +15,18 @@ public class Submit : MonoBehaviour
     private GameObject mistakeMessage;
     private Transform profileNum;
     private Transform totalProfiles;
-    private int errorsCaught;
+    private int errorsCaught = 0;
+    private bool perfectProfile = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        errorsCaught = 0;
         profileNum = GameObject.FindGameObjectWithTag("Count").transform;
         totalProfiles = GameObject.FindGameObjectWithTag("Total").transform;
         totalProfiles.GetComponent<TMPro.TextMeshProUGUI>().text = "/" + StaticFunction.getTotalProfiles().ToString();
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
+        //mistakeNotifLogos = new Sprite[2];
     }
 
     public void Confirm()
@@ -55,6 +56,15 @@ public class Submit : MonoBehaviour
                 GameObject.FindGameObjectWithTag("World").transform
         );
 
+        if (perfectProfile)
+        {
+            mistakeMessage.transform.Find("Notif Logo").GetComponent<Image>().sprite = mistakeMessage.transform.Find("Perfect Logo").GetComponent<Image>().sprite;
+        }
+        else
+        {
+            mistakeMessage.transform.Find("Notif Logo").GetComponent<Image>().sprite = mistakeMessage.transform.Find("Mistake Logo").GetComponent<Image>().sprite;
+        }
+
         mistakeMessage.transform.Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = message;
         mistakeMessage.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.mistakeMessages.Count.ToString();
         Animator anim = mistakeMessage.GetComponent<Animator>();
@@ -65,6 +75,9 @@ public class Submit : MonoBehaviour
 
     public void SubmitReport()
     {
+        errorsCaught = 0;
+        perfectProfile = false; 
+
         if (GameObject.FindGameObjectsWithTag("MistakeNotif").Length == 0)
         {
             StaticFunction.mistakeMessages.Clear();
@@ -110,11 +123,7 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be Personal Information.");
                             }
-                            else
-                            {
-                                errorsCaught++;
-                            }
-                                
+                            errorsCaught++;                                
                         }
                         else if (itemName.StartsWith("Post"))
                         {
@@ -129,10 +138,7 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getCaptionFlags()[flagIndex]);
                             }
-                            else
-                            {
-                                errorsCaught++;
-                            }
+                            errorsCaught++;
                         }
                         else if (clickable.transform.parent.parent.name == "PrivacyWindow")
                         {
@@ -155,10 +161,7 @@ public class Submit : MonoBehaviour
                                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                             MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPrivacySettingFlags()[i]);
                                         }
-                                        else
-                                        {
-                                            errorsCaught++;
-                                        }
+                                        errorsCaught++;
                                         break;
                                     }
                                 }
@@ -177,10 +180,7 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPasswordFlags()[flagIndex]);
                             }
-                            else
-                            {
-                                errorsCaught++;
-                            }
+                            errorsCaught++;
                         }
 
                         break;
@@ -194,8 +194,13 @@ public class Submit : MonoBehaviour
                 StaticFunction.setMistakes(StaticFunction.getMistakes() + (StaticFunction.getTotalErrors() - errorsCaught));
                 MakeMistakeMessage("You missed " + (StaticFunction.getTotalErrors() - errorsCaught) + " errors! You incur that many mistakes.");
             }
-        }		
-        
+            else if (StaticFunction.getTotalErrors() == errorsCaught)
+            {
+                perfectProfile = true;
+                MakeMistakeMessage("Great job!!! You got all the errors on this profile!");
+            }
+        }
+
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
 
         //reset stage
