@@ -306,14 +306,15 @@ public class FlagSystem : MonoBehaviour
             //setup stage reqs
             if (SceneManager.GetActiveScene().name == "Stage 1")
             {
-                StaticFunction.setErrorNum(1);
+                StaticFunction.setErrorNum(UnityEngine.Random.Range(1, 3)); //1-2 errors
+                Debug.Log(StaticFunction.getErrorNum());
                 StaticFunction.setTotalProfiles(3);
-                StaticFunction.setTotalErrors(1);
+                StaticFunction.setTotalErrors(StaticFunction.getErrorNum());
             }
             else if (SceneManager.GetActiveScene().name == "Stage 2")
             {
-                StaticFunction.setErrorNum(3);
-                StaticFunction.setTotalErrors(3);
+                StaticFunction.setErrorNum(UnityEngine.Random.Range(2, 4)); //2-3 errors
+                StaticFunction.setTotalErrors(StaticFunction.getErrorNum());
                 StaticFunction.setTotalProfiles(4);
                 
                 foreach (GameObject socialMediaPage in GameObject.FindGameObjectsWithTag("SocialMediaPage"))
@@ -332,8 +333,8 @@ public class FlagSystem : MonoBehaviour
             }
             else if (SceneManager.GetActiveScene().name == "Stage 3")
             {
-                StaticFunction.setErrorNum(5);
-                StaticFunction.setTotalErrors(5);
+                StaticFunction.setErrorNum(UnityEngine.Random.Range(3, 6)); //3-5 errors
+                StaticFunction.setTotalErrors(StaticFunction.getErrorNum());
                 StaticFunction.setTotalProfiles(5);
 
                 foreach (GameObject privacyWindow in GameObject.FindGameObjectsWithTag("PrivacyWindow"))
