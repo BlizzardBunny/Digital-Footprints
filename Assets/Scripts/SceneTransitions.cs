@@ -12,16 +12,19 @@ public class SceneTransitions : MonoBehaviour
 
     public void Awake()
     {
-        if (StaticFunction.getCurrentLevel() == "Stage 3")
+        if (NextLevelButton != null)
         {
-            NextLevelButton.enabled = false;
-            NextLevelButton.GetComponentInChildren<Text>().text = "";
-            NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0);
-        }
-        else
-        {
-            NextLevelButton.enabled = true;
-            NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
+            if (StaticFunction.getCurrentLevel() == "Stage 3")
+            {
+                NextLevelButton.enabled = false;
+                NextLevelButton.GetComponentInChildren<Text>().text = "";
+                NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0);
+            }
+            else
+            {
+                NextLevelButton.enabled = true;
+                NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
+            }
         }
     }
     //Loads Stage 1 when you click Start Game on the Main Menu
