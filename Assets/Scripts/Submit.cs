@@ -59,6 +59,7 @@ public class Submit : MonoBehaviour
         if (perfectProfile)
         {
             mistakeMessage.transform.Find("Notif Logo").GetComponent<Image>().sprite = mistakeMessage.transform.Find("Perfect Logo").GetComponent<Image>().sprite;
+            perfectProfile = false;
         }
         else
         {
@@ -197,9 +198,11 @@ public class Submit : MonoBehaviour
             else if (StaticFunction.getTotalErrors() == errorsCaught)
             {
                 perfectProfile = true;
-                MakeMistakeMessage("Great job!!! You got all the errors on this profile!");
+                MakeMistakeMessage("Great job!!! You got all the errors on that profile!");
             }
         }
+
+        MakeMistakeMessage("New profile loaded.");
 
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
 
@@ -215,6 +218,9 @@ public class Submit : MonoBehaviour
             FlagSystem script = (FlagSystem) x.GetComponent(typeof(FlagSystem));
             script.ResetStage();
         }
+
+        Animator mainWindowAnim = GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>();
+        mainWindowAnim.SetBool("isMinimized", true);
 
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("Confirmation"))
         {
