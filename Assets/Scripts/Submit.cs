@@ -124,6 +124,7 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be Personal Information.");
                             }
+                            Debug.Log("Caught " + itemName);
                             errorsCaught++;                                
                         }
                         else if (itemName.StartsWith("Post"))
@@ -139,6 +140,7 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getCaptionFlags()[flagIndex]);
                             }
+                            Debug.Log("Caught " + itemName);
                             errorsCaught++;
                         }
                         else if (clickable.transform.parent.parent.name == "PrivacyWindow")
@@ -162,6 +164,7 @@ public class Submit : MonoBehaviour
                                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                             MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPrivacySettingFlags()[i]);
                                         }
+                                        Debug.Log("Caught " + itemName);
                                         errorsCaught++;
                                         break;
                                     }

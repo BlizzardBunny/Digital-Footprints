@@ -140,7 +140,7 @@ public static class StaticFunction
         "Add As Friend",
         "View Posts",
         "View Email",
-        "View Phone Number",
+        "View Phone#",
         "Search me Online"
     };
 
