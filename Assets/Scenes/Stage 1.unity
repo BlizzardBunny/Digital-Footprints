@@ -7632,8 +7632,6 @@ MonoBehaviour:
   confirmationPrefab: {fileID: 3850745046234004881, guid: 9b3454f7ed139974f8c37a52a7f4a89f, type: 3}
   dialoguePrefab: {fileID: 1163755748046703942, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
   mistakeMessagePrefab: {fileID: 7356037365626714882, guid: 52acf0b0823a0e74fbb67343885ae4fe, type: 3}
-  mistakeNotifLogo: {fileID: 21300000, guid: f8782e92fb1951f4d8bff774b570f3f5, type: 3}
-  perfectNotifLogo: {fileID: 21300000, guid: 704cdad6144fc884da948443a20e4469, type: 3}
 --- !u!1001 &1647773948
 PrefabInstance:
   m_ObjectHideFlags: 0
