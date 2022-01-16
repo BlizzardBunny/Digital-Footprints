@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5075394894952690519}
   m_Layer: 5
   m_Name: ClientMessage
-  m_TagString: Untagged
+  m_TagString: ClientMessage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

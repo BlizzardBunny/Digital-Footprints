@@ -180,18 +180,6 @@ public static class StaticFunction
         "afs00th0mOTds@$",
     };
 
-    private static string[] tutorialDialogue = new string[]
-    {
-        "Greetings, and welcome to Digital Footprints, where your privacy is our priority.",
-        "For your first day, we would be providing you with some dummy accounts to work on. Use this time to familiarize yourself with the company’s software and workflow.",
-        "You will be looking for privacy issues. What privacy issues are is covered by our Company Standards widget on the right.",
-        "If you see anything that looks like a privacy issue, click on it and our system would flag it as such.",
-        "This would then be reflected in the client’s report where you can double check what you have flagged. Make sure to click send to confirm your flag.",
-        "If you are satisfied with your work, click SUBMIT and the client would be notified of your recommendations.",
-        "Do be warned that while you are free to make mistakes on the dummy account, doing so with a real customer’s account would warrant a penalty.",
-        "We hope that your time with us will be informative and fulfilling, good luck!"
-    };
-
     private static string[] roundMessagesPerfect = new string[]
     {
         "Excellent, it seems that you fully grasp how our system works here at Digital Footprints.",
@@ -226,6 +214,7 @@ public static class StaticFunction
     public static int instanceCounter = 0; //number of times FlagSystem is run
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();
+    public static bool tutorialStart = true;
 
     public static void resetVals(int numOfProfiles,int numOfErrors)
     {
@@ -296,11 +285,6 @@ public static class StaticFunction
     public static string[] getPrivacySettingChoices()
     {
         return privacySettingsChoices;
-    }
-
-    public static string[] getTutorial()
-    {
-        return tutorialDialogue;
     }
 
     public static string[] getPerfectDialogue()

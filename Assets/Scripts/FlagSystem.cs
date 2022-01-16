@@ -71,6 +71,7 @@ public class FlagSystem : MonoBehaviour
         if ((rndNum <= -1) && (StaticFunction.instanceCounter <= 0))
         {
             rndNum = UnityEngine.Random.Range(0, profilePics.Length);
+            StaticFunction.setCurrentProfile(rndNum);
         }
 
         try

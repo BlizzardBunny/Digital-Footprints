@@ -584,8 +584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 996245471}
   m_Horizontal: 0
-  m_Vertical: 1
-  m_MovementType: 1
+  m_Vertical: 0
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -1821,6 +1821,7 @@ GameObject:
   - component: {fileID: 802121858}
   - component: {fileID: 802121857}
   - component: {fileID: 802121856}
+  - component: {fileID: 802121860}
   m_Layer: 5
   m_Name: World (Canvas)
   m_TagString: Untagged
@@ -1912,6 +1913,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &802121860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802121855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c026acea9c34a8478ddc6cc3565813e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profilePics:
+  - {fileID: 21300000, guid: 4b81c6609fa4e0f438324cc8d53c9d1f, type: 3}
+  - {fileID: 21300000, guid: 500ab128378fc784cbde12c12883c810, type: 3}
+  - {fileID: 21300000, guid: 4aca1c545550aa34e901e6f6a7f07419, type: 3}
+  - {fileID: 21300000, guid: 94b691ad67b49d648b7b9cd2d993ff0e, type: 3}
+  - {fileID: 21300000, guid: 6017cd01073a52647988fd2d97cd0d0c, type: 3}
+  - {fileID: 21300000, guid: 640bedfd692c43748b229c871bfba794, type: 3}
+  - {fileID: 21300000, guid: eb9aee9b9d1742240b35b27ff472af19, type: 3}
+  - {fileID: 21300000, guid: dc36f3029e71de84ca396747b9573686, type: 3}
+  - {fileID: 21300000, guid: 898dd2d52d1a45440ae9fbc056066141, type: 3}
+  - {fileID: 21300000, guid: 0e93ea64075fac24e83990edf4a26f3e, type: 3}
+  - {fileID: 21300000, guid: b029e70bfd08dfa4eb7cae6d4c9f010d, type: 3}
+  - {fileID: 21300000, guid: 55decb9b062e3dc4b85bab6de6c3f602, type: 3}
+  - {fileID: 21300000, guid: 1b48596e62dfb3c428c64abfe36d45ab, type: 3}
+  - {fileID: 21300000, guid: c69ee77b1cece754cb2d78970d6da27a, type: 3}
+  customerDetails: {fileID: 1355450062}
 --- !u!1 &867924646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4127,7 +4156,7 @@ GameObject:
   - component: {fileID: 1916047875}
   - component: {fileID: 1916047874}
   m_Layer: 5
-  m_Name: Profile pic
+  m_Name: Pic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
