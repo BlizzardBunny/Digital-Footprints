@@ -16,9 +16,25 @@ public class CutscenePlayer : MonoBehaviour
 
     private string relativeName = "Mom";
 
-    private Dictionary<bool, string> students = new Dictionary<bool, string>() //bool is true if player is speaking, string is the line to be said
+    public class TwoDArray
     {
-        { false, "" }
+        public bool isPlayerSpeaking { get; }
+        public string line { get; }
+        public bool isChangingScene { get; }
+
+        public TwoDArray(bool x, string y) => (isPlayerSpeaking, line, isChangingScene) = (x, y, false);
+        public TwoDArray(bool x, string y, bool z) => (isPlayerSpeaking, line, isChangingScene) = (x, y, z);
+    }
+
+    private TwoDArray[] introDialogue = new TwoDArray[] //bool is true if player is speaking, string is the line to be said
+    {
+        new TwoDArray(false, "Ok, I managed to recover my account." ),
+        new TwoDArray(false, "But I’m not entirely sure why I even got hacked in the first place. " ),
+        new TwoDArray(false, "Can you take a look and see if there’s any issues?" ),
+        new TwoDArray(true, "Sure thing. Let me log into your account and check." , true),
+        new TwoDArray(false, "Thank you so much!" ),
+        new TwoDArray(false, "You know, I heard that there’s this new company specializing in these social media things." ),
+        new TwoDArray(false, "I think you can try applying to work for them, if you’re happy doing this for work." )
     };
 
     private string[] tutorialDialogue = new string[]
@@ -46,6 +62,7 @@ public class CutscenePlayer : MonoBehaviour
         {
             pic.GetComponent<Image>().sprite = relativePic;
             name.GetComponent<TMPro.TextMeshProUGUI>().text = relativeName;
+            runTutorial();
         }
         else
         {
@@ -53,4 +70,36 @@ public class CutscenePlayer : MonoBehaviour
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[currProfile];
         }
     }
+
+    void runTutorial()
+    {
+        for (int i = StaticFunction.dialogueLineCounter; i < introDialogue.Length; i++)
+        {
+            if (introDialogue[i].isPlayerSpeaking)
+            {
+                GameObject playerMessage = Instantiate(
+                    playerLinesPrefab,
+                    new Vector3(959.9981079101563f,198.29248046875f,0.0f),
+                    Quaternion.identity,
+                    messagesPanel.transform);
+
+                playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = introDialogue[i].line;
+            }
+            else
+            {
+                GameObject customerMessage = Instantiate(
+                    customerLinesPrefab,
+                    new Vector3(645.9981079101563f,188.83648681640626f,0.0f),
+                    Quaternion.identity,
+                    messagesPanel.transform);
+
+                customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
+                customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = introDialogue[i].line;
+            }       
+
+            StaticFunction.dialogueLineCounter++;
+        }
+    }
 }
+
+

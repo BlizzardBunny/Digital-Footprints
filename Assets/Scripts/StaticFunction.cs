@@ -183,19 +183,19 @@ public static class StaticFunction
     private static string[] roundMessagesPerfect = new string[]
     {
         "Excellent, it seems that you fully grasp how our system works here at Digital Footprints.",
-		"Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
+        "Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
     };
 
     private static string[] roundMessagesGood = new string[]
     {
         "While you did make some mistakes here and there, I hope that this did help you understand how our system works.",
-		"Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
+        "Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
     };
 
     private static string[] roundMessagesBad = new string[]
     {
         "I strongly recommend reviewing today’s work to understand what went wrong.",
-		"Do remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
+        "Do remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
     };
 
     private static int errorNum = 1;
@@ -209,8 +209,7 @@ public static class StaticFunction
     private static int numOfReports = 0;
     private static string currentLevel = "Stage 1";
 
-
-
+    public static int dialogueLineCounter = 0;
     public static int instanceCounter = 0; //number of times FlagSystem is run
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();
@@ -395,4 +394,5 @@ public static class StaticFunction
     {
         numOfReports = reports;
     }
+
 }
