@@ -3,13 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CutsceneSetup : MonoBehaviour
+public class CutscenePlayer : MonoBehaviour
 {
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
     public Sprite relativePic; //profile pic of the player's relative
     public GameObject customerDetails;
 
+    public GameObject messagesPanel;
+    public GameObject customerLinesPrefab;
+    public GameObject playerLinesPrefab;
+    public GameObject playerChoicesPrefab;
+
     private string relativeName = "Mom";
+
+    private Dictionary<bool, string> students = new Dictionary<bool, string>() //bool is true if player is speaking, string is the line to be said
+    {
+        { false, "" }
+    };
 
     private string[] tutorialDialogue = new string[]
     {
