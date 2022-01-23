@@ -210,6 +210,7 @@ public static class StaticFunction
     private static string currentLevel = "Stage 1";
 
     public static int dialogueLineCounter = 0;
+    public static int choiceIndex = 0;
     public static int instanceCounter = 0; //number of times FlagSystem is run
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();

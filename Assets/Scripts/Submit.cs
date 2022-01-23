@@ -83,11 +83,45 @@ public class Submit : MonoBehaviour
         {
             StaticFunction.mistakeMessages.Clear();
         }
-        //check correctness
 
+        CheckCorrectness();
+
+        ResetStage();
+
+        //after final profile
+        if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
+        {
+            dialogue = Instantiate(
+                dialoguePrefab,
+                new Vector3(960.0f, 540.0f, 0.0f),
+                Quaternion.identity,
+                GameObject.FindGameObjectWithTag("World").transform);
+
+            DialogueControls script = (DialogueControls) dialogue.transform.Find("Next").GetComponent(typeof(DialogueControls));
+            
+            if (StaticFunction.getMistakes() == StaticFunction.getTotalProfiles())
+            {
+                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadDialogue()[0];
+                script.setDialogue(StaticFunction.getBadDialogue());
+            }
+            else if (StaticFunction.getMistakes() == 0)
+            {
+                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getPerfectDialogue()[0];
+                script.setDialogue(StaticFunction.getPerfectDialogue());
+            }
+            else
+            {
+                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodDialogue()[0];
+                script.setDialogue(StaticFunction.getGoodDialogue());
+            }
+        }
+    }
+
+    void CheckCorrectness()
+    {
         if (GameObject.FindGameObjectsWithTag("ReportEntry").Length == 0)
-		{
-			StaticFunction.setMistakes(StaticFunction.getMistakes() + StaticFunction.getTotalErrors());
+        {
+            StaticFunction.setMistakes(StaticFunction.getMistakes() + StaticFunction.getTotalErrors());
             if (StaticFunction.getTotalErrors() == 1)
             {
                 MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalty.");
@@ -97,21 +131,21 @@ public class Submit : MonoBehaviour
                 MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalties.");
             }
 
-		}
-		else
-		{
-            foreach(GameObject reportEntry in GameObject.FindGameObjectsWithTag("ReportEntry"))
-			{
-				string itemName = reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text;
-				string flagName = reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text;
+        }
+        else
+        {
+            foreach (GameObject reportEntry in GameObject.FindGameObjectsWithTag("ReportEntry"))
+            {
+                string itemName = reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text;
+                string flagName = reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text;
                 string snsName = reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text;
 
                 foreach (GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
-				{
-					FlagSystem script = (FlagSystem) clickable.GetComponent(typeof(FlagSystem));
+                {
+                    FlagSystem script = (FlagSystem)clickable.GetComponent(typeof(FlagSystem));
 
                     if ((clickable.transform.parent.name == itemName) && (script.getSNSName() == snsName))
-					{
+                    {
                         if (!script.isFlag())
                         {
                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
@@ -125,7 +159,7 @@ public class Submit : MonoBehaviour
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be Personal Information.");
                             }
                             Debug.Log("Caught " + itemName);
-                            errorsCaught++;                                
+                            errorsCaught++;
                         }
                         else if (itemName.StartsWith("Post"))
                         {
@@ -169,7 +203,7 @@ public class Submit : MonoBehaviour
                                         break;
                                     }
                                 }
-                            }                            
+                            }
                         }
                         else if (itemName == "Password")
                         {
@@ -188,9 +222,9 @@ public class Submit : MonoBehaviour
                         }
 
                         break;
-					}                
-				}
-			}
+                    }
+                }
+            }
 
             //check for not enough errors caught
             if (StaticFunction.getTotalErrors() > errorsCaught)
@@ -204,7 +238,10 @@ public class Submit : MonoBehaviour
                 MakeMistakeMessage("Great job!!! You got all the errors on that profile!");
             }
         }
+    }
 
+    void ResetStage()
+    {
         MakeMistakeMessage("New profile loaded.");
 
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
@@ -243,34 +280,6 @@ public class Submit : MonoBehaviour
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("ReportEntry"))
         {
             Destroy(x);
-        }
-
-        //after final profile
-        if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
-        {
-            dialogue = Instantiate(
-                dialoguePrefab,
-                new Vector3(960.0f, 540.0f, 0.0f),
-                Quaternion.identity,
-                GameObject.FindGameObjectWithTag("World").transform);
-
-            DialogueControls script = (DialogueControls) dialogue.transform.Find("Next").GetComponent(typeof(DialogueControls));
-            
-            if (StaticFunction.getMistakes() == StaticFunction.getTotalProfiles())
-            {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadDialogue()[0];
-                script.setDialogue(StaticFunction.getBadDialogue());
-            }
-            else if (StaticFunction.getMistakes() == 0)
-            {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getPerfectDialogue()[0];
-                script.setDialogue(StaticFunction.getPerfectDialogue());
-            }
-            else
-            {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodDialogue()[0];
-                script.setDialogue(StaticFunction.getGoodDialogue());
-            }
         }
     }
 }
