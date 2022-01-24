@@ -22,4 +22,11 @@ public class CutsceneChoiceRedirect : MonoBehaviour
 
         script.acceptChoice();
     }
+
+    public void nextScene()
+    {
+        CutscenePlayer script = (CutscenePlayer)world.GetComponent(typeof(CutscenePlayer));
+
+        script.nextScene();
+    }
 }
