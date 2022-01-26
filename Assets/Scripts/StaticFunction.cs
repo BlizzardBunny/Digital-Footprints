@@ -215,6 +215,19 @@ public static class StaticFunction
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();
     public static bool tutorialStart = true;
+    public static string relativeName = "Mom";
+
+    public static string updateStrings(string s)
+    {
+        if (s.Contains("$r")) //update string with relativeName
+        {
+            return s.Replace("$r", relativeName);
+        }
+        else
+        {
+            return s;
+        }
+    }
 
     public static void resetVals(int numOfProfiles,int numOfErrors)
     {

@@ -9,26 +9,27 @@ public class CutscenePlayer : MonoBehaviour
     public class Dialogue
     {
         public bool isPlayerSpeaking { get; }
+        public bool isThought { get; }
         public string line { get; }
         public string sceneToTransitionTo { get; }
         public string[] choices { get; }
         public string[] answers { get; }
 
-        public Dialogue(bool x, string y) => (isPlayerSpeaking, line) = (x, y);
+        public Dialogue(bool x, string z) => (isPlayerSpeaking, isThought, line) = (x, false, z);
+        public Dialogue(bool x, bool y, string z) => (isPlayerSpeaking, isThought, line) = (x, y, z);
         public Dialogue(bool x, string y, string[] a, string[] b) => (isPlayerSpeaking, sceneToTransitionTo, choices, answers) = (x, y, a, b);
     }
 
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
     public Sprite relativePic; //profile pic of the player's relative
     public GameObject customerDetails;
+    public GameObject overlay;
     public GameObject nextButton;
 
     public GameObject messagesPanel;
     public GameObject customerLinesPrefab;
     public GameObject playerLinesPrefab;
     public GameObject playerChoicesPrefab;
-
-    private string relativeName = "Mom";
 
     private GameObject currChoiceMenu;
     private Dialogue[] currDialogue;
@@ -37,6 +38,10 @@ public class CutscenePlayer : MonoBehaviour
 
     private Dialogue[] introDialogue = new Dialogue[] //bool is true if player is speaking, string is the line to be said
     {
+        new Dialogue(true, true, "So, a while back I got a message online from my $r."),
+        new Dialogue(true, true, "It was weird... And it called me \"buddy\". \nI immediately knew the account was hacked."),
+        new Dialogue(true, true, "After confirming it irl, we contacted Support to restore the account."),
+        new Dialogue(true, true, "A few days later, this happened..."),
         new Dialogue(false, "Ok, I managed to recover my account." ),
         new Dialogue(false, "But I’m not entirely sure why I even got hacked in the first place. " ),
         new Dialogue(false, "Can you take a look and see if there’s any issues?" ),
@@ -60,26 +65,13 @@ public class CutscenePlayer : MonoBehaviour
         if (StaticFunction.tutorialStart)
         {
             pic.GetComponent<Image>().sprite = relativePic;
-            name.GetComponent<TMPro.TextMeshProUGUI>().text = relativeName;
+            name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.relativeName;
             StartCoroutine(runTutorial());
         }
         else
         {
             pic.GetComponent<Image>().sprite = profilePics[currProfile];
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[currProfile];
-        }
-    }
-
-    //Used to update strings that have variable keys in them. (e.g. $r for relativeName)
-    string updateStrings(string s)
-    {
-        if (s.Contains("$r")) //update string with relativeName
-        {
-            return s.Replace("$r", relativeName);
-        }
-        else
-        {
-            return s;
         }
     }
 
@@ -94,8 +86,34 @@ public class CutscenePlayer : MonoBehaviour
         {
             if (introDialogue[i].isPlayerSpeaking)
             {
-                if (introDialogue[i].choices != null)
+                overlay.transform.SetAsFirstSibling();
+                if (introDialogue[i].isThought)
                 {
+                    overlay.transform.SetAsLastSibling();
+
+                    Transform thoughts = overlay.transform.Find("Thoughts");
+                    thoughts.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
+                    string line = StaticFunction.updateStrings(introDialogue[i].line);
+
+                    for (int j = 0; j < line.Length; j++)
+                    {
+                        yield return new WaitForSeconds(0.05f);
+                        thoughts.GetComponent<TMPro.TextMeshProUGUI>().text += line[j]; 
+
+                        if (Input.GetMouseButton(0))
+                        {
+                            thoughts.GetComponent<TMPro.TextMeshProUGUI>().text += line.Substring(j+1);
+                            yield return new WaitForSeconds(0.5f);
+                            break;
+                        }
+                    }
+
+                    yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
+                }
+                else if (introDialogue[i].choices != null)
+                {
+                    overlay.transform.SetAsFirstSibling();
                     currDialogue = introDialogue;
                     currLine = i;
                     yield return StartCoroutine(showChoices(introDialogue[i].choices));
@@ -109,7 +127,7 @@ public class CutscenePlayer : MonoBehaviour
                     Quaternion.identity,
                     messagesPanel.transform.parent);
 
-                    playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = updateStrings(introDialogue[i].line);
+                    playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(introDialogue[i].line);
 
                     yield return new WaitForFixedUpdate(); //wait for playerMessage to update size acc to text
                     yield return new WaitForFixedUpdate(); //skip frame
@@ -130,6 +148,7 @@ public class CutscenePlayer : MonoBehaviour
             }
             else
             {
+                overlay.transform.SetAsFirstSibling();
                 yield return StartCoroutine(showTypingStatus());
                 GameObject customerMessage = Instantiate(
                     customerLinesPrefab,
@@ -138,7 +157,7 @@ public class CutscenePlayer : MonoBehaviour
                     messagesPanel.transform.parent);
 
                 customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
-                customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = updateStrings(introDialogue[i].line);
+                customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(introDialogue[i].line);
 
                 yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
                 yield return new WaitForFixedUpdate(); //skip frame
@@ -178,7 +197,7 @@ public class CutscenePlayer : MonoBehaviour
 
         for (int i = 1; i - 1 < choices.Length; i++)
         {
-            currChoiceMenu.transform.Find("Background").Find("Choice " + i).Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = updateStrings(choices[i - 1]);
+            currChoiceMenu.transform.Find("Background").Find("Choice " + i).Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(choices[i - 1]);
             yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
             yield return new WaitForFixedUpdate(); //skip frame
         }
@@ -213,7 +232,7 @@ public class CutscenePlayer : MonoBehaviour
         Quaternion.identity,
         messagesPanel.transform.parent);
 
-        playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = updateStrings(currDialogue[currLine].choices[StaticFunction.choiceIndex]);
+        playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(currDialogue[currLine].choices[StaticFunction.choiceIndex]);
 
         yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
@@ -239,7 +258,7 @@ public class CutscenePlayer : MonoBehaviour
             messagesPanel.transform.parent);
 
         customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
-        customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = updateStrings(currDialogue[currLine].answers[StaticFunction.choiceIndex]);
+        customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(currDialogue[currLine].answers[StaticFunction.choiceIndex]);
 
         yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
