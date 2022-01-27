@@ -23,6 +23,7 @@ public class FlagSystem : MonoBehaviour
     private int flagIndex;
     private int id;
     private bool flaggedItem;
+    private GameObject pointersPanel;
 
     private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
@@ -31,6 +32,7 @@ public class FlagSystem : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
         parentName = transform.parent.name;
         flagIndex = -1;
         id = StaticFunction.instanceCounter;
@@ -247,6 +249,15 @@ public class FlagSystem : MonoBehaviour
 
     public void Flag(Button clicked)
     {
+        if (StaticFunction.tutorialStart)
+        {
+            if (!flaggedItem)
+            {
+                PointerGenerator script = (PointerGenerator) pointersPanel.GetComponent(typeof(PointerGenerator));
+                script.mistakeMade();
+            }
+        }
+
         if (!editableIsDrawn)
         {
             try

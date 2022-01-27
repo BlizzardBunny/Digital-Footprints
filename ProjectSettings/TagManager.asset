@@ -30,6 +30,7 @@ TagManager:
   - ToFadeOnTitle
   - TitleBG
   - ClientMessage
+  - PointersPanel
   layers:
   - Default
   - TransparentFX

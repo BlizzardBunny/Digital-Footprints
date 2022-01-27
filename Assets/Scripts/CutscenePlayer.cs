@@ -35,6 +35,7 @@ public class CutscenePlayer : MonoBehaviour
     private Dialogue[] currDialogue;
     private int currLine;
     private Coroutine coroutineToBeStopped;
+    private float characterTypingSpeed = 0.05f;
 
     private Dialogue[] introDialogue = new Dialogue[] //bool is true if player is speaking, string is the line to be said
     {
@@ -98,7 +99,7 @@ public class CutscenePlayer : MonoBehaviour
 
                     for (int j = 0; j < line.Length; j++)
                     {
-                        yield return new WaitForSeconds(0.05f);
+                        yield return new WaitForSeconds(characterTypingSpeed);
                         thoughts.GetComponent<TMPro.TextMeshProUGUI>().text += line[j]; 
 
                         if (Input.GetMouseButton(0))
