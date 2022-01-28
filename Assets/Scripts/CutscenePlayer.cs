@@ -17,6 +17,7 @@ public class CutscenePlayer : MonoBehaviour
 
         public Dialogue(bool x, string z) => (isPlayerSpeaking, isThought, line) = (x, false, z);
         public Dialogue(bool x, bool y, string z) => (isPlayerSpeaking, isThought, line) = (x, y, z);
+        public Dialogue(bool x, string[] a, string[] b) => (isPlayerSpeaking, choices, answers) = (x, a, b);
         public Dialogue(bool x, string y, string[] a, string[] b) => (isPlayerSpeaking, sceneToTransitionTo, choices, answers) = (x, y, a, b);
     }
 
@@ -46,12 +47,22 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(false, "Ok, I managed to recover my account." ),
         new Dialogue(false, "But I’m not entirely sure why I even got hacked in the first place. " ),
         new Dialogue(false, "Can you take a look and see if there’s any issues?" ),
-        new Dialogue(true, "Tutorial", 
-            new string[]{"No thanks. I don't really wanna do it today.", "Why? Can't you do it yourself?", "Sure thing, $r. Let me log into your account and check." }, 
-            new string[]{"Well, I'm your $r. You're doing it.", "Well! I don't remember raising you to be that way. You're doing it.", "Thanks, dear! Love you!" }),
-        new Dialogue(false, "Thank you so much!" ),
+        new Dialogue(true,
+            new string[]{"No thanks. I don't really wanna do it today.", "Why? Can't you do it yourself?", "Sure thing, $r. Let me log into your account and check." },
+            new string[]{"Well, I'm your $r. You're doing it.", "Well! I don't remember raising you to be that way. You're doing it.", "Thank you! Love you!" }),
+        new Dialogue(false, "Oh by the way, I'll be offline for a bit. So could you email me a full report and I'll get back to you?"),
+        new Dialogue(true, "A full report??"),
+        new Dialogue(false, "You'll be fine! Just download this Report App. It'll make the whole thing a breeze."),
+        new Dialogue(true, "Tutorial",
+            new string[]{"What.", "What.", "What."},
+            new string[]{"Good luck!", "Good luck!", "Good luck!"}),
+        new Dialogue(false, "I just read your email! Thank you so much!" ),
         new Dialogue(false, "You know, I heard that there’s this new company specializing in these social media things." ),
-        new Dialogue(false, "I think you can try applying to work for them, if you’re happy doing this for work." )
+        new Dialogue(false, "I think you can try applying to work for them, if you’re happy doing this for work." ),
+        new Dialogue(true, "... This was a ploy to make me get a job, wasn't it?"),
+        new Dialogue(false, "Seen."),
+        new Dialogue(true, "That's not how seen-zoning works!!!"),
+        new Dialogue(true, true, "And that's how I got into the Data Privacy business."),
     };
 
     // Start is called before the first frame update
@@ -87,9 +98,13 @@ public class CutscenePlayer : MonoBehaviour
         {
             if (introDialogue[i].isPlayerSpeaking)
             {
-                overlay.transform.SetAsFirstSibling();
                 if (introDialogue[i].isThought)
                 {
+                    if ((i > 0) && (!introDialogue[i - 1].isThought))
+                    {
+                        yield return new WaitForSeconds(3f);
+                    }
+
                     overlay.transform.SetAsLastSibling();
 
                     Transform thoughts = overlay.transform.Find("Thoughts");
@@ -121,6 +136,7 @@ public class CutscenePlayer : MonoBehaviour
                 }
                 else
                 {
+                    overlay.transform.SetAsFirstSibling();
                     yield return new WaitForSeconds(3f);
                     GameObject playerMessage = Instantiate(
                     playerLinesPrefab,
@@ -179,6 +195,12 @@ public class CutscenePlayer : MonoBehaviour
 
             StaticFunction.dialogueLineCounter++;
         }
+
+        StaticFunction.tutorialStart = false;
+        StaticFunction.setCurrentLevel("Stage 1");
+        SceneManager.LoadScene(StaticFunction.getCurrentLevel());
+
+        yield break;
     }
 
     IEnumerator showTypingStatus()
@@ -208,9 +230,6 @@ public class CutscenePlayer : MonoBehaviour
 
         yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
-
-        Debug.Log(bg.sizeDelta.y);
-        Debug.Log(area.sizeDelta.y);
 
         if (bg.sizeDelta.y > area.sizeDelta.y)
         {

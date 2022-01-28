@@ -48,6 +48,13 @@ public class Category : MonoBehaviour
             else
             {
                 messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - " + buttonText;
+
+                if (StaticFunction.tutorialStart)
+                {
+                    PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
+
+                    script.checkCategory(transform, buttonText);
+                }
             }
         }
         catch

@@ -6,9 +6,13 @@ public class TutorialPlayer : MonoBehaviour
 {
     public Transform overlay;
 
+    private GameObject pointersPanel;
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(StaticFunction.dialogueLineCounter);
+        pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
         StartCoroutine(runThoughts(overlay.Find("Thoughts"), StaticFunction.updateStrings("Alright, let's see what $r's account is like.")));
     }
 
@@ -31,6 +35,10 @@ public class TutorialPlayer : MonoBehaviour
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
 
         overlay.SetAsFirstSibling();
-        StopAllCoroutines();
+
+        PointerGenerator script = (PointerGenerator)pointersPanel.GetComponent(typeof(PointerGenerator));
+        script.tutorialStart();
+
+        yield break;
     }
 }

@@ -89,7 +89,11 @@ public class Submit : MonoBehaviour
         ResetStage();
 
         //after final profile
-        if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
+        if (StaticFunction.tutorialStart)
+        {
+            SceneManager.LoadScene("AskDialogue");
+        }
+        else if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
         {
             dialogue = Instantiate(
                 dialoguePrefab,

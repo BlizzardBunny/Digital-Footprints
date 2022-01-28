@@ -49,7 +49,7 @@ public class SceneTransitions : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         StaticFunction.resetVals(3, 1);
         StaticFunction.instanceCounter = 0;
-        SceneManager.LoadScene("Stage 1");
+        SceneManager.LoadScene(StaticFunction.getCurrentLevel());
         StopCoroutine(fadeOut);
     }
     //Returns to the Main Menu

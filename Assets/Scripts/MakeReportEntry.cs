@@ -19,7 +19,7 @@ public class MakeReportEntry : MonoBehaviour
     }
 
     public void MakeReport()
-    {
+    { 
         if (StaticFunction.getCurrentProfile() != StaticFunction.getProfileNum())
         {
             StaticFunction.setNumOfReports(0);
@@ -31,6 +31,13 @@ public class MakeReportEntry : MonoBehaviour
         string sns = snsField.GetComponent<TMPro.TextMeshProUGUI>().text;
 
         string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
+
+        if (StaticFunction.tutorialStart)
+        {
+            PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
+
+            script.doubleCheck(reportDetails[1]);
+        }
 
         if (reportDetails.Length < 2)
         {
@@ -92,6 +99,13 @@ public class MakeReportEntry : MonoBehaviour
     
     public void DeleteReport()
     {
+        if (StaticFunction.tutorialStart)
+        {
+            PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
+
+            script.toggleSubmitButton();
+        }
+
         int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
 
         StaticFunction.reportEntries.RemoveAt(id);

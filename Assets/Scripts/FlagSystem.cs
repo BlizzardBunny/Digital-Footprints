@@ -72,7 +72,15 @@ public class FlagSystem : MonoBehaviour
     {
         if ((rndNum <= -1) && (StaticFunction.instanceCounter <= 0))
         {
-            rndNum = UnityEngine.Random.Range(0, profilePics.Length);
+            if (StaticFunction.tutorialStart)
+            {
+                rndNum = 0;
+            }
+            else
+            {
+                rndNum = UnityEngine.Random.Range(1, profilePics.Length);
+            }
+
             StaticFunction.setCurrentProfile(rndNum);
         }
 
@@ -251,10 +259,20 @@ public class FlagSystem : MonoBehaviour
     {
         if (StaticFunction.tutorialStart)
         {
+            PointerGenerator script = (PointerGenerator) pointersPanel.GetComponent(typeof(PointerGenerator));
             if (!flaggedItem)
+            {                
+                if (!editableIsDrawn)
+                {
+                    script.wrongItem(transform);
+                }
+            }
+            else
             {
-                PointerGenerator script = (PointerGenerator) pointersPanel.GetComponent(typeof(PointerGenerator));
-                script.mistakeMade();
+                if (!editableIsDrawn)
+                {
+                    script.correctItem(transform, flagIndex);
+                }
             }
         }
 

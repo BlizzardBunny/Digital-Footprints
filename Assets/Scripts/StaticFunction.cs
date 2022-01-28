@@ -54,6 +54,7 @@ public static class StaticFunction
 
     private static string[] badAddress = new string[]
     {
+        "319 Jadewood Drive, Chicago, Indiana",
         "236 Osler St, Toronto, Canada",
         "73 Lebanon St, Ibadan, Nigeria",
         "38 Riverlawn Drive, Cedar Falls, Iowa",
@@ -72,6 +73,7 @@ public static class StaticFunction
 
     private static string[] goodAddress = new string[]
     {
+        "Chicago, Indiana",
         "Toronto, Canada",
         "Ibadan, Nigeria",
         "Cedar Falls, Iowa",
@@ -90,6 +92,7 @@ public static class StaticFunction
 
     private static string[] names = new string[]
     {
+        "Auntie Denise",
         "Bruno Bourdeaux",
         "Ekene Cuevas",
         "Destiny Stuart",
@@ -108,6 +111,7 @@ public static class StaticFunction
 
     private static string[] bios = new string[]
     {
+        "My motto in life is to Live Laugh Love as best as I can.",
         "Living that sweet life #YouOnlyLiveOnce #LiveLaughLove",
         "Have virus problem? Try my applet here www.LegitVirusRemover.com",
         "Walk as if you are kissing the Earth with your feet #MantraOfTheDay #SpirituallyPure",
@@ -203,11 +207,11 @@ public static class StaticFunction
     private static bool isChecking = false;
     private static int currFlag = -1;
     private static int profileNum = 0; //profiles completed
-    private static int totalProfiles = 3;
+    private static int totalProfiles = 1;
     private static int mistakes = 0;
     private static int currentProfile = 0;
     private static int numOfReports = 0;
-    private static string currentLevel = "Stage 1";
+    private static string currentLevel = "AskDialogue";
 
     public static int dialogueLineCounter = 0;
     public static int choiceIndex = 0;
@@ -215,7 +219,7 @@ public static class StaticFunction
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();
     public static bool tutorialStart = true;
-    public static string relativeName = "Mom";
+    public static string relativeName = "Auntie";
 
     public static string updateStrings(string s)
     {
