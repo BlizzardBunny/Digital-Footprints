@@ -42,11 +42,11 @@ public class SceneTransitions : MonoBehaviour
 
     IEnumerator WaitandLoad(Animator anim)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         anim.SetBool("isZooming", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         anim.SetBool("isFading", true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         StaticFunction.resetVals(3, 1);
         StaticFunction.instanceCounter = 0;
         SceneManager.LoadScene(StaticFunction.getCurrentLevel());

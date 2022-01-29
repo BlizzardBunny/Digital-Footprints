@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PointerGenerator : MonoBehaviour
 {
+    public Transform overlay;
     public GameObject pointerPrefab;
     public Button submitButton;
 
@@ -296,5 +298,23 @@ public class PointerGenerator : MonoBehaviour
             submitButton.interactable = false;
             activateSubmit = false;
         }
+    }
+
+    public void endTutorial()
+    {
+        StartCoroutine(end());
+    }
+
+    IEnumerator end()
+    {
+        overlay.Find("Thoughts").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        overlay.SetAsLastSibling();
+
+        Animator anim = overlay.Find("Blackscreen").GetComponent<Animator>();
+        anim.SetBool("isFadingIn", false);
+
+        yield return new WaitForSeconds(1f);
+        StaticFunction.setCurrentLevel("AskDialogue");
+        SceneManager.LoadScene("AskDialogue");
     }
 }

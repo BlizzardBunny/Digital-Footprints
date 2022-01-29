@@ -91,7 +91,9 @@ public class Submit : MonoBehaviour
         //after final profile
         if (StaticFunction.tutorialStart)
         {
-            SceneManager.LoadScene("AskDialogue");
+            PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
+
+            script.endTutorial();
         }
         else if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
         {

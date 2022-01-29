@@ -110,6 +110,11 @@ public class CutscenePlayer : MonoBehaviour
                     Transform thoughts = overlay.transform.Find("Thoughts");
                     thoughts.GetComponent<TMPro.TextMeshProUGUI>().text = "";
 
+                    if (i == 0)
+                    {
+                        yield return new WaitForSeconds(1f);
+                    }
+
                     string line = StaticFunction.updateStrings(introDialogue[i].line);
 
                     for (int j = 0; j < line.Length; j++)
@@ -132,6 +137,12 @@ public class CutscenePlayer : MonoBehaviour
                     overlay.transform.SetAsFirstSibling();
                     currDialogue = introDialogue;
                     currLine = i;
+
+                    if (introDialogue[i].sceneToTransitionTo != null)
+                    {
+                        StaticFunction.setCurrentLevel("Tutorial");
+                    }
+
                     yield return StartCoroutine(showChoices(introDialogue[i].choices));
                 }
                 else
@@ -198,9 +209,20 @@ public class CutscenePlayer : MonoBehaviour
 
         StaticFunction.tutorialStart = false;
         StaticFunction.setCurrentLevel("Stage 1");
-        SceneManager.LoadScene(StaticFunction.getCurrentLevel());
 
-        yield break;
+        yield return StartCoroutine(fadeOut(StaticFunction.getCurrentLevel()));
+    }
+
+    IEnumerator fadeOut(string level)
+    {
+
+        overlay.transform.SetAsLastSibling();
+        overlay.transform.Find("Thoughts").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        overlay.transform.Find("Blackscreen").GetComponent<Animator>().SetBool("isFadingIn", false);
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(level);
     }
 
     IEnumerator showTypingStatus()
@@ -230,6 +252,11 @@ public class CutscenePlayer : MonoBehaviour
 
         yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
+        yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
+        yield return new WaitForFixedUpdate(); //skip frame
+        yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
+        yield return new WaitForFixedUpdate(); //skip frame
+
 
         if (bg.sizeDelta.y > area.sizeDelta.y)
         {
@@ -237,6 +264,10 @@ public class CutscenePlayer : MonoBehaviour
         }
 
         yield return new WaitForFixedUpdate(); //wait for currChoiceMenu to update size
+        yield return new WaitForFixedUpdate(); //skip frame
+        yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
+        yield return new WaitForFixedUpdate(); //skip frame
+        yield return new WaitForFixedUpdate(); //wait for currChoicMenu to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
 
         currChoiceMenu.transform.SetParent(messagesPanel.transform);
@@ -318,7 +349,7 @@ public class CutscenePlayer : MonoBehaviour
 
     public void nextScene()
     {
-        SceneManager.LoadScene(currDialogue[currLine].sceneToTransitionTo);
+        StartCoroutine(fadeOut(currDialogue[currLine].sceneToTransitionTo));
     }
 }
 

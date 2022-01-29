@@ -19,6 +19,9 @@ public class TutorialPlayer : MonoBehaviour
     IEnumerator runThoughts(Transform textBox, string thought)
     {
         textBox.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
+        yield return new WaitForSeconds(1f);
+
         for (int j = 0; j < thought.Length; j++)
         {
             yield return new WaitForSeconds(0.05f);
