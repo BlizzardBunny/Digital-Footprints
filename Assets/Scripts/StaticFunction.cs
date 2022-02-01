@@ -210,9 +210,9 @@ public static class StaticFunction
     private static int totalProfiles = 1;
     private static int mistakes = 0;
     private static int currentProfile = 0;
-    private static int numOfReports = 0;
     private static string currentLevel = "AskDialogue";
 
+    public static bool editableIsDrawn = false;
     public static int dialogueLineCounter = 0;
     public static int choiceIndex = 0;
     public static int instanceCounter = 0; //number of times FlagSystem is run
@@ -403,14 +403,6 @@ public static class StaticFunction
     public static void setCurrentProfile(int profile)
     {
         currentProfile = profile;
-    }
-    public static int getNumOfReports()
-    {
-        return numOfReports;
-    }
-    public static void setNumOfReports(int reports)
-    {
-        numOfReports = reports;
     }
 
 }

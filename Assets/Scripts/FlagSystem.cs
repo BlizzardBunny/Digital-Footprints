@@ -16,7 +16,6 @@ public class FlagSystem : MonoBehaviour
     public Sprite[] profilePics = new Sprite[StaticFunction.getNames().Length];
 
     private GameObject editableMA;
-    private bool editableIsDrawn = false;
 
     private string snsName = "0";
     private string parentName;
@@ -33,6 +32,12 @@ public class FlagSystem : MonoBehaviour
     private void Start()
     {
         pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
+
+        if (pointersPanel == null)
+        {
+            StaticFunction.tutorialStart = false;
+        }
+
         parentName = transform.parent.name;
         flagIndex = -1;
         id = StaticFunction.instanceCounter;
@@ -72,7 +77,7 @@ public class FlagSystem : MonoBehaviour
     {
         if ((rndNum <= -1) && (StaticFunction.instanceCounter <= 0))
         {
-            if (StaticFunction.tutorialStart)
+            if (StaticFunction.tutorialStart && (pointersPanel != null))
             {
                 rndNum = 0;
             }
@@ -255,28 +260,28 @@ public class FlagSystem : MonoBehaviour
         }
     }
 
-    public void Flag(Button clicked)
+    public void Flag()
     {
-        if (StaticFunction.tutorialStart)
+        if (StaticFunction.tutorialStart && (pointersPanel != null))
         {
             PointerGenerator script = (PointerGenerator) pointersPanel.GetComponent(typeof(PointerGenerator));
             if (!flaggedItem)
             {                
-                if (!editableIsDrawn)
+                if (!StaticFunction.editableIsDrawn)
                 {
                     script.wrongItem(transform);
                 }
             }
             else
             {
-                if (!editableIsDrawn)
+                if (!StaticFunction.editableIsDrawn)
                 {
                     script.correctItem(transform, flagIndex);
                 }
             }
         }
 
-        if (!editableIsDrawn)
+        if (!StaticFunction.editableIsDrawn)
         {
             try
             {
@@ -292,38 +297,56 @@ public class FlagSystem : MonoBehaviour
             editableMA = Instantiate(
                 editableMAPrefab,
                 new Vector3(1753.4014892578125f, 685.0f, 0.0f),
-                clicked.transform.rotation,
+                transform.rotation,
                 GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 
             Transform messageField = editableMA.transform.Find("MessageField");
             Transform snsField = editableMA.transform.Find("SNSField");
 
-            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = clicked.transform.parent.name;
+            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
             snsField.GetComponent<TMPro.TextMeshProUGUI>().text = snsName;
-            editableIsDrawn = true;
+            StaticFunction.editableIsDrawn = true;
             StaticFunction.setIsChecking(true);
             StaticFunction.setCurrFlag(flagIndex);
         }
         else
         {
-            foreach(GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+            editableMA = GameObject.FindGameObjectWithTag("EditableMA");
+
+            Transform messageField = editableMA.transform.Find("MessageField");
+
+            if (messageField.GetComponent<TMPro.TextMeshProUGUI>().text != parentName)
+            {               
+                Transform snsField = editableMA.transform.Find("SNSField");
+
+                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
+                snsField.GetComponent<TMPro.TextMeshProUGUI>().text = snsName;
+                StaticFunction.editableIsDrawn = true;
+                StaticFunction.setIsChecking(true);
+                StaticFunction.setCurrFlag(flagIndex);
+            }
+            else
             {
-                Destroy(x);
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
+                {
+                    Destroy(x);
+                }
+                
+                StaticFunction.editableIsDrawn = false;
+                StaticFunction.setIsChecking(false);
+                StaticFunction.setCurrFlag(-1);
             }
 
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
             {
                 Destroy(x);
             }
-
-            editableIsDrawn = false;
-            StaticFunction.setIsChecking(false);
-            StaticFunction.setCurrFlag(-1);
         }
     }
 
     public void ResetStage()
     {
+        StaticFunction.editableIsDrawn = false;
         flaggedItem = false;
 
         if (StaticFunction.instanceCounter <= 0)

@@ -16,6 +16,7 @@ public class Submit : MonoBehaviour
     private Transform profileNum;
     private Transform totalProfiles;
     private int errorsCaught = 0;
+    private int wrongFlags = 0;
     private bool perfectProfile = false;
 
     // Start is called before the first frame update
@@ -163,6 +164,7 @@ public class Submit : MonoBehaviour
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be Personal Information.");
+                                wrongFlags++;
                             }
                             Debug.Log("Caught " + itemName);
                             errorsCaught++;
@@ -179,6 +181,7 @@ public class Submit : MonoBehaviour
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getCaptionFlags()[flagIndex]);
+                                wrongFlags++;
                             }
                             Debug.Log("Caught " + itemName);
                             errorsCaught++;
@@ -203,6 +206,7 @@ public class Submit : MonoBehaviour
                                         {
                                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                             MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPrivacySettingFlags()[i]);
+                                            wrongFlags++;
                                         }
                                         Debug.Log("Caught " + itemName);
                                         errorsCaught++;
@@ -223,6 +227,7 @@ public class Submit : MonoBehaviour
                             {
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPasswordFlags()[flagIndex]);
+                                wrongFlags++;
                             }
                             errorsCaught++;
                         }
@@ -233,15 +238,18 @@ public class Submit : MonoBehaviour
             }
 
             //check for not enough errors caught
-            if (StaticFunction.getTotalErrors() > errorsCaught)
+            if (wrongFlags == 0)
             {
-                StaticFunction.setMistakes(StaticFunction.getMistakes() + (StaticFunction.getTotalErrors() - errorsCaught));
-                MakeMistakeMessage("You missed " + (StaticFunction.getTotalErrors() - errorsCaught) + " errors! You incur that many mistakes.");
-            }
-            else if (StaticFunction.getTotalErrors() == errorsCaught)
-            {
-                perfectProfile = true;
-                MakeMistakeMessage("Great job!!! You got all the errors on that profile!");
+                if (StaticFunction.getTotalErrors() > errorsCaught)
+                {
+                    StaticFunction.setMistakes(StaticFunction.getMistakes() + (StaticFunction.getTotalErrors() - errorsCaught));
+                    MakeMistakeMessage("You missed " + (StaticFunction.getTotalErrors() - errorsCaught) + " errors! You incur that many mistakes.");
+                }
+                else if (StaticFunction.getTotalErrors() == errorsCaught)
+                {
+                    perfectProfile = true;
+                    MakeMistakeMessage("Great job!!! You got all the errors on that profile!");
+                }
             }
         }
     }

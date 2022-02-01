@@ -19,10 +19,9 @@ public class MakeReportEntry : MonoBehaviour
     }
 
     public void MakeReport()
-    { 
+    {
         if (StaticFunction.getCurrentProfile() != StaticFunction.getProfileNum())
         {
-            StaticFunction.setNumOfReports(0);
             StaticFunction.setCurrentProfile(StaticFunction.getProfileNum());
         }
 
@@ -54,7 +53,6 @@ public class MakeReportEntry : MonoBehaviour
             reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
             reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[1];
             reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text = sns;
-            reportEntry.transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNumOfReports().ToString();
             
             if (sns.Contains("Chirper"))
             {
@@ -69,26 +67,12 @@ public class MakeReportEntry : MonoBehaviour
                 reportEntry.transform.Find("SNSLogo").GetComponent<Image>().sprite = snsLogos[2];
             }
 
-            if (StaticFunction.getNumOfReports() == 0)
-            {                
-                StaticFunction.reportEntries.Add(reportEntry);
-            }
-            else
-            {               
-                reportEntry.transform.position = new Vector3(
-                    StaticFunction.reportEntries[StaticFunction.reportEntries.Count - 1].transform.position.x, 
-                    StaticFunction.reportEntries[StaticFunction.reportEntries.Count - 1].transform.position.y - 79f, 
-                    StaticFunction.reportEntries[StaticFunction.reportEntries.Count - 1].transform.position.z
-                    );
-                StaticFunction.reportEntries.Add(reportEntry);
-            }
-
-            StaticFunction.setNumOfReports(StaticFunction.getNumOfReports() + 1);
-
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("EditableMA"))
             {
                 Destroy(x);
             }
+
+            StaticFunction.editableIsDrawn = false;
 
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
             {
@@ -104,19 +88,6 @@ public class MakeReportEntry : MonoBehaviour
             PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
 
             script.toggleSubmitButton();
-        }
-
-        int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
-
-        StaticFunction.reportEntries.RemoveAt(id);
-        StaticFunction.setNumOfReports(StaticFunction.getNumOfReports() - 1);
-
-        for (int i = id; i < StaticFunction.reportEntries.Count; i++)
-        {
-            Transform reportEntry = StaticFunction.reportEntries[i].transform;
-            reportEntry.Translate(new Vector3(0f, 79f, 0f));
-            Transform idObject = reportEntry.Find("ID");
-            idObject.GetComponent<TMPro.TextMeshProUGUI>().text = i.ToString();
         }
 
         Destroy(transform.parent.gameObject);
