@@ -27,8 +27,15 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        FlagSystem script = (FlagSystem)transform.GetComponent(typeof(FlagSystem));
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            FlagSystem script = (FlagSystem)transform.GetComponent(typeof(FlagSystem));
 
-        script.Flag();
+            script.Flag();
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+
+        }
     }
 }

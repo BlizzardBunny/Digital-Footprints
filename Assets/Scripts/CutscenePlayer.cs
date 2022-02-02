@@ -150,10 +150,10 @@ public class CutscenePlayer : MonoBehaviour
                     overlay.transform.SetAsFirstSibling();
                     yield return new WaitForSeconds(3f);
                     GameObject playerMessage = Instantiate(
-                    playerLinesPrefab,
-                    new Vector3(959.9981079101563f, 198.29241943359376f,0.0f),
-                    Quaternion.identity,
-                    messagesPanel.transform.parent);
+                        playerLinesPrefab,
+                        new Vector3(959.9981079101563f, 198.29241943359376f,0.0f),
+                        Quaternion.identity,
+                        messagesPanel.transform.parent);
 
                     playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(introDialogue[i].line);
 

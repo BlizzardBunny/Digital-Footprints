@@ -7672,7 +7672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   confirmationPrefab: {fileID: 3850745046234004881, guid: 9b3454f7ed139974f8c37a52a7f4a89f, type: 3}
-  dialoguePrefab: {fileID: 1163755748046703942, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
+  dialoguePrefab: {fileID: 4645397926517759041, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
   mistakeMessagePrefab: {fileID: 7356037365626714882, guid: 52acf0b0823a0e74fbb67343885ae4fe, type: 3}
 --- !u!1001 &1647773948
 PrefabInstance:
@@ -9086,6 +9086,7 @@ GameObject:
   - component: {fileID: 2026852161}
   - component: {fileID: 2026852160}
   - component: {fileID: 2026852159}
+  - component: {fileID: 2026852163}
   m_Layer: 5
   m_Name: World (Canvas)
   m_TagString: World
@@ -9177,6 +9178,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2026852163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026852158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcd70e497338a141a664bea74edf070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 0}
+  dialoguePrefab: {fileID: 4645397926517759041, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
 --- !u!1 &2125604032
 GameObject:
   m_ObjectHideFlags: 0
