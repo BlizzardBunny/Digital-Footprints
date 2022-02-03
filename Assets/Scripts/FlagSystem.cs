@@ -357,14 +357,14 @@ public class FlagSystem : MonoBehaviour
             flagIds.TrimExcess();
 
             //setup stage reqs
-            if (SceneManager.GetActiveScene().name == "Stage 1")
+            if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
             {
                 StaticFunction.setErrorNum(UnityEngine.Random.Range(1, 3)); //1-2 errors
                 Debug.Log(StaticFunction.getErrorNum());
                 StaticFunction.setTotalProfiles(3);
                 StaticFunction.setTotalErrors(StaticFunction.getErrorNum());
             }
-            else if (SceneManager.GetActiveScene().name == "Stage 2")
+            else if (SceneManager.GetActiveScene().name.Equals("Stage 2"))
             {
                 StaticFunction.setErrorNum(UnityEngine.Random.Range(2, 4)); //2-3 errors
                 StaticFunction.setTotalErrors(StaticFunction.getErrorNum());
@@ -384,7 +384,7 @@ public class FlagSystem : MonoBehaviour
                     privacyWindow.GetComponent<Animator>().SetBool("isMinimized", true);
                 }
             }
-            else if (SceneManager.GetActiveScene().name == "Stage 3")
+            else if (SceneManager.GetActiveScene().name.Equals("Stage 3"))
             {
                 StaticFunction.setErrorNum(UnityEngine.Random.Range(3, 6)); //3-5 errors
                 StaticFunction.setTotalErrors(StaticFunction.getErrorNum());

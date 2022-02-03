@@ -48,8 +48,8 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(false, "But I’m not entirely sure why I even got hacked in the first place. " ),
         new Dialogue(false, "Can you take a look and see if there’s any issues?" ),
         new Dialogue(true,
-            new string[]{"No thanks. I don't really wanna do it today.", "Why? Can't you do it yourself?", "Sure thing, $r. Let me log into your account and check." },
-            new string[]{"Well, I'm your $r. You're doing it.", "Well! I don't remember raising you to be that way. You're doing it.", "Thank you! Love you!" }),
+            new string[]{"No thanks. I don't really wanna do it today.", "Why? Can't you do it yourself?", "Sure thing, $r. Let me go to your account and check." },
+            new string[]{"Well, I'm your $r. You're doing it.", "Well! I don't remember raising you to be that way. You're doing it.", "Thanks, dear! Love you!" }),
         new Dialogue(false, "Oh by the way, I'll be offline for a bit. So could you email me a full report and I'll get back to you?"),
         new Dialogue(true, "A full report??"),
         new Dialogue(false, "You'll be fine! Just download this Report App. It'll make the whole thing a breeze."),
@@ -78,7 +78,9 @@ public class CutscenePlayer : MonoBehaviour
         {
             pic.GetComponent<Image>().sprite = relativePic;
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.relativeName;
-            StartCoroutine(runTutorial());
+            StaticFunction.setCurrentLevel("Stage 1");
+            StaticFunction.reset();
+            StartCoroutine(run(introDialogue));
         }
         else
         {
@@ -87,20 +89,22 @@ public class CutscenePlayer : MonoBehaviour
         }
     }
 
-    IEnumerator runTutorial()
+    IEnumerator run(Dialogue[] dialogue)
     {
+        currDialogue = dialogue;
+
         if (coroutineToBeStopped != null)
         {
             StopCoroutine(coroutineToBeStopped);
         }
 
-        for (int i = StaticFunction.dialogueLineCounter; i < introDialogue.Length; i++)
+        for (int i = StaticFunction.dialogueLineCounter; i < dialogue.Length; i++)
         {
-            if (introDialogue[i].isPlayerSpeaking)
+            if (dialogue[i].isPlayerSpeaking)
             {
-                if (introDialogue[i].isThought)
+                if (dialogue[i].isThought)
                 {
-                    if ((i > 0) && (!introDialogue[i - 1].isThought))
+                    if ((i > 0) && (!dialogue[i - 1].isThought))
                     {
                         yield return new WaitForSeconds(3f);
                     }
@@ -115,7 +119,7 @@ public class CutscenePlayer : MonoBehaviour
                         yield return new WaitForSeconds(1f);
                     }
 
-                    string line = StaticFunction.updateStrings(introDialogue[i].line);
+                    string line = StaticFunction.updateStrings(dialogue[i].line);
 
                     for (int j = 0; j < line.Length; j++)
                     {
@@ -132,18 +136,17 @@ public class CutscenePlayer : MonoBehaviour
 
                     yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
                 }
-                else if (introDialogue[i].choices != null)
+                else if (dialogue[i].choices != null)
                 {
                     overlay.transform.SetAsFirstSibling();
-                    currDialogue = introDialogue;
                     currLine = i;
 
-                    if (introDialogue[i].sceneToTransitionTo != null)
+                    if (dialogue[i].sceneToTransitionTo != null)
                     {
                         StaticFunction.setCurrentLevel("Tutorial");
                     }
 
-                    yield return StartCoroutine(showChoices(introDialogue[i].choices));
+                    yield return StartCoroutine(showChoices(dialogue[i].choices));
                 }
                 else
                 {
@@ -155,7 +158,7 @@ public class CutscenePlayer : MonoBehaviour
                         Quaternion.identity,
                         messagesPanel.transform.parent);
 
-                    playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(introDialogue[i].line);
+                    playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(dialogue[i].line);
 
                     yield return new WaitForFixedUpdate(); //wait for playerMessage to update size acc to text
                     yield return new WaitForFixedUpdate(); //skip frame
@@ -185,7 +188,7 @@ public class CutscenePlayer : MonoBehaviour
                     messagesPanel.transform.parent);
 
                 customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
-                customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(introDialogue[i].line);
+                customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(dialogue[i].line);
 
                 yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
                 yield return new WaitForFixedUpdate(); //skip frame
@@ -208,8 +211,6 @@ public class CutscenePlayer : MonoBehaviour
         }
 
         StaticFunction.tutorialStart = false;
-        StaticFunction.setCurrentLevel("Stage 1");
-
         yield return StartCoroutine(fadeOut(StaticFunction.getCurrentLevel()));
     }
 
@@ -278,10 +279,10 @@ public class CutscenePlayer : MonoBehaviour
     IEnumerator showPlayerMessage()
     {
         GameObject playerMessage = Instantiate(
-        playerLinesPrefab,
-        new Vector3(959.9981079101563f, 198.29241943359376f, 0.0f),
-        Quaternion.identity,
-        messagesPanel.transform.parent);
+            playerLinesPrefab,
+            new Vector3(959.9981079101563f, 198.29241943359376f, 0.0f),
+            Quaternion.identity,
+            messagesPanel.transform.parent);
 
         playerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(currDialogue[currLine].choices[StaticFunction.choiceIndex]);
 
@@ -336,7 +337,7 @@ public class CutscenePlayer : MonoBehaviour
         else
         {
             StaticFunction.dialogueLineCounter++;
-            StartCoroutine(runTutorial());
+            StartCoroutine(run(currDialogue));
         }
     }
 

@@ -19,6 +19,33 @@ public class Submit : MonoBehaviour
     private int wrongFlags = 0;
     private bool perfectProfile = false;
 
+    public class Dialogue
+    {
+        public string line { get; }
+        public bool allowPlayerControl { get; }
+
+        public Dialogue(string x) => (line, allowPlayerControl) = (x, false);
+        public Dialogue(string x, bool y) => (line, allowPlayerControl) = (x, y);
+    }
+
+    private Dialogue[] roundMessagesPerfect = new Dialogue[]
+    {
+        new Dialogue("Excellent, it seems that you fully grasp how our system works here at Digital Footprints."),
+        new Dialogue("Do be reminded that as you gain trust with the company, you will be given more responsibilities")
+    };
+
+    //private Dialogue[] roundMessagesGood = new Dialogue[]
+    //{
+    //    new Dialogue("While you did make some mistakes here and there, I hope that this did help you understand how our system works."),
+    //    "Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
+    //};
+
+    //private static string[] roundMessagesBad = new string[]
+    //{
+    //    "I strongly recommend reviewing today’s work to understand what went wrong.",
+    //    "Do remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
+    //};
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,28 +125,19 @@ public class Submit : MonoBehaviour
         }
         else if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
         {
-            dialogue = Instantiate(
-                dialoguePrefab,
-                new Vector3(960.0f, 540.0f, 0.0f),
-                Quaternion.identity,
-                GameObject.FindGameObjectWithTag("World").transform);
+            TutorialPlayer script = (TutorialPlayer)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(TutorialPlayer));
 
-            DialogueControls script = (DialogueControls) dialogue.transform.Find("Next").GetComponent(typeof(DialogueControls));
-            
             if (StaticFunction.getMistakes() == StaticFunction.getTotalProfiles())
             {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadDialogue()[0];
-                script.setDialogue(StaticFunction.getBadDialogue());
+                //bad dialogue
             }
             else if (StaticFunction.getMistakes() == 0)
             {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getPerfectDialogue()[0];
-                script.setDialogue(StaticFunction.getPerfectDialogue());
+                //perfect dialogue
             }
             else
             {
-                dialogue.transform.Find("Dialogue").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodDialogue()[0];
-                script.setDialogue(StaticFunction.getGoodDialogue());
+                //good dialogue
             }
         }
     }

@@ -314,6 +314,7 @@ public class PointerGenerator : MonoBehaviour
         anim.SetBool("isFadingIn", false);
 
         yield return new WaitForSeconds(1f);
+        StaticFunction.resetVals(3, 1);
         StaticFunction.setCurrentLevel("AskDialogue");
         SceneManager.LoadScene("AskDialogue");
     }
