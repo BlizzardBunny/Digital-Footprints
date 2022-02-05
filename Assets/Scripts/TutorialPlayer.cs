@@ -74,14 +74,17 @@ public class TutorialPlayer : MonoBehaviour
             StaticFunction.tutorialStart = false;
             if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
             {
+                StaticFunction.setCurrentLevel("Stage 1");
                 StartCoroutine(runStage(stageOne));
             }
             else if (SceneManager.GetActiveScene().name.Equals("Stage 2"))
             {
+                StaticFunction.setCurrentLevel("Stage 2");
                 StartCoroutine(runStage(stageTwo));
             }
             else if (SceneManager.GetActiveScene().name.Equals("Stage 3"))
             {
+                StaticFunction.setCurrentLevel("Stage 3");
                 StartCoroutine(runStage(stageThree));
             }
         }
@@ -162,6 +165,7 @@ public class TutorialPlayer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+            Debug.Log(StaticFunction.getCurrentLevel());
             Debug.Log("Choice Index: " + StaticFunction.choiceIndex);
             Debug.Log("Dialogue Line Counter: " + StaticFunction.dialogueLineCounter);
             Debug.Log("Editable is Drawn: " + StaticFunction.editableIsDrawn);

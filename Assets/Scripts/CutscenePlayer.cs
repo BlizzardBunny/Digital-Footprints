@@ -32,6 +32,7 @@ public class CutscenePlayer : MonoBehaviour
     public GameObject playerLinesPrefab;
     public GameObject playerChoicesPrefab;
 
+    private int currProfile;
     private GameObject currChoiceMenu;
     private Dialogue[] currDialogue;
     private int currLine;
@@ -54,7 +55,7 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(true, "A full report??"),
         new Dialogue(false, "You'll be fine! Just download this Report App. It'll make the whole thing a breeze."),
         new Dialogue(true, "Tutorial",
-            new string[]{"What.", "What.", "What."},
+            new string[]{"What?", "What.", "What-"},
             new string[]{"Good luck!", "Good luck!", "Good luck!"}),
         new Dialogue(false, "I just read your email! Thank you so much!" ),
         new Dialogue(false, "You know, I heard that there’s this new company specializing in these social media things." ),
@@ -65,10 +66,41 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(true, true, "And that's how I got into the Data Privacy business."),
     };
 
+    private Dialogue[] test = new Dialogue[] //bool is true if player is speaking, string is the line to be said
+    {
+        new Dialogue(false, StaticFunction.getNames()[StaticFunction.getCurrentProfile()]),
+        new Dialogue(true, StaticFunction.parentName),
+        new Dialogue(false, "isFlag: " + StaticFunction.isFlag.ToString()),
+        new Dialogue(true, true, "POGGGG")
+    };
+
+    private Dialogue[] goodAddress = new Dialogue[]
+    {
+        new Dialogue(true,
+            new string[]{"Maybe you shouldn't be posting your address online.", "Are you sure it's safe to have your address on your profile?", "I think putting your address online is pretty irresponsible."},
+            new string[]{"What do you mean? I didn't post my exact address...", "I'm pretty sure it's fine. I didn't put my exact address.", "*I* think it's fine as long as I don't put my exact address. People don't even know what street I live on!"}),
+        new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{"I see! My mistake.", "You're right. I'm sorry.", "You're clearly wrong tho."},
+            new string[]{"It's no problem.", "It's alright. I'm just glad you're asking!", "You're clearly rude, and I'll be reporting you."})
+    };
+
+    // to be edited
+    private Dialogue[] badAddress = new Dialogue[]
+    {
+        new Dialogue(true,
+            new string[]{"Maybe you shouldn't be posting your address online.", "Are you sure it's safe to have your address on your profile?", "I think putting your address online is pretty irresponsible."},
+            new string[]{"Really? But then how would people know where to visit me?", "Is it really that bad? I wanted the specialized ads.", ""}),
+        new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{"I see! My mistake.", "You're right. I'm sorry.", "You're clearly wrong tho."},
+            new string[]{"It's no problem.", "It's alright. I'm just glad you're asking!", "You're clearly rude, and I'll be reporting you."})
+    };
+
     // Start is called before the first frame update
     void Start()
     {
-        int currProfile = StaticFunction.getCurrentProfile();
+        overlay.transform.Find("Blackscreen").GetComponent<Animator>().SetBool("isFadingIn", true);
+
+        currProfile = StaticFunction.getCurrentProfile();
 
         //setup customer details
         Transform pic = customerDetails.transform.Find("Pic");
@@ -86,6 +118,55 @@ public class CutscenePlayer : MonoBehaviour
         {
             pic.GetComponent<Image>().sprite = profilePics[currProfile];
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[currProfile];
+            StartCoroutine(run(getCorrectDialogue()));
+        }
+    }
+
+    Dialogue[] getCorrectDialogue()
+    {
+        if (StaticFunction.parentName.Equals("Address"))
+        {
+            if (StaticFunction.isFlag)
+            {
+                
+            }
+            else
+            {
+                return goodAddress;
+            }
+        }
+        else if (StaticFunction.parentName.StartsWith("Post"))
+        {
+            if (StaticFunction.isFlag)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (StaticFunction.parentName.Equals("PrivacyWindow"))
+        {
+            if (StaticFunction.isFlag)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (StaticFunction.parentName.Equals("Password"))
+        {
+            if (StaticFunction.isFlag)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 
@@ -100,6 +181,7 @@ public class CutscenePlayer : MonoBehaviour
 
         for (int i = StaticFunction.dialogueLineCounter; i < dialogue.Length; i++)
         {
+            Debug.Log(i);
             if (dialogue[i].isPlayerSpeaking)
             {
                 if (dialogue[i].isThought)
@@ -187,7 +269,7 @@ public class CutscenePlayer : MonoBehaviour
                     Quaternion.identity,
                     messagesPanel.transform.parent);
 
-                customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
+                customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = customerDetails.transform.Find("Pic").GetComponent<Image>().sprite;
                 customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(dialogue[i].line);
 
                 yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
@@ -211,6 +293,7 @@ public class CutscenePlayer : MonoBehaviour
         }
 
         StaticFunction.tutorialStart = false;
+        StaticFunction.dialogueLineCounter = 0;
         yield return StartCoroutine(fadeOut(StaticFunction.getCurrentLevel()));
     }
 

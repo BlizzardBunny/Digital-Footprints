@@ -15,7 +15,7 @@ public static class StaticFunction
         "I love my car!!!",
         "New phone plannnnn!!! Hmu at 209-470-0522",
         "Doing some window shopping! Won’t be home until 5 :3",
-        "Off on a business trip! Gonna miss 3686 Chandler Drive for the first time!",
+        "Off on a business trip! Gonna be at 3686 Chandler Drive for the first time!",
         "My son’s finally enrolled! Enjoy school!!!",
         "Thanks @Ray for taking care of my home while I’m out!"
     };
@@ -202,6 +202,12 @@ public static class StaticFunction
     public static List<GameObject> mistakeMessages = new List<GameObject>();
     public static bool tutorialStart = true;
     public static string relativeName = "Auntie";
+
+    //for cutscenes
+    public static string parentName = "";
+    public static int rnd2 = -1;
+    public static int flagIndex = -1;
+    public static bool isFlag = false;
 
     public static string updateStrings(string s)
     {

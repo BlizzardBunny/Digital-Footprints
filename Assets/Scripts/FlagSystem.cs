@@ -26,6 +26,7 @@ public class FlagSystem : MonoBehaviour
 
     private static List<int> flagIds = new List<int>();
     private static int rndNum = -1;
+    private static int rnd2 = -1; //some items have a secondary rndnum
     private static int otherPostIndex = -1;
 
     // Start is called before the first frame update
@@ -71,6 +72,11 @@ public class FlagSystem : MonoBehaviour
     public bool isFlag()
     {
         return flaggedItem;
+    }
+
+    public int getRnd2()
+    {
+        return rnd2;
     }
 
     private void Setup()
@@ -133,7 +139,7 @@ public class FlagSystem : MonoBehaviour
                 Transform caption = transform.parent.transform.Find("Caption");
                 Transform photo = transform.parent.transform.Find("Photo");
 
-                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
+                rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadCaptions().Length);
                 caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[rnd2];
                 photo.GetComponent<Image>().sprite = badPosts[rnd2];
                 flagIndex = rnd2;
@@ -154,7 +160,7 @@ public class FlagSystem : MonoBehaviour
                 Transform passwordField = transform.parent.Find("PasswordField");
 
                 //randomize password
-                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadPasswords().Length);
+                rnd2 = UnityEngine.Random.Range(0, StaticFunction.getBadPasswords().Length);
 
                 string temp = "";
                 if (StaticFunction.getBadPasswords()[rnd2].Contains('['))
@@ -217,7 +223,7 @@ public class FlagSystem : MonoBehaviour
                 Transform caption = transform.parent.transform.Find("Caption");
                 Transform photo = transform.parent.transform.Find("Photo");
 
-                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodCaptions().Length);
+                rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodCaptions().Length);
                 if (otherPostIndex <= -1)
                 {
                     otherPostIndex = rnd2;
@@ -253,7 +259,7 @@ public class FlagSystem : MonoBehaviour
                 Transform passwordField = transform.parent.Find("PasswordField");
 
                 //randomize password
-                int rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodPasswords().Length);
+                rnd2 = UnityEngine.Random.Range(0, StaticFunction.getGoodPasswords().Length);
                 passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getGoodPasswords()[rnd2];
                 flagIndex = rnd2;
             }
