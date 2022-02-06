@@ -20,7 +20,7 @@ public class Flag : MonoBehaviour
 
     private static int otherPostIndex;
 
-    private void Start()
+    private void Awake()
     {
         parentName = transform.parent.name;
 
@@ -58,7 +58,7 @@ public class Flag : MonoBehaviour
     {
         flaggedItem = true;
         StaticFunction.setErrorNum(StaticFunction.getErrorNum() - 1);
-        Debug.Log("Is flag: " + parentName);
+        Debug.Log("Is flag: " + parentName + " in " + snsName);
 
         if (parentName == "Address")
         {
@@ -143,7 +143,6 @@ public class Flag : MonoBehaviour
 
     public void SetupNonFlaggedItem(int profileNum, int id) 
     {
-        Debug.Log("Is not flag: "+parentName);
         flaggedItem = false;
         if (parentName == "Address")
         {

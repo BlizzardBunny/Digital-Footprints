@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static TutorialPlayer;
 
 public class Submit : MonoBehaviour
 {
@@ -19,32 +20,26 @@ public class Submit : MonoBehaviour
     private int wrongFlags = 0;
     private bool perfectProfile = false;
 
-    public class Dialogue
-    {
-        public string line { get; }
-        public bool allowPlayerControl { get; }
-
-        public Dialogue(string x) => (line, allowPlayerControl) = (x, false);
-        public Dialogue(string x, bool y) => (line, allowPlayerControl) = (x, y);
-    }
-
     private Dialogue[] roundMessagesPerfect = new Dialogue[]
     {
         new Dialogue("Excellent, it seems that you fully grasp how our system works here at Digital Footprints."),
-        new Dialogue("Do be reminded that as you gain trust with the company, you will be given more responsibilities")
+        new Dialogue("Do be reminded that as you gain trust with the company, you will be given more responsibilities"),
+        new Dialogue("Make sure to keep up the good work!")
     };
 
-    //private Dialogue[] roundMessagesGood = new Dialogue[]
-    //{
-    //    new Dialogue("While you did make some mistakes here and there, I hope that this did help you understand how our system works."),
-    //    "Do be reminded that tomorrow, you will be provided with real accounts and as such, mistakes will be penalized."
-    //};
+    private Dialogue[] roundMessagesGood = new Dialogue[]
+    {
+        new Dialogue("While you did make some mistakes here and there, I hope that this did help you understand how our system works."),
+        new Dialogue("Do be reminded that as you gain trust with the company, you will be given more responsibilities"),
+        new Dialogue("I look forward to seeing you improve!")
+    };
 
-    //private static string[] roundMessagesBad = new string[]
-    //{
-    //    "I strongly recommend reviewing today’s work to understand what went wrong.",
-    //    "Do remember that tomorrow, you will be provided with real accounts. Mistakes of this level would not be tolerated."
-    //};
+    private Dialogue[] roundMessagesBad = new Dialogue[]
+    {
+        new Dialogue("I strongly recommend reviewing today’s work to understand what went wrong."),
+        new Dialogue("Do be reminded that as you gain trust with the company, you will be given more responsibilities"),
+        new Dialogue("Please take this time to improve.")
+    };
 
     // Start is called before the first frame update
     void Start()
@@ -125,20 +120,28 @@ public class Submit : MonoBehaviour
         }
         else if (StaticFunction.getProfileNum() == StaticFunction.getTotalProfiles())
         {
+            StaticFunction.dialogueIndex = 0;
+
             TutorialPlayer script = (TutorialPlayer)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(TutorialPlayer));
 
-            if (StaticFunction.getMistakes() == StaticFunction.getTotalProfiles())
+            if (StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
             {
-                //bad dialogue
+                script.run(roundMessagesBad);
             }
             else if (StaticFunction.getMistakes() == 0)
             {
-                //perfect dialogue
+                script.run(roundMessagesPerfect);
             }
             else
             {
-                //good dialogue
+                script.run(roundMessagesGood);
             }
+
+            FlagSystemSetup flagSystem = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
+            flagSystem.ResetCompletely();
+
+            StaticFunction.roundHasStarted = false;
+            StaticFunction.gotoLevelSelect = true;
         }
     }
 
@@ -309,6 +312,6 @@ public class Submit : MonoBehaviour
         }
 
         FlagSystemSetup script = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
-        script.ResetStage();
+        script.ResetRound();
     }
 }

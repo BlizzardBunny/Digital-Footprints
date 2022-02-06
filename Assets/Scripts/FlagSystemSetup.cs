@@ -8,12 +8,17 @@ using TMPro;
 
 public class FlagSystemSetup : MonoBehaviour
 {
-    public Image profilePic;
-    public TextMeshProUGUI profileName;
-    public TextMeshProUGUI profileBio;
+    public Image[] profilePic;
+    public TextMeshProUGUI[] profileName;
+    public TextMeshProUGUI[] profileBio;
 
     // Start is called before the first frame update
     void Start()
+    {
+        ResetCompletely();
+    }
+
+    public void ResetCompletely()
     {
         StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
 
@@ -24,6 +29,7 @@ public class FlagSystemSetup : MonoBehaviour
 
         if (!StaticFunction.roundHasStarted)
         {
+            Debug.Log("ResetCompletely()");
             StaticFunction.clickables.Clear();
             StaticFunction.clickables.TrimExcess();
             StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
@@ -42,7 +48,7 @@ public class FlagSystemSetup : MonoBehaviour
         }
     }
 
-    public void ResetStage()
+    public void ResetRound()
     {
         StaticFunction.roundHasStarted = false;
 
@@ -117,21 +123,33 @@ public class FlagSystemSetup : MonoBehaviour
             StaticFunction.setCurrentProfile(UnityEngine.Random.Range(1, StaticFunction.getNames().Length));
         }
 
-        profileName.text = StaticFunction.getNames()[StaticFunction.getCurrentProfile()];
-        profileBio.text = StaticFunction.getBios()[StaticFunction.getCurrentProfile()];
+        foreach (TextMeshProUGUI profileName in profileName)
+        {
+            profileName.text = StaticFunction.getNames()[StaticFunction.getCurrentProfile()];
+        }
+
+        foreach (TextMeshProUGUI profileBio in profileBio)
+        {
+            profileBio.text = StaticFunction.getBios()[StaticFunction.getCurrentProfile()];
+        }
     }
 
     void SetStage()
     {
-        StaticFunction.editableIsDrawn = false;     
-                
+        StaticFunction.editableIsDrawn = false;
+
+        Debug.Log("Total Errors: " + StaticFunction.getTotalErrors());
+
         for (int i = 0; i < StaticFunction.clickables.Count; i++)
         {
             Flag script = (Flag)StaticFunction.clickables[i].GetComponent(typeof(Flag));
 
             if (i == 0)
             {
-                profilePic.sprite = script.profilePics[StaticFunction.getCurrentProfile()];
+                foreach (Image profilePic in profilePic)
+                {
+                    profilePic.sprite = script.profilePics[StaticFunction.getCurrentProfile()];
+                }
             }
 
             bool isFlaggedItem = false;

@@ -13,8 +13,6 @@ public class TutorialPlayer : MonoBehaviour
     private GameObject dialogue;
     private float typingSpeed = 0.03f;
 
-    private int dialogueIndex;
-
     public class Dialogue
     {
         public string line { get; }
@@ -61,7 +59,6 @@ public class TutorialPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        dialogueIndex = 0;
         world = GameObject.FindGameObjectWithTag("World");
 
         if (SceneManager.GetActiveScene().name.Equals("Tutorial"))
@@ -142,10 +139,9 @@ public class TutorialPlayer : MonoBehaviour
                 Quaternion.identity,
                 world.transform);
         }
-
         Transform textBox = dialogue.transform.Find("BG").Find("Dialogue");
 
-        for (int i = dialogueIndex; i < stageDialogue.Length; i++)
+        for (int i = StaticFunction.dialogueIndex; i < stageDialogue.Length; i++)
         {
             textBox.GetComponent<TMPro.TextMeshProUGUI>().text = "";
 
@@ -153,11 +149,17 @@ public class TutorialPlayer : MonoBehaviour
 
             if (stageDialogue[i].allowPlayerControl)
             {
-                dialogueIndex = i;
+                StaticFunction.dialogueIndex = i;
                 Destroy(dialogue);
                 dialogue = null;
                 break;
             }
+        }
+
+        if (StaticFunction.gotoLevelSelect)
+        {
+            StartOfStage script = (StartOfStage)GameObject.FindGameObjectWithTag("MainCamera").GetComponent(typeof(StartOfStage));
+            script.EndStage();
         }
 
         yield break;

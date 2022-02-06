@@ -209,6 +209,10 @@ public static class StaticFunction
     public static bool tutorialStart = true;
     public static string relativeName = "Auntie";
 
+    //for tutorialplayer
+    public static int dialogueIndex = 0;
+    public static bool gotoLevelSelect = false;
+
     //for cutscenes
     public static string parentName = "";
     public static int flagIndex = -1;
