@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1228960436042544534}
   - component: {fileID: 1228960436042544533}
   - component: {fileID: 1228960436042544532}
-  - component: {fileID: -230640972414948255}
   - component: {fileID: 156965958316708205}
+  - component: {fileID: 5961995984399578033}
   m_Layer: 5
   m_Name: Clickable
   m_TagString: Clickable
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-230640972414948255
+--- !u!114 &156965958316708205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,36 +86,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1228960436042544521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f69bc59770b5fd94b893ecbae60add88, type: 3}
+  m_Script: {fileID: 11500000, guid: f38fb5a20eacec54db27b769f09ba118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editableMAPrefab: {fileID: 4787043458398286025, guid: 8dcbd3ead089a714b87db0fce0fd736a, type: 3}
-  badPosts:
-  - {fileID: 21300000, guid: b52d17e37bc070d42b6620303a6ee829, type: 3}
-  - {fileID: 21300000, guid: c2d2a418365007b40a6439f240ed5872, type: 3}
-  - {fileID: 21300000, guid: 0e1add8703d848d4c85d95d1a52df5db, type: 3}
-  - {fileID: 21300000, guid: 6986397e8f0bb1a47a9c9768c8da341c, type: 3}
-  - {fileID: 21300000, guid: 6aa09bcdd02e3724198f1b6a12b636b8, type: 3}
-  - {fileID: 21300000, guid: 1eaec4a1aac90d34e98f8e996656ad21, type: 3}
-  - {fileID: 21300000, guid: 04d89ec9da6a45c4e9ed7e9b03c5c78c, type: 3}
-  - {fileID: 21300000, guid: 81f78bec8280ab64d874c02cf0e63e83, type: 3}
-  - {fileID: 21300000, guid: c3afaab0e9e0ea54ba623414eaf165ff, type: 3}
-  - {fileID: 21300000, guid: d69754dd4c9b41b4f939d1cbd96a1630, type: 3}
-  - {fileID: 21300000, guid: a0e9c1fd038f94840a13f77126b7d6f9, type: 3}
-  - {fileID: 21300000, guid: 5e2fbf4e7957b4c4a9851e8848ebb5bc, type: 3}
-  goodPosts:
-  - {fileID: 21300000, guid: 9c07d927b814ff9469b16c3c09c5518b, type: 3}
-  - {fileID: 21300000, guid: 9f7b938b4dfd4b64db9bd5d680da0947, type: 3}
-  - {fileID: 21300000, guid: 0bf7239a57c61df479909d30dba20d17, type: 3}
-  - {fileID: 21300000, guid: 44c7c1a0a44715440b7537e5100c63cc, type: 3}
-  - {fileID: 21300000, guid: 3afc833b5ca93fd4b8cf4c91b6ccc9a6, type: 3}
-  - {fileID: 21300000, guid: 713760701db6e33449ae252bb345e531, type: 3}
-  - {fileID: 21300000, guid: ec21f0de7b71162429278790ba8bb98c, type: 3}
-  - {fileID: 21300000, guid: 5883aaafbd1d7cd4d829a61730a0dd0e, type: 3}
-  - {fileID: 21300000, guid: 684832108bb452048b6896a90e6f91c7, type: 3}
-  - {fileID: 21300000, guid: 2ed15bf3dee9a494a939ad0c7a19c820, type: 3}
-  - {fileID: 21300000, guid: fcb256821bdf2db438265f3f042d60b0, type: 3}
-  - {fileID: 21300000, guid: 7d6475f3d6de0394cb0acd208a612f96, type: 3}
+  askButtonPrefab: {fileID: 4004639348999333669, guid: aeae9e6b1ccb4ed4cbf135cabd540da5, type: 3}
+--- !u!114 &5961995984399578033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228960436042544521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9a115709ef1614bb0c96803f2f21d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   profilePics:
   - {fileID: 21300000, guid: 2dd04ee0c479a9341be50a2957950840, type: 3}
   - {fileID: 21300000, guid: 4b81c6609fa4e0f438324cc8d53c9d1f, type: 3}
@@ -132,16 +118,31 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 55decb9b062e3dc4b85bab6de6c3f602, type: 3}
   - {fileID: 21300000, guid: 1b48596e62dfb3c428c64abfe36d45ab, type: 3}
   - {fileID: 21300000, guid: c69ee77b1cece754cb2d78970d6da27a, type: 3}
---- !u!114 &156965958316708205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1228960436042544521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38fb5a20eacec54db27b769f09ba118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  askButtonPrefab: {fileID: 4004639348999333669, guid: aeae9e6b1ccb4ed4cbf135cabd540da5, type: 3}
+  goodPosts:
+  - {fileID: 21300000, guid: 9c07d927b814ff9469b16c3c09c5518b, type: 3}
+  - {fileID: 21300000, guid: 9f7b938b4dfd4b64db9bd5d680da0947, type: 3}
+  - {fileID: 21300000, guid: 0bf7239a57c61df479909d30dba20d17, type: 3}
+  - {fileID: 21300000, guid: 44c7c1a0a44715440b7537e5100c63cc, type: 3}
+  - {fileID: 21300000, guid: 3afc833b5ca93fd4b8cf4c91b6ccc9a6, type: 3}
+  - {fileID: 21300000, guid: 713760701db6e33449ae252bb345e531, type: 3}
+  - {fileID: 21300000, guid: ec21f0de7b71162429278790ba8bb98c, type: 3}
+  - {fileID: 21300000, guid: 5883aaafbd1d7cd4d829a61730a0dd0e, type: 3}
+  - {fileID: 21300000, guid: 684832108bb452048b6896a90e6f91c7, type: 3}
+  - {fileID: 21300000, guid: 2ed15bf3dee9a494a939ad0c7a19c820, type: 3}
+  - {fileID: 21300000, guid: fcb256821bdf2db438265f3f042d60b0, type: 3}
+  - {fileID: 21300000, guid: 7d6475f3d6de0394cb0acd208a612f96, type: 3}
+  badPosts:
+  - {fileID: 21300000, guid: b52d17e37bc070d42b6620303a6ee829, type: 3}
+  - {fileID: 21300000, guid: c2d2a418365007b40a6439f240ed5872, type: 3}
+  - {fileID: 21300000, guid: 0e1add8703d848d4c85d95d1a52df5db, type: 3}
+  - {fileID: 21300000, guid: 6986397e8f0bb1a47a9c9768c8da341c, type: 3}
+  - {fileID: 21300000, guid: 6aa09bcdd02e3724198f1b6a12b636b8, type: 3}
+  - {fileID: 21300000, guid: 1eaec4a1aac90d34e98f8e996656ad21, type: 3}
+  - {fileID: 21300000, guid: 04d89ec9da6a45c4e9ed7e9b03c5c78c, type: 3}
+  - {fileID: 21300000, guid: 81f78bec8280ab64d874c02cf0e63e83, type: 3}
+  - {fileID: 21300000, guid: c3afaab0e9e0ea54ba623414eaf165ff, type: 3}
+  - {fileID: 21300000, guid: d69754dd4c9b41b4f939d1cbd96a1630, type: 3}
+  - {fileID: 21300000, guid: a0e9c1fd038f94840a13f77126b7d6f9, type: 3}
+  - {fileID: 21300000, guid: 5e2fbf4e7957b4c4a9851e8848ebb5bc, type: 3}
+  editableMAPrefab: {fileID: 4787043458398286025, guid: 8dcbd3ead089a714b87db0fce0fd736a, type: 3}
+  pointersPanel: {fileID: 0}

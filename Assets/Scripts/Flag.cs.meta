@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: f69bc59770b5fd94b893ecbae60add88
+guid: ca9a115709ef1614bb0c96803f2f21d2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - editableMAPrefab: {fileID: 1265099658620451867, guid: 6f2c568ac4503b34789c4b6d327b948f, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

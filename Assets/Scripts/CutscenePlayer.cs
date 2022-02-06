@@ -66,14 +66,7 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(true, true, "And that's how I got into the Data Privacy business."),
     };
 
-    private Dialogue[] test = new Dialogue[] //bool is true if player is speaking, string is the line to be said
-    {
-        new Dialogue(false, StaticFunction.getNames()[StaticFunction.getCurrentProfile()]),
-        new Dialogue(true, StaticFunction.parentName),
-        new Dialogue(false, "isFlag: " + StaticFunction.isFlag.ToString()),
-        new Dialogue(true, true, "POGGGG")
-    };
-
+    //address
     private Dialogue[] goodAddress = new Dialogue[]
     {
         new Dialogue(true,
@@ -84,15 +77,39 @@ public class CutscenePlayer : MonoBehaviour
             new string[]{"It's no problem.", "It's alright. I'm just glad you're asking!", "You're clearly rude, and I'll be reporting you."})
     };
 
-    // to be edited
     private Dialogue[] badAddress = new Dialogue[]
     {
         new Dialogue(true,
             new string[]{"Maybe you shouldn't be posting your address online.", "Are you sure it's safe to have your address on your profile?", "I think putting your address online is pretty irresponsible."},
-            new string[]{"Really? But then how would people know where to visit me?", "Is it really that bad? I wanted the specialized ads.", ""}),
+            new string[]{"Really? But then how would people know where to visit me?", "Is it really that bad? I just wanted the specialized ads.", "Excuse me!? I can do whatever I want, thank you very much!!"}),
         new Dialogue(true, StaticFunction.getCurrentLevel(),
-            new string[]{"I see! My mistake.", "You're right. I'm sorry.", "You're clearly wrong tho."},
-            new string[]{"It's no problem.", "It's alright. I'm just glad you're asking!", "You're clearly rude, and I'll be reporting you."})
+            new string[]{"Showing your exact address online puts you at risk of identity theft, or worse, physical harm.", "Nevermind. You're right. I'm sorry.", "If you won't listen to me, why're you even here?"},
+            new string[]{"Oh my god! I didn't know that! Please include it in your report so I don't forget to change it later.", "It's no problem, I guess?", "(Your customer has left the chat)"})
+    };
+
+    //post
+    private Dialogue[] badPostDialogue = new Dialogue[]
+    {
+        new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{"Showing your exact address online puts you at risk of identity theft, or worse, physical harm.", "Nevermind. You're right. I'm sorry.", "If you won't listen to me, why're you even here?"},
+            new string[]{"Oh my god! I didn't know that! Please include it in your report so I don't forget to change it later.", "It's no problem, I guess?", "(Your customer has left the chat)"})
+        //"My new home! #Goals #HomeOwner",
+        //"Off to watch a movie at 8 PM! Gonna be a relaxing afternoon! #SelfCare #MovieNight",
+        //"Heading to Tokyo for a 2 week vacation! #SushiTime #R&R",
+        //"Finally got my Driver’s License! #LifeIsAHighway #BeepBeep",
+        //"Check out Globalquiz.org for free and fun quizzes! Just need email and phone number!",
+        //"Just got my new credit card!!! #GOALS",
+        //"I love my car!!!",
+        //"New phone plannnnn!!! Hmu at 209-470-0522",
+        //"Doing some window shopping! Won’t be home until 5 :3",
+        //"Off on a business trip! Gonna be at 3686 Chandler Drive for the first time!",
+        //"My son’s finally enrolled! Enjoy school!!!",
+        //"Thanks @Ray for taking care of my home while I’m out!"
+    };
+
+    private Dialogue[] goodPostDialogue = new Dialogue[]
+    {
+
     };
 
     // Start is called before the first frame update
@@ -121,14 +138,15 @@ public class CutscenePlayer : MonoBehaviour
             StartCoroutine(run(getCorrectDialogue()));
         }
     }
-
     Dialogue[] getCorrectDialogue()
     {
+        StaticFunction.reloadSameStage = true;
+
         if (StaticFunction.parentName.Equals("Address"))
         {
             if (StaticFunction.isFlag)
             {
-                
+                return badAddress;
             }
             else
             {
@@ -139,11 +157,11 @@ public class CutscenePlayer : MonoBehaviour
         {
             if (StaticFunction.isFlag)
             {
-
+                return new Dialogue[] { badPostDialogue[StaticFunction.flagIndex] };
             }
             else
             {
-
+                return new Dialogue[] { goodPostDialogue[StaticFunction.flagIndex] };
             }
         }
         else if (StaticFunction.parentName.Equals("PrivacyWindow"))
@@ -168,6 +186,8 @@ public class CutscenePlayer : MonoBehaviour
 
             }
         }
+
+        return null;
     }
 
     IEnumerator run(Dialogue[] dialogue)
@@ -271,6 +291,11 @@ public class CutscenePlayer : MonoBehaviour
 
                 customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = customerDetails.transform.Find("Pic").GetComponent<Image>().sprite;
                 customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(dialogue[i].line);
+                
+                if (dialogue[i].line.StartsWith("("))
+                {
+                    customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().fontStyle = TMPro.FontStyles.Italic;
+                }
 
                 yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
                 yield return new WaitForFixedUpdate(); //skip frame
@@ -434,6 +459,11 @@ public class CutscenePlayer : MonoBehaviour
     public void nextScene()
     {
         StartCoroutine(fadeOut(currDialogue[currLine].sceneToTransitionTo));
+    }
+
+    private void Update()
+    {
+        transform.SetAsLastSibling();
     }
 }
 

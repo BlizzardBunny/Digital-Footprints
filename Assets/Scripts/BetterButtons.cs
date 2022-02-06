@@ -36,11 +36,11 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Flag script = (Flag)transform.GetComponent(typeof(Flag));
+
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            FlagSystem script = (FlagSystem)transform.GetComponent(typeof(FlagSystem));
-
-            script.Flag();
+            script.FlagItem();
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
@@ -50,12 +50,24 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 Quaternion.identity,
                 world);
 
-            FlagSystem script = (FlagSystem)transform.GetComponent(typeof(FlagSystem));
+            try
+            {
+                if (transform.parent.parent.name.Equals("PrivacyWindow"))
+                {
+                    StaticFunction.parentName = "PrivacyWindow";
+                }
+                else
+                {
+                    StaticFunction.parentName = parentName;
+                }
+            }
+            catch
+            {
+                StaticFunction.parentName = parentName;
+            }
 
-            StaticFunction.parentName = parentName;
-            StaticFunction.flagIndex = script.getFlagIndex();
-            StaticFunction.rnd2 = script.getRnd2();
-            StaticFunction.isFlag = script.isFlag();
+            StaticFunction.flagIndex = script.flagIndex;
+            StaticFunction.isFlag = script.flaggedItem;
         }
     }
 

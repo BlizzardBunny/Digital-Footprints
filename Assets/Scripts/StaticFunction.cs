@@ -194,6 +194,12 @@ public static class StaticFunction
     private static int currentProfile = 0;
     private static string currentLevel = "AskDialogue";
 
+    //flag system setup
+    public static List<GameObject> clickables = new List<GameObject>();
+    public static List<int> clickableIDs = new List<int>();
+    public static List<int> flagIndexes = new List<int>();
+    public static bool roundHasStarted = false;
+
     public static bool editableIsDrawn = false;
     public static int dialogueLineCounter = 0;
     public static int choiceIndex = 0;
@@ -205,20 +211,20 @@ public static class StaticFunction
 
     //for cutscenes
     public static string parentName = "";
-    public static int rnd2 = -1;
     public static int flagIndex = -1;
     public static bool isFlag = false;
+    public static bool reloadSameStage = false;
 
     public static string updateStrings(string s)
     {
-        if (s.Contains("$r")) //update string with relativeName
+        string ret = s;
+
+        if (ret.Contains("$r")) //update string with relativeName
         {
-            return s.Replace("$r", relativeName);
+            ret = ret.Replace("$r", relativeName);
         }
-        else
-        {
-            return s;
-        }
+
+        return ret;
     }
 
     public static void resetVals(int numOfProfiles,int numOfErrors)

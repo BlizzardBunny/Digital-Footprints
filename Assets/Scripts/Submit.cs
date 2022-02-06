@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Submit : MonoBehaviour
-{    
+{
     public GameObject confirmationPrefab;
     public GameObject dialoguePrefab;
     public GameObject mistakeMessagePrefab;
@@ -167,11 +167,11 @@ public class Submit : MonoBehaviour
 
                 foreach (GameObject clickable in GameObject.FindGameObjectsWithTag("Clickable"))
                 {
-                    FlagSystem script = (FlagSystem)clickable.GetComponent(typeof(FlagSystem));
+                    Flag script = (Flag)clickable.GetComponent(typeof(Flag));
 
-                    if ((clickable.transform.parent.name == itemName) && (script.getSNSName() == snsName))
+                    if ((script.parentName == itemName) && (script.snsName == snsName))
                     {
-                        if (!script.isFlag())
+                        if (!script.flaggedItem)
                         {
                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                             MakeMistakeMessage(itemName + " is not a flag.");
@@ -189,11 +189,11 @@ public class Submit : MonoBehaviour
                         }
                         else if (itemName.StartsWith("Post"))
                         {
-                            int flagIndex = script.getFlagIndex();
+                            int flagIndex = script.flagIndex;
 
                             if (flagIndex <= -1)
                             {
-                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": flagindex error");
+                                Debug.Log(script.snsName + " " + itemName + ", " + flagName + ": flagindex error");
                             }
                             else if (flagName != StaticFunction.getCaptionFlags()[flagIndex])
                             {
@@ -235,11 +235,11 @@ public class Submit : MonoBehaviour
                         }
                         else if (itemName == "Password")
                         {
-                            int flagIndex = script.getFlagIndex();
+                            int flagIndex = script.flagIndex;
 
                             if (flagIndex <= -1)
                             {
-                                Debug.Log(script.getSNSName() + " " + itemName + ", " + flagName + ": flagindex error");
+                                Debug.Log(script.snsName + " " + itemName + ", " + flagName + ": flagindex error");
                             }
                             else if (flagName != StaticFunction.getPasswordFlags()[flagIndex])
                             {
@@ -285,12 +285,6 @@ public class Submit : MonoBehaviour
         //setInstanceCounter
         StaticFunction.instanceCounter = 0;
 
-        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Clickable"))
-        {
-            FlagSystem script = (FlagSystem) x.GetComponent(typeof(FlagSystem));
-            script.ResetStage();
-        }
-
         Animator mainWindowAnim = GameObject.FindGameObjectWithTag("MainWindow").GetComponent<Animator>();
         mainWindowAnim.SetBool("isMinimized", true);
 
@@ -313,5 +307,8 @@ public class Submit : MonoBehaviour
         {
             Destroy(x);
         }
+
+        FlagSystemSetup script = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
+        script.ResetStage();
     }
 }
