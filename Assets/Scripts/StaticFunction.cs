@@ -209,6 +209,9 @@ public static class StaticFunction
     public static bool tutorialStart = true;
     public static string relativeName = "Auntie";
 
+    //for tutorial
+    public static bool tutorialCanSubmit = false;
+
     //for tutorialplayer
     public static int dialogueIndex = 0;
     public static bool gotoLevelSelect = false;

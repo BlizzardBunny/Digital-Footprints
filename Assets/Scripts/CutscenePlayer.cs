@@ -115,6 +115,11 @@ public class CutscenePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         overlay.transform.Find("Blackscreen").GetComponent<Animator>().SetBool("isFadingIn", true);
 
         currProfile = StaticFunction.getCurrentProfile();
@@ -127,7 +132,6 @@ public class CutscenePlayer : MonoBehaviour
         {
             pic.GetComponent<Image>().sprite = relativePic;
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.relativeName;
-            StaticFunction.setCurrentLevel("Stage 1");
             StaticFunction.reset();
             StartCoroutine(run(introDialogue));
         }
@@ -138,6 +142,7 @@ public class CutscenePlayer : MonoBehaviour
             StartCoroutine(run(getCorrectDialogue()));
         }
     }
+
     Dialogue[] getCorrectDialogue()
     {
         StaticFunction.reloadSameStage = true;
@@ -289,7 +294,7 @@ public class CutscenePlayer : MonoBehaviour
                     Quaternion.identity,
                     messagesPanel.transform.parent);
 
-                customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = customerDetails.transform.Find("Pic").GetComponent<Image>().sprite;
+                customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = profilePics[StaticFunction.getCurrentProfile()];
                 customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(dialogue[i].line);
                 
                 if (dialogue[i].line.StartsWith("("))
@@ -315,6 +320,11 @@ public class CutscenePlayer : MonoBehaviour
             }       
 
             StaticFunction.dialogueLineCounter++;
+        }
+
+        if (StaticFunction.tutorialStart)
+        {
+            StaticFunction.setCurrentLevel("Stage 1");
         }
 
         StaticFunction.tutorialStart = false;
@@ -417,8 +427,13 @@ public class CutscenePlayer : MonoBehaviour
             Quaternion.identity,
             messagesPanel.transform.parent);
 
-        customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = relativePic;
+        customerMessage.transform.Find("Pic").GetComponent<Image>().sprite = profilePics[StaticFunction.getCurrentProfile()];
         customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.updateStrings(currDialogue[currLine].answers[StaticFunction.choiceIndex]);
+
+        if (currDialogue[currLine].answers[StaticFunction.choiceIndex].StartsWith("("))
+        {
+            customerMessage.transform.Find("Background").Find("Message").GetComponent<TMPro.TextMeshProUGUI>().fontStyle = TMPro.FontStyles.Italic;
+        }
 
         yield return new WaitForFixedUpdate(); //wait for Background to update size acc to text
         yield return new WaitForFixedUpdate(); //skip frame
@@ -439,6 +454,7 @@ public class CutscenePlayer : MonoBehaviour
         if (currDialogue[currLine].sceneToTransitionTo != null)
         {
             StaticFunction.dialogueLineCounter++;
+            StaticFunction.setCurrentLevel(currDialogue[currLine].sceneToTransitionTo);
             nextButton.transform.SetAsLastSibling();
             StopAllCoroutines();
         }

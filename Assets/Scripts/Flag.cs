@@ -9,19 +9,20 @@ public class Flag : MonoBehaviour
     public Sprite[] goodPosts, badPosts;
 
     public GameObject editableMAPrefab;
-    public GameObject pointersPanel;
 
     public bool flaggedItem { get; private set; }
     public string parentName { get; private set; }
     public int flagIndex { get; private set; }
     public string snsName { get; private set; }
 
-    private GameObject editableMA;    
+    private GameObject editableMA;
+    private GameObject pointersPanel;
 
     private static int otherPostIndex;
 
     private void Awake()
     {
+        pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
         parentName = transform.parent.name;
 
         Transform t = transform.parent;

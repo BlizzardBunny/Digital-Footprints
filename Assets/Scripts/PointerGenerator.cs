@@ -316,6 +316,13 @@ public class PointerGenerator : MonoBehaviour
         yield return new WaitForSeconds(1f);
         StaticFunction.resetVals(3, 1);
         StaticFunction.setCurrentLevel("AskDialogue");
+        StaticFunction.roundHasStarted = false;
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+        {
+            Destroy(x);
+        }
+
         SceneManager.LoadScene("AskDialogue");
     }
 }

@@ -7,6 +7,7 @@ public class Ask : MonoBehaviour
 {
     public void ask()
     {
+        StaticFunction.dialogueLineCounter = 0;
         SceneManager.LoadScene("AskDialogue");
     }
 }

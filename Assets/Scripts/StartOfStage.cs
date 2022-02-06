@@ -14,11 +14,14 @@ public class StartOfStage : MonoBehaviour
 
         if (GameObject.FindGameObjectsWithTag("World").Length == 0)
         {
-            Instantiate(
+            GameObject world = Instantiate(
                 worldPrefab,
                 Vector3.zero,
                 Quaternion.identity,
                 null);
+
+            FlagSystemSetup script = (FlagSystemSetup)world.GetComponent(typeof(FlagSystemSetup));
+            script.ResetCompletely();
         }
     }
 

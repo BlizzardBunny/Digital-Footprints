@@ -140,6 +140,7 @@ public class Submit : MonoBehaviour
             FlagSystemSetup flagSystem = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
             flagSystem.ResetCompletely();
 
+            StaticFunction.reloadSameStage = false;
             StaticFunction.roundHasStarted = false;
             StaticFunction.gotoLevelSelect = true;
         }

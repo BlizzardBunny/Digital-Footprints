@@ -22,7 +22,7 @@ public class FlagSystemSetup : MonoBehaviour
     {
         StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
 
-        if (!StaticFunction.getCurrentLevel().Equals("Tutorial"))
+        if (!SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {
             StaticFunction.tutorialStart = false;
         }

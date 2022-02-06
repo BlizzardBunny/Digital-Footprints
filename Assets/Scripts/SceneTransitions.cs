@@ -103,6 +103,7 @@ public class SceneTransitions : MonoBehaviour
     //Exits the game
     public void ExitGame()
     {
+        StaticFunction.roundHasStarted = false;
         Application.Quit();
     }
 }

@@ -158,6 +158,19 @@ public class TutorialPlayer : MonoBehaviour
 
         if (StaticFunction.gotoLevelSelect)
         {
+            if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
+            {
+                StaticFunction.setCurrentLevel("Stage 1");
+            }
+            else if (SceneManager.GetActiveScene().name.Equals("Stage 2"))
+            {
+                StaticFunction.setCurrentLevel("Stage 2");
+            }
+            else if (SceneManager.GetActiveScene().name.Equals("Stage 3"))
+            {
+                StaticFunction.setCurrentLevel("Stage 3");
+            }
+
             StartOfStage script = (StartOfStage)GameObject.FindGameObjectWithTag("MainCamera").GetComponent(typeof(StartOfStage));
             script.EndStage();
         }

@@ -40,34 +40,48 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            script.FlagItem();
+            if (StaticFunction.tutorialStart)
+            {
+                if (!StaticFunction.tutorialCanSubmit)
+                {
+                    script.FlagItem();
+                    StaticFunction.tutorialCanSubmit = true;
+                }
+            }
+            else
+            {
+                script.FlagItem();
+            }
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            askButton = Instantiate(
+            if (!StaticFunction.tutorialStart)
+            {
+                askButton = Instantiate(
                 askButtonPrefab,
                 Input.mousePosition,
                 Quaternion.identity,
                 world);
 
-            try
-            {
-                if (transform.parent.parent.name.Equals("PrivacyWindow"))
+                try
                 {
-                    StaticFunction.parentName = "PrivacyWindow";
+                    if (transform.parent.parent.name.Equals("PrivacyWindow"))
+                    {
+                        StaticFunction.parentName = "PrivacyWindow";
+                    }
+                    else
+                    {
+                        StaticFunction.parentName = parentName;
+                    }
                 }
-                else
+                catch
                 {
                     StaticFunction.parentName = parentName;
                 }
-            }
-            catch
-            {
-                StaticFunction.parentName = parentName;
-            }
 
-            StaticFunction.flagIndex = script.flagIndex;
-            StaticFunction.isFlag = script.flaggedItem;
+                StaticFunction.flagIndex = script.flagIndex;
+                StaticFunction.isFlag = script.flaggedItem;
+            }
         }
     }
 
