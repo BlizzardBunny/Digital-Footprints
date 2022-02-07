@@ -71,9 +71,9 @@ public class CutscenePlayer : MonoBehaviour
     {
         new Dialogue(true,
             new string[]{"Maybe you shouldn't be posting your address online.", "Are you sure it's safe to have your address on your profile?", "I think putting your address online is pretty irresponsible."},
-            new string[]{"What do you mean? I didn't post my exact address...", "I'm pretty sure it's fine. I didn't put my exact address.", "*I* think it's fine as long as I don't put my exact address. People don't even know what street I live on!"}),
+            new string[]{"What do you mean? I didn't post my exact address...", "I'm pretty sure it's fine. I didn't put my exact address.", "*I* think it's fine as long as I don't give my exact address. People don't even know what street I live on!"}),
         new Dialogue(true, StaticFunction.getCurrentLevel(),
-            new string[]{"I see! My mistake.", "You're right. I'm sorry.", "You're clearly wrong tho."},
+            new string[]{"I see! My mistake.", "You're right. I'm sorry.", "You're clearly wrong though."},
             new string[]{"It's no problem.", "It's alright. I'm just glad you're asking!", "You're clearly rude, and I'll be reporting you."})
     };
 
@@ -83,17 +83,31 @@ public class CutscenePlayer : MonoBehaviour
             new string[]{"Maybe you shouldn't be posting your address online.", "Are you sure it's safe to have your address on your profile?", "I think putting your address online is pretty irresponsible."},
             new string[]{"Really? But then how would people know where to visit me?", "Is it really that bad? I just wanted the specialized ads.", "Excuse me!? I can do whatever I want, thank you very much!!"}),
         new Dialogue(true, StaticFunction.getCurrentLevel(),
-            new string[]{"Showing your exact address online puts you at risk of identity theft, or worse, physical harm.", "Nevermind. You're right. I'm sorry.", "If you won't listen to me, why're you even here?"},
-            new string[]{"Oh my god! I didn't know that! Please include it in your report so I don't forget to change it later.", "It's no problem, I guess?", "(Your customer has left the chat)"})
+            new string[]{"Showing your exact address online puts you at risk of identity theft, or worse, physical harm.", "You're right. Nevermind. I'm sorry.", "If you won't listen to me, why're you even here?"},
+            new string[]{"Oh my god! I didn't know that! Please include it in your report so I don't forget to change it later.", "Whatever, I guess.", "(Your customer has left the chat)"})
     };
 
     //post
-    private Dialogue[] badPostDialogue = new Dialogue[]
+    private Dialogue[][] badPostDialogue = new Dialogue[][]
     {
-        new Dialogue(true, StaticFunction.getCurrentLevel(),
-            new string[]{"Showing your exact address online puts you at risk of identity theft, or worse, physical harm.", "Nevermind. You're right. I'm sorry.", "If you won't listen to me, why're you even here?"},
-            new string[]{"Oh my god! I didn't know that! Please include it in your report so I don't forget to change it later.", "It's no problem, I guess?", "(Your customer has left the chat)"})
-        //"My new home! #Goals #HomeOwner",
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{"Congratulations on your new home! But I don't think it's wise to post a pic of your house number and street name.", "You do realize you technically just posted your address on a public post, right?", "You shouldn't have posted this picture of your house number."},
+            new string[]{"Oh really? How so?", "Of course I do! I'm not stupid! I wanted to show off to my friends!", "What's wrong with showing off my new place to my online friends? I worked hard for this house, you know."}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{"Now anyone could just show up to your house whenever. Don't you think it's kind of a dumb move?", "It shows exactly where your house is and what it looks like, which is really dangerous.", "You know what. Nevermind."},
+            new string[]{"Well you don't have to be so rude about it!!", "I never thought of it like that!! Please remind me to change it later.", "?????"})
+        },
+        new Dialogue[] //to be edited
+        {
+            new Dialogue(true,
+            new string[]{"It's probably not a good idea.", "You do realize you technically just posted your address on a public post, right?", "You shouldn't have posted this picture of your house number."},
+            new string[]{"Oh really? How so?", "Of course I do! I'm not stupid! I wanted to show off to my friends!", "What's wrong with showing off my new place to my online friends? I worked hard for this house, you know."}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{"Now anyone could just show up to your house whenever. Don't you think this post was kind of a dumb move?", "It shows exactly where your house is and what it looks like, which is really dangerous.", "You know what. Nevermind."},
+            new string[]{"Well you don't have to be so rude about it!!", "I never thought of it like that!! Please remind me to change it later.", "?????"})
+        }
         //"Off to watch a movie at 8 PM! Gonna be a relaxing afternoon! #SelfCare #MovieNight",
         //"Heading to Tokyo for a 2 week vacation! #SushiTime #R&R",
         //"Finally got my Driver’s License! #LifeIsAHighway #BeepBeep",
@@ -162,7 +176,7 @@ public class CutscenePlayer : MonoBehaviour
         {
             if (StaticFunction.isFlag)
             {
-                return new Dialogue[] { badPostDialogue[StaticFunction.flagIndex] };
+                return badPostDialogue[StaticFunction.flagIndex];
             }
             else
             {
