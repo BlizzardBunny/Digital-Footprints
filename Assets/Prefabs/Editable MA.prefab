@@ -301,7 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102ef989ad61c334897938d6967451e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reportEntryPrefab: {fileID: 1151373948735381292, guid: 695788cc385bad9449778a7ee9316dc5, type: 3}
+  reportEntryPrefab: {fileID: 4551514131692188182, guid: 695788cc385bad9449778a7ee9316dc5, type: 3}
+  snsLogos:
+  - {fileID: 21300000, guid: 3663527dfad56554095b4947a0a83371, type: 3}
+  - {fileID: 21300000, guid: 065c13d5d4fb4d14b8d67f673d91cf12, type: 3}
+  - {fileID: 21300000, guid: 5f61b2f4bbd8ccf40a898aa92db8f4af, type: 3}
 --- !u!1 &4787043459449853499
 GameObject:
   m_ObjectHideFlags: 0
