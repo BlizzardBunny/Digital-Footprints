@@ -34,7 +34,7 @@ public class MakeReportEntry : MonoBehaviour
         if (StaticFunction.tutorialStart)
         {
             PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
-
+            StaticFunction.tutorialCanSubmit = true;
             script.doubleCheck(reportDetails[1]);
         }
 
@@ -86,7 +86,7 @@ public class MakeReportEntry : MonoBehaviour
         if (StaticFunction.tutorialStart)
         {
             PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
-
+            StaticFunction.tutorialCanSubmit = false;
             script.toggleSubmitButton();
         }
 

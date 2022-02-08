@@ -219,6 +219,7 @@ public class Flag : MonoBehaviour
                 if (!StaticFunction.editableIsDrawn)
                 {
                     script.correctItem(transform, flagIndex);
+
                 }
             }
         }

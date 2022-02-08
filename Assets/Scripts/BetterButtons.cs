@@ -45,7 +45,7 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 if (!StaticFunction.tutorialCanSubmit)
                 {
                     script.FlagItem();
-                    StaticFunction.tutorialCanSubmit = true;
+                    //StaticFunction.tutorialCanSubmit = true;
                 }
             }
             else
