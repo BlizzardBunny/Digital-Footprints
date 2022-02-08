@@ -55,7 +55,15 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (!StaticFunction.tutorialStart)
+            if (GameObject.FindGameObjectsWithTag("AskButton").Length > 0)
+            {
+                foreach (GameObject x in GameObject.FindGameObjectsWithTag("AskButton"))
+                {
+                    Destroy(x);
+                }
+            }
+
+            if (!StaticFunction.tutorialStart && (parentName.Equals("Address")))
             {
                 askButton = Instantiate(
                 askButtonPrefab,

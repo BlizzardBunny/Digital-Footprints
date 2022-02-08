@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2319841766846227761}
   m_Layer: 5
   m_Name: AskButton
-  m_TagString: Untagged
+  m_TagString: AskButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,10 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1668928889d31e40a3863cdcc10ab88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  siblings:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &4004639349448494308
 GameObject:
   m_ObjectHideFlags: 0
