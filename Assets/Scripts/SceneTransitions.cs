@@ -14,6 +14,7 @@ public class SceneTransitions : MonoBehaviour
     {
         if (NextLevelButton != null)
         {
+            //if the player's on level 3 or failed the stage, don't let them go to the next level
             if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
             {
                 NextLevelButton.enabled = false;
