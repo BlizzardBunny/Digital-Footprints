@@ -14,7 +14,7 @@ public class SceneTransitions : MonoBehaviour
     {
         if (NextLevelButton != null)
         {
-            if (StaticFunction.getCurrentLevel() == "Stage 3")
+            if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
             {
                 NextLevelButton.enabled = false;
                 NextLevelButton.GetComponentInChildren<Text>().text = "";
@@ -23,7 +23,7 @@ public class SceneTransitions : MonoBehaviour
             else
             {
                 NextLevelButton.enabled = true;
-                NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";
+                NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";                    
             }
         }
     }
@@ -60,11 +60,12 @@ public class SceneTransitions : MonoBehaviour
     //Loads the end screen where you can select whether to move to next level, restart level, or go to main menu
     public static void LevelEnd()
     {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("LevelSelect");        
     }
     //This is when you click on next level at the end screen
     public static void LoadLevel()
     {
+
         string currLevel = StaticFunction.getCurrentLevel();
         if (currLevel == "Stage 1")
         {
