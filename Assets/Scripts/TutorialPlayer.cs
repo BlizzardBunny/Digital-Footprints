@@ -131,6 +131,11 @@ public class TutorialPlayer : MonoBehaviour
 
     IEnumerator runStage(Dialogue[] stageDialogue)
     {
+        if (StaticFunction.getProfileNum() == 0)
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject.FindGameObjectWithTag("Blackscreen").transform.SetAsFirstSibling();
+        }
         if (dialogue == null)
         {
             dialogue = Instantiate(
@@ -158,6 +163,7 @@ public class TutorialPlayer : MonoBehaviour
 
         if (StaticFunction.gotoLevelSelect)
         {
+            GameObject.FindGameObjectWithTag("Blackscreen").transform.SetAsLastSibling();
             if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
             {
                 StaticFunction.setCurrentLevel("Stage 1");
