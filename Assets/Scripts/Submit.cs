@@ -124,7 +124,7 @@ public class Submit : MonoBehaviour
 
             TutorialPlayer script = (TutorialPlayer)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(TutorialPlayer));
 
-            if (StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
+            if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
             {
                 script.run(roundMessagesBad);
             }

@@ -15,11 +15,23 @@ public class SceneTransitions : MonoBehaviour
         if (NextLevelButton != null)
         {
             //if the player's on level 3 or failed the stage, don't let them go to the next level
-            if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
+            if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
             {
                 NextLevelButton.enabled = false;
                 NextLevelButton.GetComponentInChildren<Text>().text = "";
                 NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0);
+
+                foreach(GameObject x in GameObject.FindGameObjectsWithTag("LevelTitle"))
+                {
+                    if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
+                    {
+                        x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Failed";
+                    }
+                    else
+                    {
+                        x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Complete";
+                    }
+                }
             }
             else
             {

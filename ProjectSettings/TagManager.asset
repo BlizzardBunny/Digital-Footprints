@@ -33,6 +33,7 @@ TagManager:
   - PointersPanel
   - Dialogue
   - AskButton
+  - LevelTitle
   layers:
   - Default
   - TransparentFX

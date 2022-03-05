@@ -1161,7 +1161,7 @@ GameObject:
   - component: {fileID: 1538446869}
   m_Layer: 5
   m_Name: LevelComplete
-  m_TagString: Untagged
+  m_TagString: LevelTitle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
