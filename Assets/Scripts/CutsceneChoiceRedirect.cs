@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CutsceneChoiceRedirect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -57,15 +58,17 @@ public class CutsceneChoiceRedirect : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log(StaticFunction.reloadSameStage);
-
             if (transform.name.Contains("Choice"))
             {
                 acceptChoice();
             }
-            else
+            else if (transform.name.Equals("Next"))
             {
                 nextScene();
+            }
+            else
+            {
+                SceneManager.LoadScene(StaticFunction.getCurrentLevel());
             }
         }
     }

@@ -24,7 +24,7 @@ public class FlagSystemSetup : MonoBehaviour
 
         if (!SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {
-            StaticFunction.tutorialStart = false;
+            StaticFunction.tutorialStart = false; 
         }
 
         if (!StaticFunction.roundHasStarted)
@@ -120,7 +120,14 @@ public class FlagSystemSetup : MonoBehaviour
         }
         else
         {
-            StaticFunction.setCurrentProfile(UnityEngine.Random.Range(1, StaticFunction.getNames().Length));
+            int rndNum = UnityEngine.Random.Range(1, StaticFunction.getNames().Length);
+
+            while (rndNum == StaticFunction.getCurrentProfile())
+            {
+                rndNum = UnityEngine.Random.Range(1, StaticFunction.getNames().Length);
+            }
+
+            StaticFunction.setCurrentProfile(rndNum);
         }
 
         foreach (TextMeshProUGUI profileName in profileName)

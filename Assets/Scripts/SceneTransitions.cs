@@ -51,11 +51,45 @@ public class SceneTransitions : MonoBehaviour
         StaticFunction.resetVals(3, 1);
         StaticFunction.instanceCounter = 0;
         SceneManager.LoadScene(StaticFunction.getCurrentLevel());
+
+        //set currlevel to the level after this one
+        string nextLevel = "";
+        string currLevel = StaticFunction.getCurrentLevel();
+        if (currLevel.Equals("AskDialogue"))
+        {
+            if (StaticFunction.tutorialStart)
+            {
+                nextLevel = "Tutorial";
+            }
+            else
+            {
+
+            }
+
+            StaticFunction.setCurrentLevel(nextLevel);
+        }
         StopCoroutine(fadeOut);
     }
     //Returns to the Main Menu
     public void returnToMainMenu()
     {
+        if (StaticFunction.tutorialStart)
+        {
+            StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            if (!SceneManager.GetActiveScene().name.Equals("AskDialogue"))
+            {
+                StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
+            }
+        }
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+        {
+            Destroy(x);
+        }
+
         SceneManager.LoadScene("MainMenu");
     }
     //Loads the end screen where you can select whether to move to next level, restart level, or go to main menu
