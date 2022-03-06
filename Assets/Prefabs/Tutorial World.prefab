@@ -9422,7 +9422,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1716233963914062007}
+  - {fileID: 6035180780417623022}
   - {fileID: 1876109256327483720}
   - {fileID: 1876109256880890791}
   - {fileID: 1876109257379148837}
@@ -9573,7 +9573,7 @@ MonoBehaviour:
   categoryPanelPrefab: {fileID: 1917318734330558720, guid: eb3aa16a4b67f9646ac70c84cfb9785e, type: 3}
   scrollbar: {fileID: 1876109256712140137}
   otherNavButton: {fileID: 0}
---- !u!1 &6842463203034891610
+--- !u!1 &8468801018393097362
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9581,8 +9581,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1716233963914062007}
-  - component: {fileID: 1049332705308120919}
+  - component: {fileID: 6035180780417623022}
+  - component: {fileID: 6955956676599480537}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -9590,13 +9590,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1716233963914062007
+--- !u!4 &6035180780417623022
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842463203034891610}
+  m_GameObject: {fileID: 8468801018393097362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -443.82214, y: -295.7616, z: -2149.2747}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -9604,19 +9604,19 @@ Transform:
   m_Father: {fileID: 1876109257511269580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1049332705308120919
+--- !u!82 &6955956676599480537
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842463203034891610}
+  m_GameObject: {fileID: 8468801018393097362}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 30a83862f834e274b96d0f4ddddd77f4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5281b09d6ded78948a339419fc110e5b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
