@@ -23,7 +23,20 @@ public class CutsceneChoiceRedirect : MonoBehaviour, IPointerEnterHandler, IPoin
             }
         }
 
-        imageComponent = transform.GetComponent<Image>();
+        imageComponent = transform.GetComponent<Image>();            
+        
+        //Finds the Skip button
+        GameObject Skip = GameObject.Find("/World (AskDialogue)/ChatWindow/Skip");
+        //If it's still the tutorial, set as inactive so it isn't visible
+        //Else, reenable it
+        if (StaticFunction.tutorialStart)
+        {
+            Skip.SetActive(false);
+        }
+        else
+        {
+            Skip.SetActive(true);
+        }
     }
 
     public void acceptChoice()
