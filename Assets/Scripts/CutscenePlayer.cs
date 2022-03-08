@@ -99,17 +99,24 @@ public class CutscenePlayer : MonoBehaviour
             new string[]{"Now anyone could just show up to your house whenever. Don't you think it's kind of a dumb move?", "It shows exactly where your house is and what it looks like, which is really dangerous.", "You know what. Nevermind."},
             new string[]{"Well you don't have to be so rude about it!!", "I never thought of it like that!! Please remind me to change it later.", "?????"})
         },
-        new Dialogue[] //to be edited
+        new Dialogue[]
         {
             new Dialogue(true,
-            new string[]{"It's probably not a good idea.", "You do realize you technically just posted your address on a public post, right?", "You shouldn't have posted this picture of your house number."},
-            new string[]{"Oh really? How so?", "Of course I do! I'm not stupid! I wanted to show off to my friends!", "What's wrong with showing off my new place to my online friends? I worked hard for this house, you know."}),
+            new string[]{ "Good choice for your movie! But I don’t think it’s a good idea to let everyone know where you are tonight.", "You shouldn’t have posted a photo of your movie ticket. Now everyone will know where you are tonight.", "Are you sure about posting this? Won’t anyone be able to know where you are and when?"},
+            new string[]{"Oh please! Everyone posts stuff like this all the time! Stop being paranoid!", "Uhm. That’s the point??? I WANT people to know I’m seeing this movie. People do it all the time.", "Yeah so? Doesn’t everyone do it?"}),
             new Dialogue(true, StaticFunction.getCurrentLevel(),
-            new string[]{"Now anyone could just show up to your house whenever. Don't you think this post was kind of a dumb move?", "It shows exactly where your house is and what it looks like, which is really dangerous.", "You know what. Nevermind."},
-            new string[]{"Well you don't have to be so rude about it!!", "I never thought of it like that!! Please remind me to change it later.", "?????"})
+            new string[]{ "Even if everyone did do it, which they don’t, that doesn’t mean you should…", "People usually post *after* they’ve seen the movie, not before.", "It’s still dangerous. You could get hurt in real life."},
+            new string[]{ "Whatevs!", "Whatevs!", "I never thought of it that way… That’s actually pretty scary. I’ll be sure to take it down."})
+        },
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Looks like you’re ready to play: LET’S GET ROBBED!!!", "You probably shouldn’t tell people you’re going on a trip BEFORE you go.", "I don’t think this post was the best choice."},
+            new string[]{ "???? What’s THAT supposed to mean??", "What do you mean?", "Okay? Elaborate?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "You just let everyone know you won’t be home for 2 weeks… Leaving your house empty…", "It’s not safe to tell people when exactly you’re going to be leaving your house empty.", "You know what. Nevermind."},
+            new string[]{ "OMG!!! That’s not my intention! I’ll fix it ASAP!", "OMG!!! You’re right! I’ll fix it ASAP!", "????????????????"})
         }
-        //"Off to watch a movie at 8 PM! Gonna be a relaxing afternoon! #SelfCare #MovieNight",
-        //"Heading to Tokyo for a 2 week vacation! #SushiTime #R&R",
         //"Finally got my Driver’s License! #LifeIsAHighway #BeepBeep",
         //"Check out Globalquiz.org for free and fun quizzes! Just need email and phone number!",
         //"Just got my new credit card!!! #GOALS",
