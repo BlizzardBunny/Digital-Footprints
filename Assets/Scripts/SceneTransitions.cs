@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //this script handles transitions between the different scenes
 public class SceneTransitions : MonoBehaviour
 {
-    private Coroutine fadeOut;
+    private Coroutine introAnim;
     public Button NextLevelButton;
 
     public void Awake()
@@ -50,7 +50,7 @@ public class SceneTransitions : MonoBehaviour
         }
 
         Animator bgAnim = GameObject.FindGameObjectWithTag("TitleBG").GetComponent<Animator>();
-        fadeOut = StartCoroutine(WaitandLoad(bgAnim));
+        introAnim = StartCoroutine(WaitandLoad(bgAnim));
     }
 
     IEnumerator WaitandLoad(Animator anim)
@@ -80,7 +80,7 @@ public class SceneTransitions : MonoBehaviour
 
             StaticFunction.setCurrentLevel(nextLevel);
         }
-        StopCoroutine(fadeOut);
+        StopCoroutine(introAnim);
     }
     //Returns to the Main Menu
     public void returnToMainMenu()
@@ -104,15 +104,16 @@ public class SceneTransitions : MonoBehaviour
 
         SceneManager.LoadScene("MainMenu");
     }
+
     //Loads the end screen where you can select whether to move to next level, restart level, or go to main menu
-    public static void LevelEnd()
-    {
+    public void LevelEnd()
+    {        
         SceneManager.LoadScene("LevelSelect");        
     }
     //This is when you click on next level at the end screen
-    public static void LoadLevel()
+    public void LoadLevel()
     {
-
+        
         string currLevel = StaticFunction.getCurrentLevel();
         if (currLevel == "Stage 1")
         {

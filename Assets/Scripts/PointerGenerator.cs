@@ -318,11 +318,6 @@ public class PointerGenerator : MonoBehaviour
         StaticFunction.setCurrentLevel("AskDialogue");
         StaticFunction.roundHasStarted = false;
 
-        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
-        {
-            Destroy(x);
-        }
-
         SceneManager.LoadScene("AskDialogue");
     }
 }

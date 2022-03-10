@@ -35,6 +35,8 @@ TagManager:
   - AskButton
   - LevelTitle
   - Blackscreen
+  - AskDialogueScene
+  - Exit
   layers:
   - Default
   - TransparentFX

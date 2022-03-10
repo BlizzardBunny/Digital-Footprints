@@ -14,14 +14,7 @@ public class CutsceneChoiceRedirect : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void Start()
     {
-        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
-        {
-            if (x.transform.name.Contains("AskDialogue"))
-            {
-                world = x;
-                break;
-            }
-        }
+        world = GameObject.FindGameObjectWithTag("AskDialogueScene");
 
         imageComponent = transform.GetComponent<Image>();            
         

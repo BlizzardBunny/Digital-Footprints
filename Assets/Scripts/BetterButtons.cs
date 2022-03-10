@@ -63,7 +63,7 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 }
             }
 
-            if (!StaticFunction.tutorialStart && (parentName.Equals("Address")))
+            if (!StaticFunction.tutorialStart)
             {
                 askButton = Instantiate(
                 askButtonPrefab,

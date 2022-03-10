@@ -36,7 +36,8 @@ public class DialogueControls : MonoBehaviour
             dialogueIndex = 0;
             StaticFunction.instanceCounter = 0;
             StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
-            SceneTransitions.LevelEnd();
+            SceneTransitions script = (SceneTransitions)GameObject.FindGameObjectWithTag("Exit").GetComponent(typeof(SceneTransitions));
+            script.LevelEnd();
         }
         else
         {

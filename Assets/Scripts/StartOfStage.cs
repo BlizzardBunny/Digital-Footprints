@@ -22,8 +22,15 @@ public class StartOfStage : MonoBehaviour
                 Quaternion.identity,
                 null);
 
-            FlagSystemSetup script = (FlagSystemSetup)world.GetComponent(typeof(FlagSystemSetup));
-            script.ResetCompletely();
+            try
+            {
+                FlagSystemSetup script = (FlagSystemSetup)world.GetComponent(typeof(FlagSystemSetup));
+                script.ResetCompletely();
+            }
+            catch
+            {
+            }
+
         }
     }
 

@@ -1555,7 +1555,7 @@ GameObject:
   - component: {fileID: 802121860}
   m_Layer: 5
   m_Name: World (AskDialogue)
-  m_TagString: World
+  m_TagString: AskDialogueScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

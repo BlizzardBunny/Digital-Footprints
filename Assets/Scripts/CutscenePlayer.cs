@@ -706,6 +706,10 @@ public class CutscenePlayer : MonoBehaviour
         }
 
         StaticFunction.tutorialStart = false;
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+        {
+            Destroy(x);
+        }
         StaticFunction.dialogueLineCounter = 0;
         yield return StartCoroutine(fadeOut(StaticFunction.getCurrentLevel()));
     }
@@ -852,6 +856,13 @@ public class CutscenePlayer : MonoBehaviour
 
     public void nextScene()
     {
+        if (StaticFunction.tutorialStart)
+        {
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+            {
+                Destroy(x);
+            }
+        }
         StartCoroutine(fadeOut(currDialogue[currLine].sceneToTransitionTo));
     }
 
