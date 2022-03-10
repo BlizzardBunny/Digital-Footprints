@@ -178,10 +178,96 @@ public class CutscenePlayer : MonoBehaviour
                 "HAH! You just think I’d be that stupid!"})
         },
         //"New phone plannnnn!!! Hmu at 209-470-0522",
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Why did you post this?",
+                "It’s great that you’re excited about your new phone plan. But it’s not wise to share your phone number online.",
+                "Good luck getting random scam calls 24/7!!"},
+            new string[]{ "Why? Is something wrong?",
+                "What’s so wrong about it?",
+                "How did you know about that!?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "You posted your phone number online so… Maybe try using your brain?",
+                "Scammers can mask their phone number with yours, leading authorities to you instead.",
+                "Sigh… nevermind."},
+            new string[]{ "(Your customer has left the chat)",
+                "OMG!! Thank you for telling me!!",
+                "Okay…?"})
+        },
+
         //"Doing some window shopping! Won’t be home until 5 :3",
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Now all of China knows you’re here… at the mall.",
+                "Why did you post this?",
+                "This post would’ve been fine, if you didn’t say you’ll be home at 5."},
+            new string[]{ "…Why are you quoting memes?",
+                "I didn’t want people to look for me while I’m out?",
+                "Oh yeah? What’s wrong with that?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "Now all stalkers have to do is find you at the mall and attack you! :D",
+                "Someone could try to track you down at the mall, or target your home while you’re out.",
+                "...Nevermind."},
+            new string[]{ "I doubt anyone would try to hurt me that way. You’re just paranoid.",
+                "Really!? I’ll be more careful next time.",
+                "Okay…?"})
+        },
         //"Off on a business trip! Gonna be at 3686 Chandler Drive for the first time!",
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "You just… Did you seriously just tell everyone your EXACT location?",
+                "Why did you post this?",
+                "You didn’t have to add an exact address on this post."},
+            new string[]{ "Did I? How?",
+                "I wanted people to know where I’ll be. Why?",
+                "But then how would people know where I’ll be staying?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "You just posted the exact address you’ll be at for your business trip! Dangerous people could try to find you there!",
+                "If I still have to explain it, I can’t help you.",
+                "Nevermind..."},
+            new string[]{ "Whelp. I guess I better call my boss to change where I’ll be staying…",
+                "Then what am I hiring you for???",
+                "Wait!! ! Tell me!!"})
+        },
         //"My son’s finally enrolled! Enjoy school!!!",
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Congratulations to your son! But I don’t think you should’ve posted his information online.",
+                "What is wrong with you??? Putting you and your child in danger like that!!",
+                "Why did you post this?"},
+            new string[]{ "But I’m so proud of him!! What’s so wrong about that?",
+                "Danger??? What do you mean??",
+                "Because I’m proud of my boy! Is something wrong?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "I can very clearly see your son’s full information in the photo you posted, as well as your address and phone number.",
+                "It’s nothing. Nevermind.",
+                "Uhm. You clearly don’t care that anyone could use this post to target and harm your kid. What kind of parent are you?"},
+            new string[]{ "Oh dear!! I’ll be sure to edit the post later. Thank you!",
+                "If you say so…",
+                "(Your customer has left the chat)"})
+        },
         //"Thanks @Ray for taking care of my home while I’m out!"
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Good on Ray for helping out! But I don’t think it’s a bright idea to let people know you’re not at home.",
+                "Why did you post this?",
+                "Tell me. Who told you that letting the internet know you’ll be out of the house was a good idea?"},
+            new string[]{ "Can’t fault me for wanting to show my thanks. What’s wrong with being thankful?",
+                "I wanted to show Ray my gratitude! Is there something wrong with that?",
+                "Excuse me? I just wanted to say thank you to my friend. What’s wrong with that?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "Nothing wrong with that! But you could’ve waited until you got home first. That way, your current location is safe.",
+                "It’s simply dangerous to let people know where you are/aren’t. You could have stalkers, you know!",
+                "Oh, nothing’s “wrong” except the fact that people can use this information to harm you, your house, or your friend Ray. So congratulations."},
+            new string[]{ "I see! I’ll try holding off next time.",
+                "Stalkers!? You’re just trying to get me paranoid haha…",
+                "… who hurt you?"})
+        },
     };
 
     private Dialogue[][] goodPostDialogue = new Dialogue[][]
