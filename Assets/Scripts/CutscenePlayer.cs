@@ -116,11 +116,67 @@ public class CutscenePlayer : MonoBehaviour
             new Dialogue(true, StaticFunction.getCurrentLevel(),
             new string[]{ "You just let everyone know you won’t be home for 2 weeks… Leaving your house empty…", "It’s not safe to tell people when exactly you’re going to be leaving your house empty.", "You know what. Nevermind."},
             new string[]{ "OMG!!! That’s not my intention! I’ll fix it ASAP!", "OMG!!! You’re right! I’ll fix it ASAP!", "????????????????"})
-        }
-        //"Finally got my Driver’s License! #LifeIsAHighway #BeepBeep",
-        //"Check out Globalquiz.org for free and fun quizzes! Just need email and phone number!",
-        //"Just got my new credit card!!! #GOALS",
-        //"I love my car!!!",
+        },
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Why in the world would you post your own license???", "Was it really wise to post your drivers’ license without censoring your details?", "You shouldn’t have posted your license online."},
+            new string[]{ "Oh you saw? Pretty neat huh?", "Of course it is! I covered my face!", "Why not!? Aren’t you just being paranoid?"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "No! No! No! That’s NOT what you’re supposed to post!", "People can still clearly see your details and use them for identity theft.", "Sure… You’re right. Nevermind."},
+            new string[]{ "Ok! Ok! I get it! I’ll fix it later!", "OH… Okay. You got me.", "Stop wasting my time."})
+        },
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Why in the world would you actually share those useless quizzes????", 
+                "It’s great that you think that those quizzes are fun. But maybe you should avoid the ones that ask for your personal info?", 
+                "You shouldn’t have posted this."},
+            new string[]{ "Hey! They’re fun and harmless! Why wouldn’t I?",
+                "But they need it to save my data! That’s harmless, isn’t it?",
+                "???? Elaborate."}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "Seriously?? You just gave them your email address and phone number! That’s in no way harmless!",
+                "They can use your data for identity theft.",
+                "Not only are you giving away your own data, you’re asking other people to share your data too!! That’s anything but harmless!"},
+            new string[]{ "Okokokokok fine! I know better now.",
+                "Identity theft!? OMG. I better fix that asap!",
+                "Alright, fine!! You don’t have to be rude about it."})
+        },
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "What’s wrong with you???????????",
+                "What do you think about this post?",
+                "You shouldn’t have posted this."},
+            new string[]{ "Excuse me???",
+                "Oh you mean my credit card? Jealous?",
+                "Why not!? I’m pretty proud of this credit card you know!"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "Never before have I seen someone post their literal credit card online… The CVC’s only 3 digits, people can guess that and use it you know….",
+                "I think you should check your bank account…",
+                "Anyone can use your card details to steal money from your account."},
+            new string[]{ "Let them try! They’re just jelly of my finances hahahaha!",
+                "IT’S EMPTY!!!??? I bet YOU had something to do with this!! I’m reporting you to the police!!!",
+                "What do you know!? I told my parents this was a waste of time."})
+        },
+        new Dialogue[]
+        {
+            new Dialogue(true,
+            new string[]{ "Congrats on your new car! But maybe blur out your plate number off this post?",
+                "You shouldn’t have posted this.",
+                "Why did you post this?"},
+            new string[]{ "Why? What can people do with my plate number?",
+                "Says you! You’re just jealous of my new car!",
+                "Because I wanted to show everyone my new car!"}),
+            new Dialogue(true, StaticFunction.getCurrentLevel(),
+            new string[]{ "People can use your plate number to find more information about you, like your full name and address.",
+                "…Nevermind.",
+                "If people know your plate number, you’re more likely to believe their scams!"},
+            new string[]{ "Pfft. You’re just paranoid.",
+                "Don’t waste my time again.",
+                "HAH! You just think I’d be that stupid!"})
+        },
         //"New phone plannnnn!!! Hmu at 209-470-0522",
         //"Doing some window shopping! Won’t be home until 5 :3",
         //"Off on a business trip! Gonna be at 3686 Chandler Drive for the first time!",
@@ -128,9 +184,9 @@ public class CutscenePlayer : MonoBehaviour
         //"Thanks @Ray for taking care of my home while I’m out!"
     };
 
-    private Dialogue[] goodPostDialogue = new Dialogue[]
+    private Dialogue[][] goodPostDialogue = new Dialogue[][]
     {
-
+        
     };
 
     // Start is called before the first frame update
@@ -187,7 +243,7 @@ public class CutscenePlayer : MonoBehaviour
             }
             else
             {
-                return new Dialogue[] { goodPostDialogue[StaticFunction.flagIndex] };
+                return goodPostDialogue[StaticFunction.flagIndex];
             }
         }
         else if (StaticFunction.parentName.Equals("PrivacyWindow"))
