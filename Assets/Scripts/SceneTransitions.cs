@@ -9,7 +9,9 @@ public class SceneTransitions : MonoBehaviour
 {
     private Coroutine introAnim;
     public Button NextLevelButton;
+    public GameObject confirmationPrefab;
 
+    private GameObject confirmation;
     public void Awake()
     {
         if (NextLevelButton != null)
@@ -40,9 +42,31 @@ public class SceneTransitions : MonoBehaviour
             }
         }
     }
+
+    public void Confirm()
+    {
+        confirmation = Instantiate(
+               confirmationPrefab,
+               new Vector3(959.9976806640625f,540.0001220703125f,0.0f),
+               Quaternion.identity,
+               transform.parent);
+    }
+
+    public void DestroyConfirm()
+    {
+        foreach(GameObject x in GameObject.FindGameObjectsWithTag("Confirmation"))
+        {
+            Destroy(x);
+        }
+    }
+
     //Loads Stage 1 when you click Start Game on the Main Menu
     public void StartGame()
     {
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Confirmation"))
+        {
+            x.transform.SetAsFirstSibling();
+        }
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("ToFadeOnTitle"))
         {
             Animator anim = g.GetComponent<Animator>();
@@ -80,6 +104,7 @@ public class SceneTransitions : MonoBehaviour
 
             StaticFunction.setCurrentLevel(nextLevel);
         }
+        DestroyConfirm();
         StopCoroutine(introAnim);
     }
     //Returns to the Main Menu

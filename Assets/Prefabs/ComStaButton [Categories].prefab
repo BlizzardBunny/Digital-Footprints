@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6057899523739005328, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Name
-      value: ComStaButton
+      value: ComStaButton [Categories]
       objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005329, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_Pivot.x
@@ -77,7 +77,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005329, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 7.625107
+      value: 7.625122
       objectReference: {fileID: 0}
     - target: {fileID: 6057899523739005329, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -94,6 +94,18 @@ PrefabInstance:
     - target: {fileID: 6057899523739005329, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057899523739005331, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057899523739005331, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057899523739005331, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6057899523958104874, guid: 4ba9b0efcd0b4914588a70682aef8000, type: 3}
       propertyPath: m_text

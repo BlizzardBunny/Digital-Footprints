@@ -64,27 +64,42 @@ public class BetterButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
 
             if (!StaticFunction.tutorialStart)
-            {
-                askButton = Instantiate(
-                askButtonPrefab,
-                Input.mousePosition,
-                Quaternion.identity,
-                world);
-
+            {              
                 try
                 {
                     if (transform.parent.parent.name.Equals("PrivacyWindow"))
                     {
-                        StaticFunction.parentName = "PrivacyWindow";
+                        
+                    }
+                    else if (parentName.Equals("Password"))
+                    {
+
                     }
                     else
                     {
+                        askButton = Instantiate(
+                            askButtonPrefab,
+                            Input.mousePosition,
+                            Quaternion.identity,
+                            world);
                         StaticFunction.parentName = parentName;
                     }
                 }
                 catch
                 {
-                    StaticFunction.parentName = parentName;
+                    if (parentName.Equals("Password"))
+                    {
+
+                    }
+                    else
+                    {
+                        askButton = Instantiate(
+                            askButtonPrefab,
+                            Input.mousePosition,
+                            Quaternion.identity,
+                            world);
+                        StaticFunction.parentName = parentName;
+                    }
                 }
 
                 StaticFunction.flagIndex = script.flagIndex;
