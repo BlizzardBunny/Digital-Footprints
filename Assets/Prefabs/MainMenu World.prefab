@@ -252,7 +252,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4849519098093810717}
         m_TargetAssemblyTypeName: SceneTransitions, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: Confirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextLevelButton: {fileID: 0}
-  confirmationPrefab: {fileID: 0}
+  confirmationPrefab: {fileID: 6742048581197511819, guid: 28e5884eca068574ca0ab9fee3453d2d, type: 3}
 --- !u!95 &4849519098093810716
 Animator:
   serializedVersion: 3
