@@ -25,7 +25,11 @@ public class SceneTransitions : MonoBehaviour
 
                 foreach(GameObject x in GameObject.FindGameObjectsWithTag("LevelTitle"))
                 {
-                    if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
+                    if (StaticFunction.getGameOver() == true || StaticFunction.getMistakes() < StaticFunction.getTotalProfiles())
+                    {
+                        x.GetComponent<TMPro.TextMeshProUGUI>().text = "Thank you for playing!";
+                    }
+                    else if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
                     {
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Failed";
                     }
@@ -152,6 +156,7 @@ public class SceneTransitions : MonoBehaviour
         }
         else if (currLevel == "Stage 3")
         {
+            StaticFunction.setGameOver();
             SceneManager.LoadScene("MainMenu");
         }
     }

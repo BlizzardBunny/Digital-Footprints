@@ -222,6 +222,9 @@ public static class StaticFunction
     public static bool isFlag = false;
     public static bool reloadSameStage = false;
 
+    //For the end of the game
+    public static bool gameOver = false;
+
     public static string updateStrings(string s)
     {
         string ret = s;
@@ -407,5 +410,12 @@ public static class StaticFunction
     {
         currentProfile = profile;
     }
-
+    public static bool getGameOver()
+    {
+        return gameOver;
+    }
+    public static void setGameOver()
+    {
+        gameOver = true;
+    }
 }
