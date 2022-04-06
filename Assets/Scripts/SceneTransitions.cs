@@ -71,6 +71,7 @@ public class SceneTransitions : MonoBehaviour
         {
             x.transform.SetAsFirstSibling();
         }
+
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("ToFadeOnTitle"))
         {
             Animator anim = g.GetComponent<Animator>();
@@ -108,30 +109,15 @@ public class SceneTransitions : MonoBehaviour
 
             StaticFunction.setCurrentLevel(nextLevel);
         }
-        DestroyConfirm();
-        StopCoroutine(introAnim);
-    }
-    //Returns to the Main Menu
-    public void returnToMainMenu()
-    {
-        if (StaticFunction.tutorialStart)
-        {
-            StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
-        }
         else
         {
-            if (!SceneManager.GetActiveScene().name.Equals("AskDialogue"))
+            foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
             {
-                StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
+                Destroy(x);
             }
         }
-
-        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
-        {
-            Destroy(x);
-        }
-
-        SceneManager.LoadScene("MainMenu");
+        DestroyConfirm();
+        StopCoroutine(introAnim);
     }
 
     //Loads the end screen where you can select whether to move to next level, restart level, or go to main menu

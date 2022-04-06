@@ -51,12 +51,19 @@ public class DialogueControls : MonoBehaviour
         StopCoroutine(showMsg);
 
         //update list
-        int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
-        StaticFunction.mistakeMessages.RemoveAt(id);
-        for (int i = id; i < StaticFunction.mistakeMessages.Count; i++)
+        try
         {
-            StaticFunction.mistakeMessages[i].transform.Translate(new Vector3(0f, 114.8024f, 0f));
-            StaticFunction.mistakeMessages[i].transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = i.ToString();
+            int id = int.Parse(transform.parent.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text);
+            StaticFunction.mistakeMessages.RemoveAt(id);
+            for (int i = id; i < StaticFunction.mistakeMessages.Count; i++)
+            {
+                StaticFunction.mistakeMessages[i].transform.Translate(new Vector3(0f, 114.8024f, 0f));
+                StaticFunction.mistakeMessages[i].transform.Find("ID").GetComponent<TMPro.TextMeshProUGUI>().text = i.ToString();
+            }
+        }
+        catch
+        {
+
         }
 
         Destroy(transform.parent.gameObject);

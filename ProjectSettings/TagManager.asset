@@ -37,6 +37,7 @@ TagManager:
   - Blackscreen
   - AskDialogueScene
   - Exit
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
