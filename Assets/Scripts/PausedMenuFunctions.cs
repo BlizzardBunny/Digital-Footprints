@@ -55,7 +55,7 @@ public class PausedMenuFunctions : MonoBehaviour
         }
         else
         {
-            if (!SceneManager.GetActiveScene().name.Equals("AskDialogue"))
+            if (!SceneManager.GetActiveScene().name.Equals("AskDialogue") && !SceneManager.GetActiveScene().name.Equals("LevelSelect"))
             {
                 StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
             }
@@ -71,6 +71,32 @@ public class PausedMenuFunctions : MonoBehaviour
 
     public void SaveGame()
     {        
+        PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
+
+        if (StaticFunction.tutorialStart)
+        {
+            PlayerPrefs.SetInt("tutorialStart", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("tutorialStart", 0);
+        }
+
+        if (StaticFunction.dialogueLineCounter > 11)
+        {
+            PlayerPrefs.SetInt("dialogueLineCounter", 11);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("dialogueLineCounter", 0);
+        }
+
+        PlayerPrefs.Save();
+        MakeMistakeMessage("Game data saved!");
+    }
+
+    public void SaveGame(string nextLvl)
+    {
         PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
 
         if (StaticFunction.tutorialStart)
@@ -147,9 +173,14 @@ public class PausedMenuFunctions : MonoBehaviour
             MakeMistakeMessage("There is no save data!");
     }
 
-    public void NewGame()
+    public void ResetSaves()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void NewGame()
+    {
+        ResetSaves();
         SceneTransitions script = (SceneTransitions)this.GetComponent(typeof(SceneTransitions));
         script.StartGame();
     }

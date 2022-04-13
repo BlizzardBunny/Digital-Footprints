@@ -31,6 +31,18 @@ public class LevelSelectTransitions : MonoBehaviour
         isFadingIn = false;
         yield return new WaitForSeconds(1.0f);
         GameObject.FindGameObjectWithTag("Blackscreen").transform.SetAsFirstSibling();
+
+        PausedMenuFunctions script = (PausedMenuFunctions)this.GetComponent(typeof(PausedMenuFunctions));
+        Debug.Log(StaticFunction.getCurrentLevel());
+        if (StaticFunction.getCurrentLevel().Equals(""))
+        {
+            script.ResetSaves();
+        }
+        else
+        {
+            script.SaveGame();
+        }
+
         yield return new WaitForSeconds(1.0f);
         yield break;
     }

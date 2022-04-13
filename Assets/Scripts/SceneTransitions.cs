@@ -104,7 +104,18 @@ public class SceneTransitions : MonoBehaviour
             }
             else
             {
-
+                switch (currLevel)
+                {
+                    case "Stage 1":
+                        nextLevel = "Stage 2";
+                        break;
+                    case "Stage 2":
+                        nextLevel = "Stage 3";
+                        break;
+                    case "Stage 3":
+                        nextLevel = "";
+                        break;
+                }
             }
 
             StaticFunction.setCurrentLevel(nextLevel);
