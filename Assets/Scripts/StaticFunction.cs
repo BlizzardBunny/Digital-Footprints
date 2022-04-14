@@ -258,11 +258,14 @@ public static class StaticFunction
         totalProfiles = 1;
         mistakes = 0;
         currentProfile = 0;
+        currentLevel = "AskDialogue";
         editableIsDrawn = false;
         choiceIndex = 0;
         instanceCounter = 0;
         reportEntries = new List<GameObject>();
         mistakeMessages = new List<GameObject>();
+        tutorialStart = true;
+        dialogueLineCounter = 0;
     }
 
     public static string[] getBadCaptions()

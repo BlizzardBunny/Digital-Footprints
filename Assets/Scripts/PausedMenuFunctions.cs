@@ -70,34 +70,15 @@ public class PausedMenuFunctions : MonoBehaviour
     }
 
     public void SaveGame()
-    {        
-        PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
-
-        if (StaticFunction.tutorialStart)
-        {
-            PlayerPrefs.SetInt("tutorialStart", 1);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("tutorialStart", 0);
-        }
-
-        if (StaticFunction.dialogueLineCounter > 11)
-        {
-            PlayerPrefs.SetInt("dialogueLineCounter", 11);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("dialogueLineCounter", 0);
-        }
-
-        PlayerPrefs.Save();
-        MakeMistakeMessage("Game data saved!");
-    }
-
-    public void SaveGame(string nextLvl)
     {
-        PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
+        if (SceneManager.GetActiveScene().name.Equals("LevelSelect"))
+        {
+            PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
+        }
+        else
+        {
+            PlayerPrefs.SetString("currLevel", SceneManager.GetActiveScene().name);
+        }
 
         if (StaticFunction.tutorialStart)
         {
@@ -176,6 +157,7 @@ public class PausedMenuFunctions : MonoBehaviour
     public void ResetSaves()
     {
         PlayerPrefs.DeleteAll();
+        StaticFunction.reset();
     }
 
     public void NewGame()

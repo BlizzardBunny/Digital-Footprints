@@ -33,7 +33,24 @@ public class LevelSelectTransitions : MonoBehaviour
         GameObject.FindGameObjectWithTag("Blackscreen").transform.SetAsFirstSibling();
 
         PausedMenuFunctions script = (PausedMenuFunctions)this.GetComponent(typeof(PausedMenuFunctions));
-        Debug.Log(StaticFunction.getCurrentLevel());
+
+        string nextLevel = "";
+        string currLevel = StaticFunction.getCurrentLevel();
+        switch (currLevel)
+        {
+            case "Stage 1":
+                nextLevel = "Stage 2";
+                break;
+            case "Stage 2":
+                nextLevel = "Stage 3";
+                break;
+            case "Stage 3":
+                nextLevel = "";
+                break;
+        }
+
+        StaticFunction.setCurrentLevel(nextLevel);
+
         if (StaticFunction.getCurrentLevel().Equals(""))
         {
             script.ResetSaves();

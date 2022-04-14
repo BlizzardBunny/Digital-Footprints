@@ -20,7 +20,7 @@ public class FlagSystemSetup : MonoBehaviour
 
     public void ResetCompletely()
     {
-        StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
+        //StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
 
         if (!SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {

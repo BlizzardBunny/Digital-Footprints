@@ -143,7 +143,6 @@ public class Submit : MonoBehaviour
             StaticFunction.reloadSameStage = false;
             StaticFunction.roundHasStarted = false;
             StaticFunction.gotoLevelSelect = true;
-            StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
         }
     }
 
