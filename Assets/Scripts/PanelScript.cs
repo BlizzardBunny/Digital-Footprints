@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PanelScript : MonoBehaviour
 {
     [SerializeField] GameObject categoryPanelPrefab;
+    [SerializeField] GameObject CompanyStandardsContentPanel;
     public Scrollbar scrollbar;
     public Button otherNavButton;
 
@@ -18,7 +19,6 @@ public class PanelScript : MonoBehaviour
     public void Start()
     {
         GameObject content = GameObject.FindGameObjectWithTag("CompanyStandardsContent");
-        content.transform.position = new Vector3(1580.0f, 322.0400085449219f, 0.0f);
         socialMediaPages = GameObject.FindGameObjectsWithTag("SocialMediaPage");
         currSocialMedia = "*";
     }
@@ -66,7 +66,7 @@ public class PanelScript : MonoBehaviour
     {
         if (pageNumber < 4)
         {
-            StartCoroutine(scrollRight(scrollbar));
+            StartCoroutine(scrollRight(CompanyStandardsContentPanel));
             otherNavButton.interactable = true;
             pageNumber++;
         }    
@@ -76,7 +76,7 @@ public class PanelScript : MonoBehaviour
     {
         if (pageNumber > 1)
         {
-            StartCoroutine(scrollLeft(scrollbar));
+            StartCoroutine(scrollLeft(CompanyStandardsContentPanel));
             otherNavButton.interactable = true;
             pageNumber--;
         }
@@ -139,44 +139,46 @@ public class PanelScript : MonoBehaviour
         }
     }
 
-    private IEnumerator scrollLeft(Scrollbar scrollbar)
+    private IEnumerator scrollLeft(GameObject panel)
     {
         GetComponent<Button>().interactable = false;
         float elapsedTime = 0;
         float timeToMove = 0.66f;
-        float originalPosition = scrollbar.value;
-        float targetPosition = scrollbar.value - scrollVal;
-        Debug.Log("scroll panel");
+        Vector3 originalPosition = panel.transform.position;
+        Vector3 targetPosition = panel.transform.position;
+        targetPosition.x = targetPosition.x + 340;
+
         while (elapsedTime < timeToMove)
         {
-            scrollbar.value = Mathf.Lerp(originalPosition, targetPosition, (elapsedTime / timeToMove));
+            panel.transform.position = Vector3.Lerp(originalPosition, targetPosition, (elapsedTime / timeToMove));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        scrollbar.value = targetPosition;
+        panel.transform.position = targetPosition;
         if (pageNumber != 1)
         {
             GetComponent<Button>().interactable = true;
         }
     }
-    private IEnumerator scrollRight(Scrollbar scrollbar)
+    private IEnumerator scrollRight(GameObject panel)
     {
         GetComponent<Button>().interactable = false;
         float elapsedTime = 0;
         float timeToMove = 0.66f;
-        float originalPosition = scrollbar.value;
-        float targetPosition = scrollbar.value + scrollVal;
-        Debug.Log("scroll panel");
+        Vector3 originalPosition = panel.transform.position;
+        Vector3 targetPosition = panel.transform.position;
+        targetPosition.x = targetPosition.x - 340;
+
         while (elapsedTime < timeToMove)
         {
-            scrollbar.value = Mathf.Lerp(originalPosition, targetPosition, (elapsedTime / timeToMove));
+            panel.transform.position = Vector3.Lerp(originalPosition, targetPosition, (elapsedTime / timeToMove));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        scrollbar.value = targetPosition;
+        panel.transform.position = targetPosition;
         if (pageNumber != 4)
         {
-            GetComponent<Button>().interactable = true;            
+            GetComponent<Button>().interactable = true;
         }
     }
 

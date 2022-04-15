@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 1692135928102783813, guid: 81d3c4f39bef78e40b90f2649031c009, type: 3}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 1817865503320231685}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865502455391522
@@ -705,7 +706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 678.1656, y: -152.5}
+  m_AnchoredPosition: {x: 680, y: -152}
   m_SizeDelta: {x: 340, y: 305}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1817865502669453719
@@ -1766,6 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865502980139274
@@ -2340,6 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865503068077755
@@ -2698,6 +2701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 1817865503582527982}
   scrollbar: {fileID: 1817865503320231685}
   otherNavButton: {fileID: 1817865503431462408}
 --- !u!1 &1817865503161590918
@@ -3064,6 +3068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865503195031847
@@ -3505,6 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865503320231687
@@ -3628,7 +3634,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1817865504176110252}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.20021605
+  m_Size: 0.2
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4088,6 +4094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 1817865503582527982}
   scrollbar: {fileID: 1817865503320231685}
   otherNavButton: {fileID: 1817865503102577569}
 --- !u!1 &1817865503459912394
@@ -4263,8 +4270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 9.54}
-  m_SizeDelta: {x: 340, y: 304.08}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 340, y: 305}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1817865503521127590
 CanvasRenderer:
@@ -4533,7 +4540,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1698.1655, y: 305}
+  m_SizeDelta: {x: 1700, y: 305}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &1817865503624969492
 GameObject:
@@ -5287,7 +5294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1018.1656, y: -152.5}
+  m_AnchoredPosition: {x: 1020, y: -152}
   m_SizeDelta: {x: 340, y: 305}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1817865503734534426
@@ -5477,7 +5484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 338.1656, y: -152.5}
+  m_AnchoredPosition: {x: 340, y: -152}
   m_SizeDelta: {x: 340, y: 305}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1817865503798396083
@@ -5879,6 +5886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865504015515486
@@ -6996,6 +7004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865504218662656
@@ -7629,8 +7638,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -46}
-  m_SizeDelta: {x: 338.1656, y: 50}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1817865504269354299
 CanvasRenderer:
@@ -8030,6 +8039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865504440708424
@@ -8300,6 +8310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 0}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 0}
   otherNavButton: {fileID: 0}
 --- !u!1 &1817865504516979082
@@ -8544,6 +8555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 1917318734330558720, guid: eb3aa16a4b67f9646ac70c84cfb9785e, type: 3}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 1817865503320231685}
   otherNavButton: {fileID: 0}
 --- !u!114 &1817865503618056369
@@ -8559,6 +8571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryPanelPrefab: {fileID: 651505840690487988, guid: 906edb473b66fe4409286ab608795f40, type: 3}
+  CompanyStandardsContentPanel: {fileID: 0}
   scrollbar: {fileID: 1817865503320231685}
   otherNavButton: {fileID: 0}
 --- !u!1 &5156262115442467712
@@ -8720,7 +8733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1358.1655, y: -152.5}
+  m_AnchoredPosition: {x: 1360, y: -152}
   m_SizeDelta: {x: 340, y: 305}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1001 &1817865502448860074
