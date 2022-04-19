@@ -43,8 +43,11 @@ public class PausedMenuFunctions : MonoBehaviour
                 GameObject.FindGameObjectWithTag("World").transform
             );
         }
-
-        
+    }
+    
+    public void UnPause()
+    {
+        Destroy(pausedMenu);
     }
 
     public void ReturnToMainMenu()
