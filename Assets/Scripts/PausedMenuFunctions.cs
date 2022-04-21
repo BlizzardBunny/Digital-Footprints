@@ -69,6 +69,8 @@ public class PausedMenuFunctions : MonoBehaviour
             Destroy(x);
         }
 
+        StaticFunction.roundHasStarted = false;
+
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -82,7 +84,7 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             PlayerPrefs.SetString("currLevel", SceneManager.GetActiveScene().name);
         }
-
+        Debug.Log("tutorialStart: " + StaticFunction.tutorialStart);
         if (StaticFunction.tutorialStart)
         {
             PlayerPrefs.SetInt("tutorialStart", 1);
@@ -91,14 +93,15 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             PlayerPrefs.SetInt("tutorialStart", 0);
         }
+        Debug.Log("PlayerPrefs tutorialStart: " + PlayerPrefs.GetInt("tutorialStart"));
 
-        if (StaticFunction.dialogueLineCounter > 11)
+        if (StaticFunction.tutorialPart)
         {
-            PlayerPrefs.SetInt("dialogueLineCounter", 11);
+            PlayerPrefs.SetInt("tutorialPart", 1);
         }
         else
         {
-            PlayerPrefs.SetInt("dialogueLineCounter", 0);
+            PlayerPrefs.SetInt("tutorialPart", 0);
         }
 
         PlayerPrefs.Save();
@@ -136,6 +139,7 @@ public class PausedMenuFunctions : MonoBehaviour
         if (PlayerPrefs.HasKey("currLevel"))
         {
             StaticFunction.setCurrentLevel(PlayerPrefs.GetString("currLevel"));
+            Debug.Log("PlayerPrefs tutorialStart: " + PlayerPrefs.GetInt("tutorialStart"));            
             switch (PlayerPrefs.GetInt("tutorialStart"))
             {
                 case 0:
@@ -145,9 +149,17 @@ public class PausedMenuFunctions : MonoBehaviour
                     StaticFunction.tutorialStart = true;
                     break;
             }
-
-            StaticFunction.dialogueLineCounter = PlayerPrefs.GetInt("dialogueLineCounter");
-
+            Debug.Log("tutorialStart: " + StaticFunction.tutorialStart);
+            switch (PlayerPrefs.GetInt("tutorialPart"))
+            {
+                case 0:
+                    StaticFunction.tutorialPart = false;
+                    break;
+                case 1:
+                    StaticFunction.tutorialPart = true;
+                    break;
+            }
+            StaticFunction.dialogueIndex = 0;
             MakeMistakeMessage("Game loaded!");
 
             SceneTransitions script = (SceneTransitions)this.GetComponent(typeof(SceneTransitions));
@@ -160,6 +172,7 @@ public class PausedMenuFunctions : MonoBehaviour
     public void ResetSaves()
     {
         PlayerPrefs.DeleteAll();
+        StaticFunction.tutorialPart = true;
         StaticFunction.reset();
     }
 

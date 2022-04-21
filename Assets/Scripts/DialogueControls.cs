@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class DialogueControls : MonoBehaviour
 {
     private Transform dialogueBox;
-    private int dialogueIndex = 1;
     private string[] dialogue;
     private Coroutine showMsg;
 
@@ -31,9 +30,9 @@ public class DialogueControls : MonoBehaviour
 
     public void ContDialogue()
     {
-        if (dialogueIndex >= dialogue.Length)
+        if (StaticFunction.bossDialogueIndex >= dialogue.Length)
         {
-            dialogueIndex = 0;
+            StaticFunction.bossDialogueIndex = 0;
             StaticFunction.instanceCounter = 0;
             //StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
             SceneTransitions script = (SceneTransitions)GameObject.FindGameObjectWithTag("Exit").GetComponent(typeof(SceneTransitions));
@@ -41,8 +40,8 @@ public class DialogueControls : MonoBehaviour
         }
         else
         {
-            dialogueBox.GetComponent<TMPro.TextMeshProUGUI>().text = dialogue[dialogueIndex];
-            dialogueIndex++;
+            dialogueBox.GetComponent<TMPro.TextMeshProUGUI>().text = dialogue[StaticFunction.bossDialogueIndex];
+            StaticFunction.bossDialogueIndex++;
         }
     }
 

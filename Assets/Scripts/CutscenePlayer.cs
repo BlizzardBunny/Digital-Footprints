@@ -39,7 +39,7 @@ public class CutscenePlayer : MonoBehaviour
     private Coroutine coroutineToBeStopped;
     private float characterTypingSpeed = 0.05f;
 
-    private Dialogue[] introDialogue = new Dialogue[] //bool is true if player is speaking, string is the line to be said
+    private Dialogue[] introDialogue1 = new Dialogue[] //bool is true if player is speaking, string is the line to be said
     {
         new Dialogue(true, true, "So, a while back I got a message online from my $r."),
         new Dialogue(true, true, "It was weird... And it called me \"buddy\". \nI immediately knew the account was hacked."),
@@ -57,6 +57,10 @@ public class CutscenePlayer : MonoBehaviour
         new Dialogue(true, "Tutorial",
             new string[]{"What?", "What.", "What-"},
             new string[]{"Good luck!", "Good luck!", "Good luck!"}),
+    };
+
+    private Dialogue[] introDialogue2 = new Dialogue[] //bool is true if player is speaking, string is the line to be said
+    {
         new Dialogue(false, "I just read your email! Thank you so much!" ),
         new Dialogue(false, "You know, I heard that there’s this new company specializing in these social media things." ),
         new Dialogue(false, "I think you can try applying to work for them, if you’re happy doing this for work." ),
@@ -511,7 +515,14 @@ public class CutscenePlayer : MonoBehaviour
             pic.GetComponent<Image>().sprite = relativePic;
             name.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.relativeName;
             StaticFunction.reset();
-            StartCoroutine(run(introDialogue));
+            if (StaticFunction.tutorialPart)
+            {
+                StartCoroutine(run(introDialogue1));
+            }
+            else
+            {
+                StartCoroutine(run(introDialogue2));
+            }
         }
         else
         {
@@ -858,11 +869,14 @@ public class CutscenePlayer : MonoBehaviour
     {
         if (StaticFunction.tutorialStart)
         {
+            StaticFunction.tutorialPart = !StaticFunction.tutorialPart;
             foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
             {
                 Destroy(x);
             }
-        }
+        }       
+
+        StaticFunction.dialogueLineCounter = 0;
         StartCoroutine(fadeOut(currDialogue[currLine].sceneToTransitionTo));
     }
 

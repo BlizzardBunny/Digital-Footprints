@@ -139,23 +139,8 @@ public class SceneTransitions : MonoBehaviour
     //This is when you click on next level at the end screen
     public void LoadLevel()
     {
-        
-        string currLevel = StaticFunction.getCurrentLevel();
-        if (currLevel == "Stage 1")
-        {
-            StaticFunction.resetVals(4, 3);
-            SceneManager.LoadScene("Stage 2");
-        }
-        else if (currLevel == "Stage 2")
-        {
-            StaticFunction.resetVals(5, 5);
-            SceneManager.LoadScene("Stage 3");
-        }
-        else if (currLevel == "Stage 3")
-        {
-            StaticFunction.setGameOver();
-            SceneManager.LoadScene("MainMenu");
-        }
+        //currLevel is set in LevelSelectTransitions already so we just need to load the scene here nalang
+        SceneManager.LoadScene(StaticFunction.getCurrentLevel());
     }
     //This is when you click on restart level on the end screen
     public static void RestartLevel()

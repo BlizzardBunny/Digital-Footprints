@@ -18,15 +18,18 @@ public class FlagSystemSetup : MonoBehaviour
         ResetCompletely();
     }
 
+    private void Update()
+    {
+        if (!StaticFunction.roundHasStarted)
+        {
+            ResetCompletely();
+        }
+    }
+
     public void ResetCompletely()
     {
         //StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
-
-        if (!SceneManager.GetActiveScene().name.Equals("Tutorial"))
-        {
-            StaticFunction.tutorialStart = false; 
-        }
-
+        Debug.Log("FlagSystemSetup1: tutorialStart: " + StaticFunction.tutorialStart);
         if (!StaticFunction.roundHasStarted)
         {
             Debug.Log("ResetCompletely()");
@@ -46,6 +49,8 @@ public class FlagSystemSetup : MonoBehaviour
 
             SetStage();
         }
+
+        Debug.Log("FlagSystemSetup2: tutorialStart: " + StaticFunction.tutorialStart);
     }
 
     public void ResetRound()

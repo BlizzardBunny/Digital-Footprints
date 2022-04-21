@@ -179,16 +179,6 @@ public class TutorialPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            Debug.Log("Reload Same Stage" + StaticFunction.reloadSameStage);
-            Debug.Log("RoundHasStarted: " + StaticFunction.roundHasStarted);
-            Debug.Log(StaticFunction.getCurrentLevel());
-            Debug.Log("Choice Index: " + StaticFunction.choiceIndex);
-            Debug.Log("Dialogue Line Counter: " + StaticFunction.dialogueLineCounter);
-            Debug.Log("Editable is Drawn: " + StaticFunction.editableIsDrawn);
-            Debug.Log("Instance Counter: " + StaticFunction.instanceCounter);
-            Debug.Log("Tutorial Start: " + StaticFunction.tutorialStart);
-        }
+        
     }
 }

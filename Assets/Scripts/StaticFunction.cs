@@ -207,6 +207,7 @@ public static class StaticFunction
     public static List<GameObject> reportEntries = new List<GameObject>();
     public static List<GameObject> mistakeMessages = new List<GameObject>();
     public static bool tutorialStart = true;
+    public static bool tutorialPart = true; //true is part 1, false is part 2
     public static string relativeName = "Auntie";
 
     //for tutorial
@@ -215,6 +216,9 @@ public static class StaticFunction
     //for tutorialplayer
     public static int dialogueIndex = 0;
     public static bool gotoLevelSelect = false;
+
+    //for Boss's dialogue
+    public static int bossDialogueIndex = 0;
 
     //for cutscenes
     public static string parentName = "";

@@ -204,6 +204,8 @@ public class Flag : MonoBehaviour
 
     public void FlagItem()
     {
+        Debug.Log("tutorialStart: " + StaticFunction.tutorialStart);
+        Debug.Log("pointerPanel null: " + (pointersPanel == null));
         if (StaticFunction.tutorialStart && (pointersPanel != null))
         {
             PointerGenerator script = (PointerGenerator)pointersPanel.GetComponent(typeof(PointerGenerator));
