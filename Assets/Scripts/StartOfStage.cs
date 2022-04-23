@@ -12,13 +12,10 @@ public class StartOfStage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if (PlayerPrefs.HasKey("currLevel"))
-        //{
-        //    StaticFunction.setCurrentLevel(PlayerPrefs.GetString("currLevel"));
-        //    StaticFunction.tutorialStart = false;
-
-        //    StaticFunction.dialogueLineCounter = PlayerPrefs.GetInt("dialogueLineCounter");
-        //}
+        if (StaticFunction.roundHasStarted)
+        {
+            StaticFunction.roundHasStarted = false;
+        }
 
         StaticFunction.gotoLevelSelect = false;
 

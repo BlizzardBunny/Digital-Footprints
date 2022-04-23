@@ -84,7 +84,7 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             PlayerPrefs.SetString("currLevel", SceneManager.GetActiveScene().name);
         }
-        Debug.Log("tutorialStart: " + StaticFunction.tutorialStart);
+
         if (StaticFunction.tutorialStart)
         {
             PlayerPrefs.SetInt("tutorialStart", 1);
@@ -93,7 +93,6 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             PlayerPrefs.SetInt("tutorialStart", 0);
         }
-        Debug.Log("PlayerPrefs tutorialStart: " + PlayerPrefs.GetInt("tutorialStart"));
 
         if (StaticFunction.tutorialPart)
         {

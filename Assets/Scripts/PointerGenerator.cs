@@ -317,6 +317,7 @@ public class PointerGenerator : MonoBehaviour
         StaticFunction.resetVals(3, 1);
         StaticFunction.setCurrentLevel("AskDialogue");
         StaticFunction.roundHasStarted = false;
+        Debug.Log("End Tutorial:" + StaticFunction.roundHasStarted);
 
         SceneManager.LoadScene("AskDialogue");
     }

@@ -29,10 +29,10 @@ public class FlagSystemSetup : MonoBehaviour
     public void ResetCompletely()
     {
         //StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
-        Debug.Log("FlagSystemSetup1: tutorialStart: " + StaticFunction.tutorialStart);
         if (!StaticFunction.roundHasStarted)
         {
             Debug.Log("ResetCompletely()");
+            StaticFunction.resetVals(1, 1);
             StaticFunction.clickables.Clear();
             StaticFunction.clickables.TrimExcess();
             StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
@@ -49,8 +49,6 @@ public class FlagSystemSetup : MonoBehaviour
 
             SetStage();
         }
-
-        Debug.Log("FlagSystemSetup2: tutorialStart: " + StaticFunction.tutorialStart);
     }
 
     public void ResetRound()

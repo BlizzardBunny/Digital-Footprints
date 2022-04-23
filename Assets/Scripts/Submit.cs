@@ -114,6 +114,7 @@ public class Submit : MonoBehaviour
         //after final profile
         if (StaticFunction.tutorialStart)
         {
+            StaticFunction.roundHasStarted = false;
             PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
 
             script.endTutorial();

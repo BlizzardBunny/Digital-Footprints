@@ -595,7 +595,7 @@ public class CutscenePlayer : MonoBehaviour
 
         for (int i = StaticFunction.dialogueLineCounter; i < dialogue.Length; i++)
         {
-            Debug.Log(i);
+            Debug.Log(i + StaticFunction.roundHasStarted.ToString());
             if (dialogue[i].isPlayerSpeaking)
             {
                 if (dialogue[i].isThought)
