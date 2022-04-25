@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Flag : MonoBehaviour
@@ -204,8 +205,6 @@ public class Flag : MonoBehaviour
 
     public void FlagItem()
     {
-        Debug.Log("tutorialStart: " + StaticFunction.tutorialStart);
-        Debug.Log("pointerPanel null: " + (pointersPanel == null));
         if (StaticFunction.tutorialStart && (pointersPanel != null))
         {
             PointerGenerator script = (PointerGenerator)pointersPanel.GetComponent(typeof(PointerGenerator));
@@ -245,10 +244,15 @@ public class Flag : MonoBehaviour
                 transform.rotation,
                 GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 
-            Transform messageField = editableMA.transform.Find("MessageField");
+            if (SceneManager.GetActiveScene().name.Equals("Tutorial"))
+            {
+                editableMA.transform.Find("Clear").GetComponent<Button>().interactable = false;
+            }
+
+            Transform item = editableMA.transform.Find("MessageField").Find("Item");
             Transform snsField = editableMA.transform.Find("SNSField");
 
-            messageField.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
+            item.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
             snsField.GetComponent<TMPro.TextMeshProUGUI>().text = snsName;
             StaticFunction.editableIsDrawn = true;
             StaticFunction.setIsChecking(true);
@@ -258,13 +262,13 @@ public class Flag : MonoBehaviour
         {
             editableMA = GameObject.FindGameObjectWithTag("EditableMA");
 
-            Transform messageField = editableMA.transform.Find("MessageField");
+            Transform item = editableMA.transform.Find("MessageField").Find("Item");
 
-            if (messageField.GetComponent<TMPro.TextMeshProUGUI>().text != parentName)
+            if (item.GetComponent<TMPro.TextMeshProUGUI>().text != parentName)
             {
                 Transform snsField = editableMA.transform.Find("SNSField");
 
-                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
+                item.GetComponent<TMPro.TextMeshProUGUI>().text = parentName;
                 snsField.GetComponent<TMPro.TextMeshProUGUI>().text = snsName;
                 StaticFunction.editableIsDrawn = true;
                 StaticFunction.setIsChecking(true);

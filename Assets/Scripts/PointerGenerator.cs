@@ -219,6 +219,11 @@ public class PointerGenerator : MonoBehaviour
 
     public void doubleCheck(string flagName)
     {
+        if (flagName.Equals(""))
+        {
+            return;
+        }
+
         toggleSubmitButton();
 
         if (GameObject.FindGameObjectsWithTag("ReportEntry").Length > 0)

@@ -8,14 +8,17 @@ public class MakeReportEntry : MonoBehaviour
     public GameObject reportEntryPrefab;
     public Sprite[] snsLogos;
 
-    private GameObject messageField;
-    private GameObject snsField;
     private GameObject reportEntry;
 
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    private void Update()
+    {
+        
     }
 
     public void MakeReport()
@@ -25,20 +28,21 @@ public class MakeReportEntry : MonoBehaviour
             StaticFunction.setCurrentProfile(StaticFunction.getProfileNum());
         }
 
-        messageField = GameObject.FindGameObjectWithTag("MessageField");
-        snsField = GameObject.FindGameObjectWithTag("SNSField");
+        Transform item = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Item");
+        string itemText = item.GetComponent<TMPro.TextMeshProUGUI>().text;
+        Transform flag = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Flag");
+        string flagText = flag.GetComponent<TMPro.TextMeshProUGUI>().text;
+        GameObject snsField = GameObject.FindGameObjectWithTag("SNSField");
         string sns = snsField.GetComponent<TMPro.TextMeshProUGUI>().text;
-
-        string[] reportDetails = messageField.GetComponent<TMPro.TextMeshProUGUI>().text.Split(new string[] { " - " }, System.StringSplitOptions.None);
 
         if (StaticFunction.tutorialStart)
         {
             PointerGenerator script = (PointerGenerator)(GameObject.FindGameObjectWithTag("PointersPanel")).GetComponent(typeof(PointerGenerator));
             StaticFunction.tutorialCanSubmit = true;
-            script.doubleCheck(reportDetails[1]);
+            script.doubleCheck(flagText);
         }
 
-        if (reportDetails.Length < 2)
+        if (flagText.Equals("") || itemText.Equals(""))
         {
             //do nothing
         }
@@ -50,8 +54,8 @@ public class MakeReportEntry : MonoBehaviour
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 
-            reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
-            reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[1];
+            reportEntry.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>().text = itemText;
+            reportEntry.transform.Find("FlagName").GetComponent<TMPro.TextMeshProUGUI>().text = flagText;
             reportEntry.transform.Find("SNSName").GetComponent<TMPro.TextMeshProUGUI>().text = sns;
             
             if (sns.Contains("Chirper"))
@@ -91,5 +95,18 @@ public class MakeReportEntry : MonoBehaviour
         }
 
         Destroy(transform.parent.gameObject);
+    }
+
+    public void ClearMessageField()
+    {
+        Transform item = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Item");
+        Transform flag = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Flag");
+        item.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        flag.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+        {
+            Destroy(x);
+        }
     }
 }

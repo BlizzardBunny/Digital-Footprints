@@ -37,17 +37,16 @@ public class Category : MonoBehaviour
 
         try
         {
-            Transform messageField = GameObject.FindGameObjectWithTag("MessageField").transform;
-            string text = messageField.GetComponent<TMPro.TextMeshProUGUI>().text;
+            Transform flag = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Flag");
+            string text = flag.GetComponent<TMPro.TextMeshProUGUI>().text;
 
-            if (text.Contains("-"))
+            if (!text.Equals(""))
             {
-                string[] reportDetails = text.Split(new string[] { " - " }, System.StringSplitOptions.None);
-                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = reportDetails[0];
+                flag.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             }
             else
             {
-                messageField.GetComponent<TMPro.TextMeshProUGUI>().text = text + " - " + buttonText;
+                flag.GetComponent<TMPro.TextMeshProUGUI>().text = buttonText;
 
                 if (StaticFunction.tutorialStart)
                 {
