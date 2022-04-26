@@ -109,7 +109,10 @@ public class Submit : MonoBehaviour
 
         CheckCorrectness();
 
-        ResetStage();
+        if (StaticFunction.getProfileNum() <= StaticFunction.getTotalProfiles())
+        {
+            ResetStage();
+        }
 
         //after final profile
         if (StaticFunction.tutorialStart)

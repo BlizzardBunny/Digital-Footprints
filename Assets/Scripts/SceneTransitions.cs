@@ -16,6 +16,7 @@ public class SceneTransitions : MonoBehaviour
     {
         if (NextLevelButton != null)
         {
+            Debug.Log("============" + StaticFunction.getMistakes() + " > " + StaticFunction.getTotalProfiles());
             //if the player's on level 3 or failed the stage, don't let them go to the next level
             if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
             {
@@ -28,19 +29,23 @@ public class SceneTransitions : MonoBehaviour
                     if (StaticFunction.getGameOver() == true || StaticFunction.getMistakes() < StaticFunction.getTotalProfiles())
                     {
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Thank you for playing!";
+                        StaticFunction.passedLevel = true;
                     }
                     else if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
                     {
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Failed";
+                        StaticFunction.passedLevel = false;
                     }
                     else
                     {
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Complete";
+                        StaticFunction.passedLevel = true;
                     }
                 }
             }
             else
             {
+                StaticFunction.passedLevel = true;
                 NextLevelButton.enabled = true;
                 NextLevelButton.GetComponentInChildren<Text>().text = "Next Level";                    
             }
@@ -139,13 +144,15 @@ public class SceneTransitions : MonoBehaviour
     //This is when you click on next level at the end screen
     public void LoadLevel()
     {
+        StaticFunction.passedLevel = false;
         //currLevel is set in LevelSelectTransitions already so we just need to load the scene here nalang
         SceneManager.LoadScene(StaticFunction.getCurrentLevel());
     }
     //This is when you click on restart level on the end screen
     public static void RestartLevel()
     {
-        string currLevel = StaticFunction.getCurrentLevel();
+        StaticFunction.passedLevel = false;
+        string currLevel = StaticFunction.prevLevel;
         if (currLevel == "Stage 1")
         {
             StaticFunction.resetVals(3, 1);
@@ -159,6 +166,12 @@ public class SceneTransitions : MonoBehaviour
             StaticFunction.resetVals(5, 5);
         }
         StaticFunction.setCurrentProfile(0);
+
+        if (PlayerPrefs.HasKey("currLevel"))
+        {
+            PlayerPrefs.SetString("currLevel", currLevel);
+        }
+
         SceneManager.LoadScene(currLevel);
     }
     //Exits the game

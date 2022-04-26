@@ -62,6 +62,13 @@ public class PausedMenuFunctions : MonoBehaviour
             {
                 StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
             }
+            else if (SceneManager.GetActiveScene().name.Equals("LevelSelect"))
+            {
+                if (!StaticFunction.passedLevel)
+                {
+                    StaticFunction.setCurrentLevel(StaticFunction.prevLevel);
+                }
+            }
         }
 
         foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
@@ -71,18 +78,20 @@ public class PausedMenuFunctions : MonoBehaviour
 
         StaticFunction.roundHasStarted = false;
 
+        SaveGame();
+
         SceneManager.LoadScene("MainMenu");
     }
 
     public void SaveGame()
     {
-        if (SceneManager.GetActiveScene().name.Equals("LevelSelect"))
+        if (SceneManager.GetActiveScene().name.Contains("Stage") || SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {
-            PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
+            PlayerPrefs.SetString("currLevel", SceneManager.GetActiveScene().name);
         }
         else
         {
-            PlayerPrefs.SetString("currLevel", SceneManager.GetActiveScene().name);
+            PlayerPrefs.SetString("currLevel", StaticFunction.getCurrentLevel());
         }
 
         if (StaticFunction.tutorialStart)

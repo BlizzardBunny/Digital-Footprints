@@ -193,6 +193,8 @@ public static class StaticFunction
     private static int mistakes = 0;
     private static int currentProfile = 0;
     private static string currentLevel = "AskDialogue";
+    public static string prevLevel = "";
+    public static bool passedLevel = false;
 
     //flag system setup
     public static List<GameObject> clickables = new List<GameObject>();

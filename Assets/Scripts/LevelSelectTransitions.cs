@@ -48,7 +48,7 @@ public class LevelSelectTransitions : MonoBehaviour
                 nextLevel = "";
                 break;
         }
-
+        StaticFunction.prevLevel = currLevel;
         StaticFunction.setCurrentLevel(nextLevel);
 
         if (StaticFunction.getCurrentLevel().Equals(""))
