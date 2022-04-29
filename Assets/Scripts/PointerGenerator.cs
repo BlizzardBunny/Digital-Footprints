@@ -319,6 +319,7 @@ public class PointerGenerator : MonoBehaviour
         anim.SetBool("isFadingIn", false);
 
         yield return new WaitForSeconds(1f);
+        Debug.Log("PointerGenerator: " + StaticFunction.getMistakes() + " , " + StaticFunction.getProfileNum());
         StaticFunction.resetVals(3, 1);
         StaticFunction.setCurrentLevel("AskDialogue");
         StaticFunction.roundHasStarted = false;

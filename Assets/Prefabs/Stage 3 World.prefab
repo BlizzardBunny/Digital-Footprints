@@ -23867,6 +23867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlay: {fileID: 0}
   dialoguePrefab: {fileID: 4645397926517759041, guid: d6d118a1396556b46b634f2e19f60fdb, type: 3}
+  pointerPrefab: {fileID: 5416389610568732675, guid: d129d7fa19ee011469e804359aca847e, type: 3}
 --- !u!114 &7245163657625860123
 MonoBehaviour:
   m_ObjectHideFlags: 0

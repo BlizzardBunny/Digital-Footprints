@@ -7,19 +7,24 @@ public class TutorialPlayer : MonoBehaviour
 {
     public Transform overlay;
     public GameObject dialoguePrefab;
+    public GameObject pointerPrefab;
 
     private GameObject world;
     private GameObject pointersPanel;
     private GameObject dialogue;
     private float typingSpeed = 0.03f;
+    private GameObject pointer;
 
     public class Dialogue
     {
         public string line { get; }
         public bool allowPlayerControl { get; }
+        public string pointerInfo { get; }
+        public Vector3 pointerLocation { get; }
 
         public Dialogue(string x) => (line, allowPlayerControl) = (x, false);
         public Dialogue(string x, bool y) => (line, allowPlayerControl) = (x, y);
+        public Dialogue(string x, string z, Vector3 v) => (line, pointerInfo, pointerLocation) = (x, z, v);
     }
 
     private Dialogue[] stageOne = new Dialogue[]
@@ -40,7 +45,9 @@ public class TutorialPlayer : MonoBehaviour
         new Dialogue("So we've decided to let you handle medium-priority customers."),
         new Dialogue("These are customers who allow us to look into their privacy settings."),
         new Dialogue("More details on proper Privacy Settings can be found in your Company Standards."),
-        new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on both sites!"),
+        new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on both sites!",
+            "You now have access to: CHIRPER!",
+            new Vector3(908.0f,267.70001220703127f,0.0f)),
         new Dialogue("As always, make sure to double-check your report before you [SUBMIT]."),
         new Dialogue("Good luck!", true)
     };
@@ -51,7 +58,9 @@ public class TutorialPlayer : MonoBehaviour
         new Dialogue("These are customers who allow us to look into their passwords."),
         new Dialogue("It's a good thing we had you sign that NDA before joining the company! Haha!"),
         new Dialogue("There are more details on proper Password Strength in your Company Standards."),
-        new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on all sites!"),
+        new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on all sites!",
+            "You now have access to: |PHOTOGRAM!",
+            new Vector3(1125.0f,267.0f,0.0f)),
         new Dialogue("As always, make sure to double-check your report before you [SUBMIT]."),
         new Dialogue("Good luck!", true)
     };
@@ -64,7 +73,14 @@ public class TutorialPlayer : MonoBehaviour
         if (SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {
             pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
-            StartCoroutine(runTutorial(overlay.Find("Thoughts"), StaticFunction.updateStrings("Alright, let's see what $r's account is like.")));
+            try
+            {
+                StartCoroutine(runTutorial(overlay.Find("Thoughts"), StaticFunction.updateStrings("Alright, let's see what $r's account is like.")));
+            }
+            catch
+            {
+                StopAllCoroutines();
+            }
         }
         else
         {
@@ -75,20 +91,27 @@ public class TutorialPlayer : MonoBehaviour
             }
             else
             {
-                if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
+                try
                 {
-                    //StaticFunction.setCurrentLevel("Stage 1");
-                    StartCoroutine(runStage(stageOne));
+                    if (SceneManager.GetActiveScene().name.Equals("Stage 1"))
+                    {
+                        //StaticFunction.setCurrentLevel("Stage 1");
+                        StartCoroutine(runStage(stageOne));
+                    }
+                    else if (SceneManager.GetActiveScene().name.Equals("Stage 2"))
+                    {
+                        //StaticFunction.setCurrentLevel("Stage 2");
+                        StartCoroutine(runStage(stageTwo));
+                    }
+                    else if (SceneManager.GetActiveScene().name.Equals("Stage 3"))
+                    {
+                        //StaticFunction.setCurrentLevel("Stage 3");
+                        StartCoroutine(runStage(stageThree));
+                    }
                 }
-                else if (SceneManager.GetActiveScene().name.Equals("Stage 2"))
+                catch
                 {
-                    //StaticFunction.setCurrentLevel("Stage 2");
-                    StartCoroutine(runStage(stageTwo));
-                }
-                else if (SceneManager.GetActiveScene().name.Equals("Stage 3"))
-                {
-                    //StaticFunction.setCurrentLevel("Stage 3");
-                    StartCoroutine(runStage(stageThree));
+                    StopAllCoroutines();
                 }
             }
         }
@@ -146,9 +169,25 @@ public class TutorialPlayer : MonoBehaviour
         }
         Transform textBox = dialogue.transform.Find("BG").Find("Dialogue");
 
-        for (int i = StaticFunction.dialogueIndex; i < stageDialogue.Length; i++)
+        for (int i = 0; i < stageDialogue.Length; i++)
         {
+            if (pointer != null)
+            {
+                Destroy(pointer);
+            }
+
             textBox.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+
+            if (stageDialogue[i].pointerInfo != null)
+            {
+                pointer = Instantiate(
+                    pointerPrefab,
+                    stageDialogue[i].pointerLocation,
+                    Quaternion.identity,
+                    world.transform);
+
+                pointer.transform.Find("Details").GetComponent<TMPro.TextMeshProUGUI>().text = stageDialogue[i].pointerInfo;
+            }
 
             yield return StartCoroutine(typingAnim(textBox, stageDialogue[i].line));
 
@@ -158,7 +197,7 @@ public class TutorialPlayer : MonoBehaviour
                 Destroy(dialogue);
                 dialogue = null;
                 break;
-            }
+            }            
         }
 
         if (StaticFunction.gotoLevelSelect)

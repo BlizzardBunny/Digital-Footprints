@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2b6731ecd381145ae43fda42fd40e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifPrefab: {fileID: 7356037365626714882, guid: 52acf0b0823a0e74fbb67343885ae4fe, type: 3}
+  notifPrefab: {fileID: 108294812714625385, guid: 5a68561c2799f9544a84abd557838486, type: 3}
   pausedMenuPrefab: {fileID: 0}
 --- !u!1 &2621098471036447031
 GameObject:
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2b6731ecd381145ae43fda42fd40e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notifPrefab: {fileID: 0}
+  notifPrefab: {fileID: 108294812714625385, guid: 5a68561c2799f9544a84abd557838486, type: 3}
   pausedMenuPrefab: {fileID: 0}
 --- !u!1 &2621098471253092744
 GameObject:

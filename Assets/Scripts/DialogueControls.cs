@@ -64,6 +64,13 @@ public class DialogueControls : MonoBehaviour
         {
 
         }
+        StopAllCoroutines();
+        StaticFunction.editableIsDrawn = false;
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("Categories"))
+        {
+            Destroy(x);
+        }
 
         Destroy(transform.parent.gameObject);
     }
@@ -77,7 +84,14 @@ public class DialogueControls : MonoBehaviour
     IEnumerator ShowMessage(Animator anim)
     {
         yield return new WaitForSeconds(5f);
-        anim.SetBool("isFadingOut", true);
+        try
+        {
+            anim.SetBool("isFadingOut", true);
+        }
+        catch
+        {
+            StopAllCoroutines();
+        }
         yield return new WaitForSeconds(1f);        
         DestroyParent();
     }

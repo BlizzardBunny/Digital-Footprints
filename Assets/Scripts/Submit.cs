@@ -128,7 +128,7 @@ public class Submit : MonoBehaviour
 
             TutorialPlayer script = (TutorialPlayer)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(TutorialPlayer));
 
-            if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
+            if (StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
             {
                 script.run(roundMessagesBad);
             }
@@ -141,8 +141,8 @@ public class Submit : MonoBehaviour
                 script.run(roundMessagesGood);
             }
 
-            FlagSystemSetup flagSystem = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
-            flagSystem.ResetCompletely();
+            //FlagSystemSetup flagSystem = (FlagSystemSetup)GameObject.FindGameObjectWithTag("World").GetComponent(typeof(FlagSystemSetup));
+            //flagSystem.ResetCompletely();
 
             StaticFunction.reloadSameStage = false;
             StaticFunction.roundHasStarted = false;

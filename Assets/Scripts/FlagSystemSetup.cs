@@ -18,14 +18,6 @@ public class FlagSystemSetup : MonoBehaviour
         ResetCompletely();
     }
 
-    private void Update()
-    {
-        if (!StaticFunction.roundHasStarted)
-        {
-            ResetCompletely();
-        }
-    }
-
     public void ResetCompletely()
     {
         //StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
@@ -48,13 +40,19 @@ public class FlagSystemSetup : MonoBehaviour
             SetStageRequirements();
 
             SetStage();
+            StaticFunction.roundHasStarted = true;
         }
     }
 
     public void ResetRound()
     {
-        StaticFunction.roundHasStarted = false;
-
+        Debug.Log("ResetRound()");
+        //StaticFunction.roundHasStarted = false;
+        StaticFunction.flagIndexes.Clear();
+        StaticFunction.flagIndexes.TrimExcess();
+        StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
+        StaticFunction.clickables.Clear();
+        StaticFunction.clickables.TrimExcess();
         StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
         foreach (GameObject clickable in StaticFunction.clickables)
         {
@@ -182,8 +180,6 @@ public class FlagSystemSetup : MonoBehaviour
                 script.SetupNonFlaggedItem(StaticFunction.getCurrentProfile(), i);
             }
         }
-
-        StaticFunction.roundHasStarted = true;
     }
 
     void RandomizeFlags()

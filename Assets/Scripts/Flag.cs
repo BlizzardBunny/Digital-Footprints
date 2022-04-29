@@ -43,16 +43,8 @@ public class Flag : MonoBehaviour
     public int RandomFlagIndex(int maximum, int id)
     {
         int ret = -1;
-        if (!StaticFunction.roundHasStarted)
-        {
-            ret = UnityEngine.Random.Range(0, maximum);
-            StaticFunction.flagIndexes.Add(ret);
-        }
-        else
-        {
-            ret = StaticFunction.flagIndexes[id];
-        }
-
+        ret = UnityEngine.Random.Range(0, maximum);
+        StaticFunction.flagIndexes.Add(ret);
         return ret;
     }
 
@@ -67,13 +59,13 @@ public class Flag : MonoBehaviour
             transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[profileNum];
         }
         else if (parentName.StartsWith("Post"))
-        {
+        {            
             //make deets of post match deets of profile
             Transform postProfilePic = transform.parent.transform.Find("ProfilePic");
             Transform postName = transform.parent.transform.Find("Name");
             postProfilePic.GetComponent<Image>().sprite = profilePics[profileNum];
             postName.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getNames()[profileNum];
-
+            
             //randomize post content
             Transform caption = transform.parent.transform.Find("Caption");
             Transform photo = transform.parent.transform.Find("Photo");

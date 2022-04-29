@@ -129,11 +129,21 @@ public class PausedMenuFunctions : MonoBehaviour
         }
         else
         {
+            Transform parent;
+            try
+            {
+                parent = GameObject.FindGameObjectWithTag("AskDialogueScene").transform;
+            }
+            catch
+            {
+                parent = GameObject.FindGameObjectWithTag("World").transform;
+            }
+
             notif = Instantiate(
                 notifPrefab,
-                new Vector3(281.0283203125f, 1022.5988159179688f - (114.8024f * StaticFunction.mistakeMessages.Count), 0.0f),
+                new Vector3(281.0283203125f, 1022.5988159179688f, 0.0f),
                 Quaternion.identity,
-                GameObject.FindGameObjectWithTag("World").transform
+                parent
             );
         }
 

@@ -18,11 +18,11 @@ public class SceneTransitions : MonoBehaviour
         {
             Debug.Log("============" + StaticFunction.getMistakes() + " > " + StaticFunction.getTotalProfiles());
             //if the player's on level 3 or failed the stage, don't let them go to the next level
-            if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
+            if (StaticFunction.getCurrentLevel() == "Stage 3" || StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
             {
                 NextLevelButton.enabled = false;
                 NextLevelButton.GetComponentInChildren<Text>().text = "";
-                NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0);
+                NextLevelButton.GetComponent<Image>().color = new Color(0, 0, 0, 0);
 
                 foreach(GameObject x in GameObject.FindGameObjectsWithTag("LevelTitle"))
                 {
@@ -31,7 +31,7 @@ public class SceneTransitions : MonoBehaviour
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Thank you for playing!";
                         StaticFunction.passedLevel = true;
                     }
-                    else if (StaticFunction.getMistakes() > StaticFunction.getTotalProfiles())
+                    else if (StaticFunction.getMistakes() >= StaticFunction.getTotalProfiles())
                     {
                         x.GetComponent<TMPro.TextMeshProUGUI>().text = "Level Failed";
                         StaticFunction.passedLevel = false;
@@ -94,6 +94,7 @@ public class SceneTransitions : MonoBehaviour
         yield return new WaitForSeconds(1f);
         anim.SetBool("isFading", true);
         yield return new WaitForSeconds(1f);
+        Debug.Log("WaitnLoad: " + StaticFunction.getMistakes() + " , " + StaticFunction.getProfileNum());
         StaticFunction.resetVals(3, 1);
         StaticFunction.instanceCounter = 0;
         SceneManager.LoadScene(StaticFunction.getCurrentLevel());
@@ -153,6 +154,8 @@ public class SceneTransitions : MonoBehaviour
     {
         StaticFunction.passedLevel = false;
         string currLevel = StaticFunction.prevLevel;
+
+        Debug.Log("RestartLvl: " + StaticFunction.getMistakes() + " , " + StaticFunction.getProfileNum());
         if (currLevel == "Stage 1")
         {
             StaticFunction.resetVals(3, 1);
