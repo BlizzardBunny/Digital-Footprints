@@ -879,6 +879,22 @@ public class CutscenePlayer : MonoBehaviour
         StartCoroutine(fadeOut(currDialogue[currLine].sceneToTransitionTo));
     }
 
+    public void nextScene(string sceneName)
+    {
+        if (StaticFunction.tutorialStart)
+        {
+            StaticFunction.tutorialPart = !StaticFunction.tutorialPart;
+        }
+
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+        {
+            Destroy(x);
+        }
+
+        StaticFunction.dialogueLineCounter = 0;
+        StartCoroutine(fadeOut(sceneName));
+    }
+
     private void Update()
     {
         transform.SetAsLastSibling();

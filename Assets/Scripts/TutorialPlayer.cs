@@ -166,6 +166,11 @@ public class TutorialPlayer : MonoBehaviour
                 new Vector3(959.9996948242188f,540.764892578125f,0.0f),
                 Quaternion.identity,
                 world.transform);
+
+            if (StaticFunction.getProfileNum() > 0)
+            {
+                dialogue.transform.Find("Close").SetAsFirstSibling();
+            }
         }
         Transform textBox = dialogue.transform.Find("BG").Find("Dialogue");
 

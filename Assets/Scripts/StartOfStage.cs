@@ -12,6 +12,7 @@ public class StartOfStage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StaticFunction.setCurrentLevel(SceneManager.GetActiveScene().name);
         if (StaticFunction.roundHasStarted)
         {
             StaticFunction.roundHasStarted = false;
