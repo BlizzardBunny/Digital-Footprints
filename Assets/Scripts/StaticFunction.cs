@@ -163,8 +163,8 @@ public static class StaticFunction
     private static string[] passwordFlags = new string[]
     {
         "Complexity",
-        "Personal Information",
-        "Personal Information",
+        "Personal Info",
+        "Personal Info",
         "Password Length",
         "Complexity",
         "Complexity",
@@ -195,6 +195,7 @@ public static class StaticFunction
     private static string currentLevel = "AskDialogue";
     public static string prevLevel = "";
     public static bool passedLevel = false;
+    public static bool isShowingDetails = false;
 
     //flag system setup
     public static List<GameObject> clickables = new List<GameObject>();
