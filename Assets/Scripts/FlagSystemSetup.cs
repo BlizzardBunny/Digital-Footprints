@@ -25,6 +25,8 @@ public class FlagSystemSetup : MonoBehaviour
         {
             Debug.Log("ResetCompletely()");
             StaticFunction.resetVals(1, 1);
+            StaticFunction.flags.Clear();
+            StaticFunction.flags.TrimExcess();
             StaticFunction.clickables.Clear();
             StaticFunction.clickables.TrimExcess();
             StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
@@ -41,13 +43,16 @@ public class FlagSystemSetup : MonoBehaviour
 
             SetStage();
             StaticFunction.roundHasStarted = true;
+
+            Debug.Log("FlagSystemSetup: " + StaticFunction.flags.Count);
         }
     }
 
     public void ResetRound()
     {
         Debug.Log("ResetRound()");
-        //StaticFunction.roundHasStarted = false;
+        StaticFunction.flags.Clear();
+        StaticFunction.flags.TrimExcess();
         StaticFunction.flagIndexes.Clear();
         StaticFunction.flagIndexes.TrimExcess();
         StaticFunction.clickables = GameObject.FindGameObjectsWithTag("Clickable").ToList<GameObject>();
@@ -66,6 +71,7 @@ public class FlagSystemSetup : MonoBehaviour
         SetStageRequirements();
 
         SetStage();
+        Debug.Log("FlagSystemSetup: " + StaticFunction.flags.Count);
     }
 
     void SetStageRequirements()

@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class StaticFunction
 {
+    public struct Triple
+    {
+        public string Item1, Item2, Item3;
+
+        public Triple(string item1, string item2, string item3) => (Item1, Item2, Item3) = (item1, item2, item3);
+    }
+
+
     private static string[] badCaptions = new string[]
     {
         "My new home! #Goals #HomeOwner",
@@ -203,6 +211,7 @@ public static class StaticFunction
     public static List<int> flagIndexes = new List<int>();
     public static bool roundHasStarted = false;
 
+    public static List<Triple> flags = new List<Triple>();
     public static bool editableIsDrawn = false;
     public static int dialogueLineCounter = 0;
     public static int choiceIndex = 0;

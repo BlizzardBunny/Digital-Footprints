@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -161,6 +161,10 @@ public class Submit : MonoBehaviour
                 MakeMistakeMessage("No reports were made. You incur " + StaticFunction.getTotalErrors() + " penalties.");
             }
 
+            foreach (StaticFunction.Triple flag in StaticFunction.flags)
+            {
+                MakeMistakeMessage(flag.Item1 + " in " + flag.Item2.Replace(" (Panel)","") + " should be " + flag.Item3);
+            }
         }
         else
         {
@@ -188,8 +192,28 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be Personal Information.");
                                 wrongFlags++;
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == "Personal Information"))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
                             }
-                            Debug.Log("Caught " + itemName);
+                            else
+                            {
+                                Debug.Log("Caught " + itemName);
+
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == flagName))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
+                            }
                             errorsCaught++;
                         }
                         else if (itemName.StartsWith("Post"))
@@ -205,8 +229,27 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getCaptionFlags()[flagIndex]);
                                 wrongFlags++;
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == StaticFunction.getCaptionFlags()[flagIndex]))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
                             }
-                            Debug.Log("Caught " + itemName);
+                            else
+                            {
+                                Debug.Log("Caught " + itemName);
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == flagName))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
+                            }
                             errorsCaught++;
                         }
                         else if (clickable.transform.parent.parent.name == "PrivacyWindow")
@@ -230,8 +273,27 @@ public class Submit : MonoBehaviour
                                             StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                             MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPrivacySettingFlags()[i]);
                                             wrongFlags++;
+                                            foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                            {
+                                                if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == StaticFunction.getPrivacySettingFlags()[i]))
+                                                {
+                                                    StaticFunction.flags.Remove(flag);
+                                                    break;
+                                                }
+                                            }
                                         }
-                                        Debug.Log("Caught " + itemName);
+                                        else
+                                        {
+                                            Debug.Log("Caught " + itemName);
+                                            foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                            {
+                                                if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == flagName))
+                                                {
+                                                    StaticFunction.flags.Remove(flag);
+                                                    break;
+                                                }
+                                            }
+                                        }
                                         errorsCaught++;
                                         break;
                                     }
@@ -251,6 +313,26 @@ public class Submit : MonoBehaviour
                                 StaticFunction.setMistakes(StaticFunction.getMistakes() + 1);
                                 MakeMistakeMessage(itemName + " is not " + flagName + ".\nIt should be " + StaticFunction.getPasswordFlags()[flagIndex]);
                                 wrongFlags++;
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == StaticFunction.getPasswordFlags()[flagIndex]))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Debug.Log("Caught " + itemName);
+                                foreach (StaticFunction.Triple flag in StaticFunction.flags)
+                                {
+                                    if ((flag.Item1 == itemName) && (flag.Item2 == snsName) && (flag.Item3 == flagName))
+                                    {
+                                        StaticFunction.flags.Remove(flag);
+                                        break;
+                                    }
+                                }
                             }
                             errorsCaught++;
                         }
@@ -261,14 +343,19 @@ public class Submit : MonoBehaviour
             }
 
             //check for not enough errors caught
-            if (wrongFlags == 0)
+            if (StaticFunction.getTotalErrors() > errorsCaught)
             {
-                if (StaticFunction.getTotalErrors() > errorsCaught)
+                StaticFunction.setMistakes(StaticFunction.getMistakes() + (StaticFunction.getTotalErrors() - errorsCaught));
+                MakeMistakeMessage("You missed " + (StaticFunction.getTotalErrors() - errorsCaught) + " errors! You incur that many mistakes.");
+
+                foreach (StaticFunction.Triple flag in StaticFunction.flags)
                 {
-                    StaticFunction.setMistakes(StaticFunction.getMistakes() + (StaticFunction.getTotalErrors() - errorsCaught));
-                    MakeMistakeMessage("You missed " + (StaticFunction.getTotalErrors() - errorsCaught) + " errors! You incur that many mistakes.");
+                    MakeMistakeMessage(flag.Item1 + " in " + flag.Item2.Replace(" (Panel)", "") + " should be " + flag.Item3);
                 }
-                else if (StaticFunction.getTotalErrors() == errorsCaught)
+            }
+            else if (StaticFunction.getTotalErrors() == errorsCaught)
+            {
+                if (wrongFlags == 0)
                 {
                     perfectProfile = true;
                     MakeMistakeMessage("Great job!!! You got all the errors on that profile!");

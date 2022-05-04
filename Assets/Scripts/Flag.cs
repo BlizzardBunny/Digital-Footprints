@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,6 +57,7 @@ public class Flag : MonoBehaviour
         if (parentName == "Address")
         {
             transform.parent.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadAddress()[profileNum];
+            StaticFunction.flags.Add(new StaticFunction.Triple(parentName, snsName, "Personal Information"));
         }
         else if (parentName.StartsWith("Post"))
         {            
@@ -73,6 +74,7 @@ public class Flag : MonoBehaviour
             flagIndex = RandomFlagIndex(StaticFunction.getBadCaptions().Length, id);
             caption.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getBadCaptions()[flagIndex];
             photo.GetComponent<Image>().sprite = badPosts[flagIndex];
+            StaticFunction.flags.Add(new StaticFunction.Triple(parentName, snsName, StaticFunction.getCaptionFlags()[flagIndex]));
         }
         else if (transform.parent.parent.name == "PrivacyWindow")
         {
@@ -84,6 +86,14 @@ public class Flag : MonoBehaviour
 
             everyoneToggle.isOn = true;
             friendsToggle.isOn = false;
+            for (int i = 0; i < StaticFunction.getPrivacySettingChoices().Length; i++)
+            {
+                if (parentName.Equals(StaticFunction.getPrivacySettingChoices()[i]))
+                {
+                    StaticFunction.flags.Add(new StaticFunction.Triple(parentName, snsName, StaticFunction.getPrivacySettingFlags()[i]));
+                    break;
+                }
+            }
         }
         else if (parentName == "Password")
         {
@@ -132,6 +142,7 @@ public class Flag : MonoBehaviour
             }
 
             passwordField.GetComponent<TMPro.TextMeshProUGUI>().text = temp;
+            StaticFunction.flags.Add(new StaticFunction.Triple(parentName, snsName, StaticFunction.getPasswordFlags()[flagIndex]));
         }
     }
 
