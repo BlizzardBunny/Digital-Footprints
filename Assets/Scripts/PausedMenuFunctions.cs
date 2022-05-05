@@ -201,6 +201,15 @@ public class PausedMenuFunctions : MonoBehaviour
         script.StartGame();
     }
 
+    public void RestartLevel()
+    {
+        foreach (GameObject x in GameObject.FindGameObjectsWithTag("World"))
+        {
+            Destroy(x);
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void ExitGame()
     {
         SaveGame();
