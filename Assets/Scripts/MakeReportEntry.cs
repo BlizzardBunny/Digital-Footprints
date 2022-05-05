@@ -50,7 +50,7 @@ public class MakeReportEntry : MonoBehaviour
         {
             reportEntry = Instantiate(
                 reportEntryPrefab,
-                new Vector3(1752.53125f, 979.4930419921875f, 0.0f),                             
+                GameObject.FindGameObjectWithTag("MessagesBG").transform.position,                             
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 

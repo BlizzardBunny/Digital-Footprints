@@ -243,7 +243,7 @@ public class Flag : MonoBehaviour
 
             editableMA = Instantiate(
                 editableMAPrefab,
-                new Vector3(1753.4014892578125f, 685.0f, 0.0f),
+                GameObject.FindGameObjectWithTag("MessagesCanvas").transform.position,
                 transform.rotation,
                 GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 

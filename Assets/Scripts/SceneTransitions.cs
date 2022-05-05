@@ -56,7 +56,7 @@ public class SceneTransitions : MonoBehaviour
     {
         confirmation = Instantiate(
                confirmationPrefab,
-               new Vector3(959.9976806640625f,540.0001220703125f,0.0f),
+               transform.parent.position,
                Quaternion.identity,
                transform.parent);
     }

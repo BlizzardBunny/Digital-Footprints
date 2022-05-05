@@ -163,7 +163,7 @@ public class TutorialPlayer : MonoBehaviour
         {
             dialogue = Instantiate(
                 dialoguePrefab,
-                new Vector3(959.9996948242188f,540.764892578125f,0.0f),
+                world.transform.position,
                 Quaternion.identity,
                 world.transform);
 

@@ -29,7 +29,7 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             pausedMenu = Instantiate(
                 pausedMenuPrefab,
-                new Vector3(959.9949951171875f, 540.3999633789063f, 0.0f),
+                GameObject.FindGameObjectWithTag("AskDialogueScene").transform.position,
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("AskDialogueScene").transform
             );
@@ -38,7 +38,7 @@ public class PausedMenuFunctions : MonoBehaviour
         {
             pausedMenu = Instantiate(
                 pausedMenuPrefab,
-                new Vector3(959.9949951171875f, 540.3999633789063f, 0.0f),
+                GameObject.FindGameObjectWithTag("World").transform.position,
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
             );
@@ -120,9 +120,11 @@ public class PausedMenuFunctions : MonoBehaviour
     {
         if (notifPrefab.name.EndsWith("1"))
         {
+            Vector3 pos = GameObject.FindGameObjectWithTag("World").transform.position;
+            RectTransform notifSize = notifPrefab.GetComponent<RectTransform>();
             notif = Instantiate(
                 notifPrefab,
-                new Vector3(376.07061767578127f, 1003.189697265625f, 0.0f),
+                pos + new Vector3(-pos.x + notifSize.sizeDelta.x, pos.y - notifSize.sizeDelta.y, 0.0f),
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
             );
@@ -141,7 +143,7 @@ public class PausedMenuFunctions : MonoBehaviour
 
             notif = Instantiate(
                 notifPrefab,
-                new Vector3(281.0283203125f, 1022.5988159179688f, 0.0f),
+                parent.position,
                 Quaternion.identity,
                 parent
             );

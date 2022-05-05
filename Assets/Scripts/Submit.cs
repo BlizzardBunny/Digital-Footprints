@@ -56,7 +56,7 @@ public class Submit : MonoBehaviour
     {
         confirmation = Instantiate(
                 confirmationPrefab,
-                new Vector3(962.2625122070313f, 540.0f, 0.0f),
+                GameObject.FindGameObjectWithTag("World").transform.position,
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
         );
@@ -74,7 +74,7 @@ public class Submit : MonoBehaviour
     {
         mistakeMessage = Instantiate(
                 mistakeMessagePrefab,
-                new Vector3(281.0283203125f, 1022.5988159179688f - (114.8024f * StaticFunction.mistakeMessages.Count), 0.0f),
+                GameObject.FindGameObjectWithTag("World").transform.position - new Vector3(0.0f, (114.8024f * StaticFunction.mistakeMessages.Count), 0.0f),
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
         );

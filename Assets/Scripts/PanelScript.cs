@@ -113,7 +113,7 @@ public class PanelScript : MonoBehaviour
     {
         Instantiate(
             categoryPanelPrefab,
-            new Vector3(1749.999755859375f, 287.0400085449219f, 0.0f),
+            GameObject.FindGameObjectWithTag("CompanyStandards").transform.position,
             clicked.transform.rotation,
             GameObject.FindGameObjectWithTag("CompanyStandards").transform
             );
