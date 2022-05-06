@@ -11,6 +11,7 @@ public class Submit : MonoBehaviour
     public GameObject dialoguePrefab;
     public GameObject mistakeMessagePrefab;
 
+    private Canvas worldCanvas;
     private GameObject confirmation;
     private GameObject dialogue;
     private GameObject mistakeMessage;
@@ -49,6 +50,7 @@ public class Submit : MonoBehaviour
         totalProfiles.GetComponent<TMPro.TextMeshProUGUI>().text = "/" + StaticFunction.getTotalProfiles().ToString();
         profileNum.GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getProfileNum().ToString();
         GameObject.FindGameObjectWithTag("ErrorTag").GetComponent<TMPro.TextMeshProUGUI>().text = StaticFunction.getMistakes().ToString();
+        worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
         //mistakeNotifLogos = new Sprite[2];
     }
 
@@ -72,9 +74,15 @@ public class Submit : MonoBehaviour
 
     public void MakeMistakeMessage(string message)
     {
+        RectTransform parent = GameObject.FindGameObjectWithTag("World").GetComponent<RectTransform>();
+        RectTransform notifSize = mistakeMessagePrefab.GetComponent<RectTransform>();
         mistakeMessage = Instantiate(
                 mistakeMessagePrefab,
-                GameObject.FindGameObjectWithTag("World").transform.position - new Vector3(0.0f, (114.8024f * StaticFunction.mistakeMessages.Count), 0.0f),
+                parent.position +
+                        new Vector3(
+                            -((parent.rect.width * worldCanvas.scaleFactor) / 2) + ((notifSize.rect.width * worldCanvas.scaleFactor) / 2),
+                            ((parent.rect.height * worldCanvas.scaleFactor) / 2) - ((notifSize.rect.height * worldCanvas.scaleFactor) / 2),
+                            0.0f) - new Vector3(0.0f, ((notifSize.rect.height * worldCanvas.scaleFactor)) * StaticFunction.mistakeMessages.Count, 0.0f),
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
         );

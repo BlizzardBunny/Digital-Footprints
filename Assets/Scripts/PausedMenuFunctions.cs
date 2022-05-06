@@ -8,6 +8,12 @@ public class PausedMenuFunctions : MonoBehaviour
 {
     public GameObject notifPrefab, pausedMenuPrefab;
     private GameObject notif, pausedMenu;
+    private Canvas worldCanvas;
+
+    private void Start()
+    {
+        worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
+    }
 
     void Update()
     {
@@ -120,30 +126,40 @@ public class PausedMenuFunctions : MonoBehaviour
     {
         if (notifPrefab.name.EndsWith("1"))
         {
-            Vector3 pos = GameObject.FindGameObjectWithTag("World").transform.position;
+            RectTransform pos = GameObject.FindGameObjectWithTag("World").GetComponent<RectTransform>();
             RectTransform notifSize = notifPrefab.GetComponent<RectTransform>();
+            //Goal: -243.31
             notif = Instantiate(
                 notifPrefab,
-                pos + new Vector3(-pos.x + notifSize.sizeDelta.x, pos.y - notifSize.sizeDelta.y, 0.0f),
+                pos.position + 
+                    new Vector3(
+                        -((pos.rect.width * worldCanvas.scaleFactor) / 2) + ((notifSize.rect.width * worldCanvas.scaleFactor) / 2),
+                        ((pos.rect.height * worldCanvas.scaleFactor) / 2) - ((notifSize.rect.height * worldCanvas.scaleFactor) / 2), 
+                        0.0f),
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("World").transform
             );
         }
         else
         {
-            Transform parent;
+            RectTransform notifSize = notifPrefab.GetComponent<RectTransform>();
+            RectTransform parent;
             try
             {
-                parent = GameObject.FindGameObjectWithTag("AskDialogueScene").transform;
+                parent = GameObject.FindGameObjectWithTag("AskDialogueScene").GetComponent<RectTransform>();
             }
             catch
             {
-                parent = GameObject.FindGameObjectWithTag("World").transform;
+                parent = GameObject.FindGameObjectWithTag("World").GetComponent<RectTransform>();
             }
 
             notif = Instantiate(
                 notifPrefab,
-                parent.position,
+                parent.position +
+                    new Vector3(
+                        -((parent.rect.width * worldCanvas.scaleFactor) / 2) + ((notifSize.rect.width * worldCanvas.scaleFactor) / 2),
+                        ((parent.rect.height * worldCanvas.scaleFactor) / 2) - ((notifSize.rect.height * worldCanvas.scaleFactor) / 2),
+                        0.0f),
                 Quaternion.identity,
                 parent
             );

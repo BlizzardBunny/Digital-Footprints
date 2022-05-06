@@ -11,6 +11,7 @@ public class PanelScript : MonoBehaviour
 
     private bool panelIsShowing = true;
     private float scrollVal = 0.25f;
+    private Canvas worldCanvas;
 
     private static int pageNumber = 1;
     private static string currSocialMedia;
@@ -21,6 +22,7 @@ public class PanelScript : MonoBehaviour
         GameObject content = GameObject.FindGameObjectWithTag("CompanyStandardsContent");
         socialMediaPages = GameObject.FindGameObjectsWithTag("SocialMediaPage");
         currSocialMedia = "*";
+        worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
     }
 
     public void TogglePanel(GameObject panel)
@@ -111,9 +113,14 @@ public class PanelScript : MonoBehaviour
 
     public void Categorize(Button clicked)
     {
+        RectTransform parent = GameObject.FindGameObjectWithTag("CompanyStandards").GetComponent<RectTransform>();
+        RectTransform categorySize = categoryPanelPrefab.GetComponent<RectTransform>();
         Instantiate(
             categoryPanelPrefab,
-            GameObject.FindGameObjectWithTag("CompanyStandards").transform.position,
+            parent.position
+                + new Vector3(-(((parent.rect.width * worldCanvas.scaleFactor) / 2) + (categorySize.rect.width * worldCanvas.scaleFactor)), 
+                (parent.rect.height * worldCanvas.scaleFactor)/2, 
+                0.0f),
             clicked.transform.rotation,
             GameObject.FindGameObjectWithTag("CompanyStandards").transform
             );

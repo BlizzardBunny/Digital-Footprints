@@ -18,11 +18,13 @@ public class Flag : MonoBehaviour
 
     private GameObject editableMA;
     private GameObject pointersPanel;
+    private Canvas worldCanvas;
 
     private static int otherPostIndex;
 
     private void Awake()
     {
+        worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
         pointersPanel = GameObject.FindGameObjectWithTag("PointersPanel");
         parentName = transform.parent.name;
 
@@ -241,9 +243,12 @@ public class Flag : MonoBehaviour
             {
             }
 
+            RectTransform bgSize = GameObject.FindGameObjectWithTag("MessagesCanvas").transform.Find("BG").GetComponent<RectTransform>();
+
             editableMA = Instantiate(
                 editableMAPrefab,
-                GameObject.FindGameObjectWithTag("MessagesCanvas").transform.position,
+                GameObject.FindGameObjectWithTag("MessagesCanvas").transform.position
+                    + new Vector3(0.0f, -(bgSize.rect.height * worldCanvas.scaleFactor)/2, 0.0f),
                 transform.rotation,
                 GameObject.FindGameObjectWithTag("MessagesCanvas").transform);
 
