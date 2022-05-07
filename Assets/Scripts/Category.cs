@@ -101,7 +101,7 @@ public class Category : MonoBehaviour
             Transform flag = GameObject.FindGameObjectWithTag("MessageField").transform.Find("Flag");
             string text = flag.GetComponent<TMPro.TextMeshProUGUI>().text;
 
-            if (!text.Equals(""))
+            if (text.Equals(buttonText))
             {
                 flag.GetComponent<TMPro.TextMeshProUGUI>().text = "";
             }

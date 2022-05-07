@@ -114,12 +114,13 @@ public class PanelScript : MonoBehaviour
     public void Categorize(Button clicked)
     {
         RectTransform parent = GameObject.FindGameObjectWithTag("CompanyStandards").GetComponent<RectTransform>();
+        RectTransform titleBar = GameObject.FindGameObjectWithTag("CompanyStandards").transform.Find("TitleBar").GetComponent<RectTransform>();
         RectTransform categorySize = categoryPanelPrefab.GetComponent<RectTransform>();
         Instantiate(
             categoryPanelPrefab,
             parent.position
-                + new Vector3(-(((parent.rect.width * worldCanvas.scaleFactor) / 2) + (categorySize.rect.width * worldCanvas.scaleFactor)), 
-                (parent.rect.height * worldCanvas.scaleFactor)/2, 
+                + new Vector3(-((parent.rect.width * worldCanvas.scaleFactor) / 2), 
+                ((parent.rect.height * worldCanvas.scaleFactor)/2) - ((titleBar.rect.height * worldCanvas.scaleFactor)/2), 
                 0.0f),
             clicked.transform.rotation,
             GameObject.FindGameObjectWithTag("CompanyStandards").transform

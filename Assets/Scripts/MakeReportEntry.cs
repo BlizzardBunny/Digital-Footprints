@@ -9,11 +9,12 @@ public class MakeReportEntry : MonoBehaviour
     public Sprite[] snsLogos;
 
     private GameObject reportEntry;
+    private Canvas worldCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
     }
 
     private void Update()
@@ -48,9 +49,11 @@ public class MakeReportEntry : MonoBehaviour
         }
         else
         {
+            RectTransform parent = GameObject.FindGameObjectWithTag("MessagesBG").GetComponent<RectTransform>();
             reportEntry = Instantiate(
                 reportEntryPrefab,
-                GameObject.FindGameObjectWithTag("MessagesBG").transform.position,                             
+                parent.position
+                    + new Vector3(0.0f, -((parent.rect.height * worldCanvas.scaleFactor) / 2), 0.0f),                             
                 Quaternion.identity,
                 GameObject.FindGameObjectWithTag("MessagesBG").transform);
 

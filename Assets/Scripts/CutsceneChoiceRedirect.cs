@@ -87,6 +87,10 @@ public class CutsceneChoiceRedirect : MonoBehaviour, IPointerEnterHandler, IPoin
                         script.nextScene("Stage 1");
                     }
                 }
+                else
+                {
+                    SceneManager.LoadScene(StaticFunction.getCurrentLevel());
+                }
             }
         }
     }
