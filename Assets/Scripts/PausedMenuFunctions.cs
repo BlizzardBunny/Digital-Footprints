@@ -9,10 +9,12 @@ public class PausedMenuFunctions : MonoBehaviour
     public GameObject notifPrefab, pausedMenuPrefab;
     private GameObject notif, pausedMenu;
     private Canvas worldCanvas;
+    private AudioSource music;
 
     private void Start()
     {
         worldCanvas = GameObject.FindGameObjectWithTag("World").GetComponent<Canvas>();
+        music = GameObject.FindGameObjectWithTag("World").transform.Find("Music").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -31,6 +33,7 @@ public class PausedMenuFunctions : MonoBehaviour
 
     public void Pause()
     {
+        music.Pause();
         if (SceneManager.GetActiveScene().name.Equals("AskDialogue"))
         {
             pausedMenu = Instantiate(
@@ -53,6 +56,7 @@ public class PausedMenuFunctions : MonoBehaviour
     
     public void UnPause()
     {
+        music.Play();
         Destroy(pausedMenu);
     }
 
