@@ -17153,7 +17153,7 @@ GameObject:
   - component: {fileID: 5934296724210971009}
   m_Layer: 5
   m_Name: Taskbar (Panel)
-  m_TagString: Untagged
+  m_TagString: TaskBar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19090,7 +19090,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6445879260262873312}
   m_HandleRect: {fileID: 283962547671820311}
   m_Direction: 0
-  m_Value: 0
+  m_Value: -0.000000044878792
   m_Size: 0.2
   m_NumberOfSteps: 0
   m_OnValueChanged:

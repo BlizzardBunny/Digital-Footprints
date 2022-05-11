@@ -10,6 +10,7 @@ public class TutorialPlayer : MonoBehaviour
     public GameObject pointerPrefab;
 
     private GameObject world;
+    private Canvas worldCanvas;
     private GameObject pointersPanel;
     private GameObject dialogue;
     private float typingSpeed = 0.03f;
@@ -20,11 +21,11 @@ public class TutorialPlayer : MonoBehaviour
         public string line { get; }
         public bool allowPlayerControl { get; }
         public string pointerInfo { get; }
-        public Vector3 pointerLocation { get; }
+        public bool snsPicker { get; } //true for Chirper, false for Photogram
 
         public Dialogue(string x) => (line, allowPlayerControl) = (x, false);
         public Dialogue(string x, bool y) => (line, allowPlayerControl) = (x, y);
-        public Dialogue(string x, string z, Vector3 v) => (line, pointerInfo, pointerLocation) = (x, z, v);
+        public Dialogue(string x, string z, bool y) => (line, pointerInfo, snsPicker) = (x, z, y);
     }
 
     private Dialogue[] stageOne = new Dialogue[]
@@ -46,8 +47,7 @@ public class TutorialPlayer : MonoBehaviour
         new Dialogue("These are customers who allow us to look into their privacy settings."),
         new Dialogue("More details on proper Privacy Settings can be found in your Company Standards."),
         new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on both sites!",
-            "You now have access to: CHIRPER!",
-            new Vector3(908.0f,267.70001220703127f,0.0f)),
+            "You now have access to: CHIRPER!", true),
         new Dialogue("As always, make sure to double-check your report before you [SUBMIT]."),
         new Dialogue("Good luck!", true)
     };
@@ -59,8 +59,7 @@ public class TutorialPlayer : MonoBehaviour
         new Dialogue("It's a good thing we had you sign that NDA before joining the company! Haha!"),
         new Dialogue("There are more details on proper Password Strength in your Company Standards."),
         new Dialogue("Also, you now have access to more social media sites. Make sure to check everything on all sites!",
-            "You now have access to: |PHOTOGRAM!",
-            new Vector3(1125.0f,267.0f,0.0f)),
+            "You now have access to: |PHOTOGRAM!", false),
         new Dialogue("As always, make sure to double-check your report before you [SUBMIT]."),
         new Dialogue("Good luck!", true)
     };
@@ -69,6 +68,7 @@ public class TutorialPlayer : MonoBehaviour
     void Start()
     {
         world = GameObject.FindGameObjectWithTag("World");
+        worldCanvas = world.GetComponent<Canvas>();
 
         if (SceneManager.GetActiveScene().name.Equals("Tutorial"))
         {
@@ -185,9 +185,28 @@ public class TutorialPlayer : MonoBehaviour
 
             if (stageDialogue[i].pointerInfo != null)
             {
+                Transform taskbarPanel = GameObject.FindGameObjectWithTag("TaskBar").transform;
+
+                RectTransform sns;
+                if (stageDialogue[i].snsPicker)
+                {
+                    sns = taskbarPanel.Find("Buttons").Find("Chirper").GetComponent<RectTransform>();
+                }
+                else
+                {
+                    sns = taskbarPanel.Find("Buttons").Find("Photogram").GetComponent<RectTransform>();                    
+                }
+
+                RectTransform pointerRect = pointerPrefab.GetComponent<RectTransform>();
+
+                Vector3 pointerLocation = sns.position + new Vector3(
+                    0.0f, 
+                    ((sns.rect.height * worldCanvas.scaleFactor) / 2) + ((pointerRect.rect.height * worldCanvas.scaleFactor) / 2), 
+                    0.0f);
+
                 pointer = Instantiate(
                     pointerPrefab,
-                    stageDialogue[i].pointerLocation,
+                    pointerLocation,
                     Quaternion.identity,
                     world.transform);
 
