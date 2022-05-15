@@ -19,6 +19,18 @@ public class PausedMenuFunctions : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (pausedMenu == null)
+            {
+                Pause();
+            }
+            else
+            {
+                UnPause();
+            }
+        }
+
         if (SceneManager.GetActiveScene().name.Equals("MainMenu"))
         {
             if (this.name.Equals("LoadButton"))
