@@ -61,7 +61,8 @@ public class Category : MonoBehaviour
 
     public void Categorize()
     {
-        if (!StaticFunction.isShowingDetails)
+        Debug.Log(cdPanel.gameObject.activeSelf);
+        if (!cdPanel.gameObject.activeSelf)
         {
             cdPanel.gameObject.SetActive(true);
             details.GetComponent<TMPro.TextMeshProUGUI>().text = categoryDetails[buttonText].details;
